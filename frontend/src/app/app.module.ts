@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapLeafletComponent } from './components/map-leaflet/map-leaflet.component';
 import { PageNotFound } from './components/page-not-found/page-not-found';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
