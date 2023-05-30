@@ -1,10 +1,12 @@
 .map-container {
   position: absolute;
-  top: 0;
+  top: 80px; /* da je ok glede na navbar*/
+  /*top: 0;*/
   left: 0;
   right: 0;
   bottom: 0;
   margin: 30px;
+  height: calc(100% - 140px);  /* da je ok glede na navbar*/
 }
 
 .map-frame {

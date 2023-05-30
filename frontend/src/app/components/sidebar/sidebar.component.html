@@ -1,0 +1,12 @@
+<nav id="sidebar" class="sidebar d-flex flex-column align-content-center align-items-center bg-dark">
+  <div class="sidebar-header w-100 bg-white text-dark justify-content-center align-items-center" style="height:70px">
+    <h3 class="m-4">"Dog walkers"</h3>
+  </div>
+
+  <ul class="list-unstyled my-5">
+    <li *ngFor="let view of views">
+      <a href="{{view.path}}">{{view.title}}</a>
+    </li>
+  </ul>
+
+</nav>

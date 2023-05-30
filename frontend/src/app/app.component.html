@@ -1,12 +1,11 @@
 
 
-<h1>Angular Router App</h1>
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
-<nav>
-  <ul>
-    <li><a routerLink="/map" routerLinkActive="active" ariaCurrentWhenActive="page">Map Component</a></li>
-    <li><a routerLink="/test" routerLinkActive="active" ariaCurrentWhenActive="page">Test Component</a></li>
-  </ul>
-</nav>
-<!-- The routed views render in the <router-outlet>-->
-<router-outlet></router-outlet>
+<div >
+  <app-navbar></app-navbar>
+  <div id="content" class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="main" class="routerWrapper mt-5 w-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

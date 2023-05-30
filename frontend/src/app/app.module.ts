@@ -8,6 +8,9 @@ import { PageNotFound } from './components/page-not-found/page-not-found';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PageNotFound,
     LoginPageComponent,
     RegistrationPageComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent,
+    SidebarComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

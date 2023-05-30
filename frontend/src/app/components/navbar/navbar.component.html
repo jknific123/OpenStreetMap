@@ -1,0 +1,56 @@
+<!--Navbar-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+  <!--    App title and sidebar collapse btn-->
+  <button type="button" id="sidebarCollapse" class="btn btn-link text-dark ml-0 pl-0">
+    <h3><i class="fas fa-align-left fa-fw ml-0 py-0 mr-4"></i>QOI </h3>
+  </button>
+  <button class="navbar-toggler border-dark text-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!--    The rest of navbar-->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav navbar-nav ml-auto">
+<!--      <li class="nav-item active border-left mx-3">-->
+<!--        <h5>-->
+<!--        <a class="nav-link" routerLink="/link1">Link 1 <i class="ml-2 fas fa-inbox fa-lg"></i> </a>-->
+<!--        </h5>-->
+<!--      </li>-->
+<!--      <hr/>-->
+<!--      <li  class="nav-item border-left ml-3 mb-0 pb-0" >-->
+<!--        <h5>-->
+<!--          <h5>-->
+<!--            <a class="nav-link" >Link 2</a>-->
+<!--          </h5>-->
+<!--        </h5>-->
+<!--      </li>-->
+<!--      <li class="nav-item mx-3 mb-0 pb-0">-->
+<!--        <span class=" mb-0 pb-0">-->
+<!--          <label class="switch">-->
+<!--            <input type="checkbox">-->
+<!--            <span class="slider round"></span>-->
+<!--          </label>-->
+<!--        </span>-->
+<!--      </li>-->
+      <li class="nav-item border-left">
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-danger border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <h5 class="mr-5">
+              <i class="far fa-user-circle fa-lg mr-2"></i>
+              Jeff Bozos
+            </h5>
+
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <button class="dropdown-item" type="button" routerLink="/profil" >Profil</button>
+              <button class="dropdown-item" type="button" >Odjavi me</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
