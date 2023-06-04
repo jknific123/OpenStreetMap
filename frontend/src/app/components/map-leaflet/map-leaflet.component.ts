@@ -1,6 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import * as L from 'leaflet';
-import { MarkerService} from "../../services/marker.service";
+import {MarkerService} from "../../services/marker.service";
 
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -23,16 +23,17 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map-leaflet.component.html',
   styleUrls: ['./map-leaflet.component.css']
 })
-export class MapLeafletComponent implements AfterViewInit{
+export class MapLeafletComponent implements AfterViewInit {
 
   private map: any;
+  private marker: any;
 
   constructor(private markerService: MarkerService) {
   }
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 46.05108, 14.50513 ],
+      center: [46.05108, 14.50513],
       zoom: 13
     });
 
@@ -44,9 +45,29 @@ export class MapLeafletComponent implements AfterViewInit{
 
     tiles.addTo(this.map);
   }
+
   ngAfterViewInit(): void {
     this.initMap();
     this.markerService.makeCapitalMarkers(this.map);
+  }
+
+  public reloadMap() {
+    this.markerService.makeCapitalMarkers(this.map);
+  }
+
+  onClickLocation() {
+
+    this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
+      // console.log(e.latlng); // get the coordinates
+
+      // pobrise trenutni pointer na mapi
+      if (this.marker) {
+        this.map.removeLayer(this.marker);
+      }
+
+      this.marker = L.marker([e.latlng.lat, e.latlng.lng]); // add the marker onclick
+      this.marker.addTo(this.map);
+    });
   }
 
 }
