@@ -8,3 +8,12 @@ Error: Cannot use import statement outside a module - ob zagonu nodemon al pa no
 
 V tsconfig.json:
 - build folder je nastavljen z "outDir"
+
+za barve aplikacije:
+
+https://www.toogoodtogo.com/en/careers/5440606003
+
+https://www.joulebug.com/
+
+mongoose je treba met starejšo verzijo ker so v 6.0 odstranli callbacke
+- https://stackoverflow.com/questions/75603536/throw-new-mongooseerrorquery-prototype-exec-no-longer-accepts-a-callback
