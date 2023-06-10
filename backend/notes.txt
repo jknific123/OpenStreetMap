@@ -1,0 +1,10 @@
+
+
+Error: Cannot use import statement outside a module - ob zagonu nodemon al pa node index.ts
+- potrebno zaganjat index.js in ne index.ts
+- https://bobbyhadz.com/blog/typescript-cannot-use-import-statement-outside-module#:~:text=To%20solve%20the%20error%20%22Cannot,run%20them%20directly%20with%20node%20.
+
+
+
+V tsconfig.json:
+- build folder je nastavljen z "outDir"
