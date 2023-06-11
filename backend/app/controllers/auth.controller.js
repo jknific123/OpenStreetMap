@@ -3,10 +3,10 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
-exports.signup = (req, res) => {
+const signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -62,7 +62,7 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.signin = (req, res) => {
+const signin = (req, res) => {
   User.findOne({
     username: req.body.username,
   })
@@ -77,20 +77,20 @@ exports.signin = (req, res) => {
         return res.status(404).send({ message: "User Not found." });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
+      const passwordIsValid = bcrypt.compareSync(
+          req.body.password,
+          user.password
       );
 
       if (!passwordIsValid) {
         return res.status(401).send({ message: "Invalid Password!" });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      const token = jwt.sign({id: user.id}, config.secret, {
         expiresIn: 86400, // 24 hours
       });
 
-      var authorities = [];
+      const authorities = [];
 
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
@@ -107,11 +107,18 @@ exports.signin = (req, res) => {
     });
 };
 
-exports.signout = async (req, res) => {
+const signout = async (req, res) => {
   try {
     req.session = null;
     return res.status(200).send({ message: "You've been signed out!" });
   } catch (err) {
     this.next(err);
   }
+};
+
+
+module.exports = {
+  signup,
+  signin,
+  signout,
 };
