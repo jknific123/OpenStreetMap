@@ -4,8 +4,6 @@ const cookieSession = require("cookie-session");
 
 const dbConfig = require("./app/config/db.config");
 
-// const dbConfig = require("./config/db.config");
-
 const app = express();
 
 // const corsOptions = {
