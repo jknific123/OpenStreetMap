@@ -12,8 +12,14 @@ const schemaUser = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password: String,
-    role: String
+    password: {
+        type: String,
+        required: true
+    },
+    role: {
+        type: String,
+        required: true
+    }
 });
 
 

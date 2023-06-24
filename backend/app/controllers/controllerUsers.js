@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const bcrypt = require('bcrypt');
 
 const getAllUsers = async (req, res) => {
 
@@ -30,12 +31,17 @@ const getUserById = async (req, res) => {
 };
 
 
-const createUser = async (req, res) => {
-    // TODO tole popravit nazaj na registracijo
+const registerUser = async (req, res) => {
+
+    if (!req.body.name || !req.body.email
+        || !req.body.password || !req.body.role) {
+        return res.status(400).json({message: 'Not all required data for registration was provided.'});
+    }
+
     const tmpUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: bcrypt.hashSync(req.body.password, 10),
         // password: bcrypt.hashSync(req.body.password, 8)
         role: req.body.role
     });
@@ -99,7 +105,7 @@ const userDelete = (req, res) => {
 module.exports = {
     getAllUsers,
     getUserById,
-    createUser,
+    registerUser,
     userUpdate,
     userDelete
 }
