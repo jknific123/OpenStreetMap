@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // TODO login, logout
 
@@ -16,16 +19,21 @@ const loginUser = async (req, res) => {
     }
 
     try {
-        console.log(userToLogin);
-        console.log(userToLogin.password);
         if (await bcrypt.compare(req.body.password, userToLogin.password)) {
-            res.send('Successful login.');
+            const plainUserObject = {
+                name: userToLogin.name,
+                email: userToLogin.email,
+                role: userToLogin.role
+            };
+            const accessToken = jwt.sign(plainUserObject, process.env.ACCES_TOKEN_SECRET);
+            res.json({accessToken: accessToken});
         }
         else {
-            res.send('Unsuccessful login.');
+            res.send('Unsuccessful login  .');
         }
     } catch (error) {
-        res.status(500).send('Unsuccessful login.');
+        console.log('error: ', error)
+        res.status(500).send({message: error});
     }
 
 }
