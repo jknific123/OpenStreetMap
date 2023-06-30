@@ -29,5 +29,7 @@ router.delete('/delete_user/:id', ctrlUsers.userDelete);
 
 // auth api
 router.post('/login', ctrlAuth.loginUser);
+router.delete('/logout', authenticateToken, ctrlAuth.logoutUser);
+router.post('/token', ctrlAuth.refreshAccessToken);
 
 module.exports = router;

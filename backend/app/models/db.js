@@ -52,3 +52,4 @@ process.on('SIGTERM', () => {
 
 // TODO tukaj je treba dodat modele
 require('./modelUser.js')
+require('./modelRefreshToken.js')
