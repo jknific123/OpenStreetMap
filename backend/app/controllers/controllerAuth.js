@@ -6,7 +6,6 @@ const RefreshToken = mongoose.model('RefreshToken');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// TODO login, logout
 
 const loginUser = async (req, res) => {
 
@@ -73,11 +72,11 @@ const logoutUser = async (req, res) => {
 }
 
 function generateAccesToken(user) {
-    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '10m'});
+    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '15m'});
 }
 
-// funkcija, ki refresha accessToken ce je refreshToken veljaven oz shranjen v bazi
 const refreshAccessToken = async (req, res) => {
+    // funkcija, ki refresha accessToken ce je refreshToken veljaven oz shranjen v bazi
 
     const refreshToken = req.body.refreshToken
     if (refreshToken == null) {

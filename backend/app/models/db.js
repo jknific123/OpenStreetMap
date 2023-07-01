@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 let dbURI = process.env.DATABASE_URL;
 if (process.env.NODE_ENV === 'production') {
+    // TODO ko bo treba gostit aplikacijo je treba v .env dodat se ta url
     dbURI = process.env.MONGODB_CLOUD_URI;
 }
 
