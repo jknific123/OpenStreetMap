@@ -6,7 +6,6 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {BoardAdminComponent} from "./components/board-admin/board-admin.component";
 
 const routes: Routes = [
   {
@@ -28,10 +27,6 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
-  },
-  {
-    path: 'board-admin',
-    component: BoardAdminComponent
   },
   {
     path: '**',

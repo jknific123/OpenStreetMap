@@ -14,9 +14,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
-import { BoardAdminComponent } from './components/board-admin/board-admin.component';
-import { BoardModeratorComponent } from './components/board-moderator/board-moderator.component';
-import { BoardUserComponent } from './components/board-user/board-user.component';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
 
 @NgModule({
@@ -30,9 +27,6 @@ import {httpInterceptorProviders} from "./helpers/http.interceptor";
     NavbarComponent,
     SidebarComponent,
     ProfilePageComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
-    BoardUserComponent
   ],
   imports: [
     BrowserModule,
