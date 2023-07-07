@@ -6,14 +6,11 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {HomePageComponent} from "./components/home-page/home-page.component";
+import { authGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {
     path: '', redirectTo: 'home', pathMatch: 'full' },
-  {
-    path: 'map',
-    component: MapLeafletComponent
-  },
   {
     path: 'login',
     component: LoginPageComponent
@@ -24,11 +21,18 @@ const routes: Routes = [
   },
   {
     path: 'profil',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'map',
+    component: MapLeafletComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'home',
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [authGuard]
   },
   {
     path: '**',
