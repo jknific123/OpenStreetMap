@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-page',
@@ -8,28 +10,32 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegistrationPageComponent implements OnInit {
 
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
+  form!: FormGroup;
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {}
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      name: '',
+      email: '',
+      password: ''
+    });
   }
 
-  onSubmit(): void {
-    const { username, email, password } = this.form;
-
-    this.authService.register(username, email, password).subscribe({
+  submit(): void {
+    console.log(this.form.getRawValue());
+    console.log(this.form.value);
+    this.authService.registerUser(this.form.getRawValue()).subscribe({
       next: data => {
-        console.log(data);
+        // console.log('registration succeded, data:', data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.router.navigate(['/login']);
       },
       error: err => {
         this.errorMessage = err.error.message;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { StorageService } from '../../services/storage.service';
+import { SessionStorageService } from '../../services/session.storage.service';
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -8,37 +10,40 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  form!: FormGroup;
 
-  form: any = {
-    username: null,
-    password: null
-  };
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
 
   constructor(private authService: AuthService,
-              private storageService: StorageService) { }
+              private sessionStorageService: SessionStorageService,
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
-    }
+    this.form = this.formBuilder.group({
+      name: '',
+      email: '',
+      password: ''
+    });
   }
 
-  onSubmit(): void {
-    const { username, password } = this.form;
-
-    this.authService.login(username, password).subscribe({
+  submit(): void {
+    console.log(this.form.getRawValue());
+    this.authService.loginUser(this.form.getRawValue()).subscribe({
       next: data => {
-        this.storageService.saveUser(data);
+        console.log('login succeded, data:', data);
+        // saving auth token and user data
+        this.sessionStorageService.saveAuthToken(data.accessToken)
+        this.sessionStorageService.saveRefreshToken(data.refreshToken);
+        // this.sessionStorageService.saveUser(data.accessToken);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
+
+        this.router.navigate(['/home']);
       },
       error: err => {
         this.errorMessage = err.error.message;

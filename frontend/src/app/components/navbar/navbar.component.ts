@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {AppComponent} from "../../app.component";
+import {AuthService} from "../../services/auth.service";
+import {SessionStorageService} from "../../services/session.storage.service";
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private element: ElementRef,
               private router: Router,
-              private appComponent: AppComponent) {
+              private authService: AuthService,
+              private sessionStorageService: SessionStorageService) {
     this.sidebarVisible = false;
   }
 
@@ -109,7 +111,16 @@ export class NavbarComponent implements OnInit {
   };
 
   userLogout() {
-    this.appComponent.logout();
+    this.authService.logoutUser().subscribe({
+      next: data => {
+        console.log('Logout was succesfull!', data);
+        this.sessionStorageService.clean();
+        this.router.navigate(['/login']);
+      },
+      error: err => {
+        console.log('Logout was not succesfull: ', err);
+      }
+    });
   }
 
 }

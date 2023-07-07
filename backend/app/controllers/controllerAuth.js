@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
     try {
         if (await bcrypt.compare(req.body.password, userToLogin.password)) {
             const plainUserObject = {
-                id: userToLogin._id,
+                _id: userToLogin._id,
                 name: userToLogin.name,
                 email: userToLogin.email,
                 role: userToLogin.role
@@ -50,21 +50,21 @@ const loginUser = async (req, res) => {
 const logoutUser = async (req, res) => {
 
     if (req.user == null) {
-        res.status(401).send({message: 'Error, no user data provided for logout!'});
+        res.status(401).send({ message: 'Error, no user data provided for logout!' });
+        return; // Return early to avoid further execution
     }
 
     const refreshTokenToDelete = req.body.refreshToken;
 
     try {
-        await RefreshToken.findOneAndRemove({content: refreshTokenToDelete}).then(function (err, data) {
-            if (err) {
-                console.log('zgodil se je error pri brisanju refTokena: ', err);
-                res.status(404).json({message: err});
-            } else {
-                console.log(`Successfully loged out user with id ${req.user.id}`);
-                res.status(204).json(data);
-            }
-        });
+        const deletedRefreshToken = await RefreshToken.findOneAndDelete({ content: refreshTokenToDelete });
+        if (deletedRefreshToken) {
+            console.log('Deleted refToken:', deletedRefreshToken);
+            res.status(200).json({ message: 'User logged out successfully.' });
+        } else {
+            console.log('Refresh token not found.');
+            res.status(404).json({ message: 'Refresh token not found.' });
+        }
     } catch (error) {
         console.log('Error occurred when trying to logout user: ', error);
         res.status(500).json({message: error});
@@ -72,7 +72,7 @@ const logoutUser = async (req, res) => {
 }
 
 function generateAccesToken(user) {
-    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '15m'});
+    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '10s'});
 }
 
 const refreshAccessToken = async (req, res) => {
@@ -93,6 +93,7 @@ const refreshAccessToken = async (req, res) => {
             return res.sendStatus(403);
         }
         const plainUserObject = {
+            _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MarkerService } from "./services/marker.service";
 
@@ -10,7 +10,7 @@ import { MapLeafletComponent } from './components/map-leaflet/map-leaflet.compon
 import { PageNotFound } from './components/page-not-found/page-not-found';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
@@ -23,7 +23,7 @@ import {httpInterceptorProviders} from "./helpers/http.interceptor";
     PageNotFound,
     LoginPageComponent,
     RegistrationPageComponent,
-    DashboardComponent,
+    HomePageComponent,
     NavbarComponent,
     SidebarComponent,
     ProfilePageComponent,
@@ -32,7 +32,8 @@ import {httpInterceptorProviders} from "./helpers/http.interceptor";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MarkerService,
   httpInterceptorProviders],

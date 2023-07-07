@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       title: 'Dashboard',
-      path: '/dashboard'
+      path: '/home'
     },
   ];
 

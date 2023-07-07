@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const AUTH_API = 'http://localhost:8080/api/auth/';
+import {User} from "../classes/user";
+import {environment} from "../../environments/environment";
+import {SessionStorageService} from "./session.storage.service";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,32 +13,29 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private sessionStorageService: SessionStorageService) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signin',
-      {
-        username,
-        password,
-      },
-      httpOptions
-    );
+  private apiUrl = environment.apiUrl;
+
+  registerUser(userData: User): Observable<any> {
+    const url = `${this.apiUrl}/register_user`;
+    return this.http.post<any>(url, userData);
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'signup',
-      {
-        username,
-        email,
-        password,
-      },
-      httpOptions
-    );
+  loginUser(data: any): Observable<any> {
+    const url = `${this.apiUrl}/login`;
+    return this.http.post(url, data);
   }
 
-  logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout', { }, httpOptions);
+  logoutUser(): Observable<any> {
+    const url = `${this.apiUrl}/logout`;
+    return this.http.post(url, {refreshToken: this.sessionStorageService.getRefreshToken()});
+  }
+
+  refreshToken(): Observable<any> {
+    const url = `${this.apiUrl}/refresh_token`;
+    const refreshToken = this.sessionStorageService.getRefreshToken();
+    return this.http.post(url, {refreshToken: refreshToken});
   }
 }

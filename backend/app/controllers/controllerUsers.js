@@ -33,8 +33,7 @@ const getUserById = async (req, res) => {
 
 const registerUser = async (req, res) => {
 
-    if (!req.body.name || !req.body.email
-        || !req.body.password || !req.body.role) {
+    if (!req.body.name || !req.body.email || !req.body.password) {
         return res.status(400).json({message: 'Not all required data for registration was provided.'});
     }
 
@@ -73,6 +72,8 @@ const userUpdate = async (req, res) => {
         if (req.body.email != null) {
             userById.email = req.body.email;
         }
+
+        // TODO updejtat se more dat tudi geslo
 
         if (req.body.role != null) {
             userById.role = req.body.role;

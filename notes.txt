@@ -17,3 +17,6 @@ https://www.joulebug.com/
 
 mongoose je treba met starejšo verzijo ker so v 6.0 odstranli callbacke
 - https://stackoverflow.com/questions/75603536/throw-new-mongooseerrorquery-prototype-exec-no-longer-accepts-a-callback
+
+CORS things - how to connect angular and node
+https://stackoverflow.com/questions/57009371/access-to-xmlhttprequest-at-from-origin-localhost3000-has-been-blocked

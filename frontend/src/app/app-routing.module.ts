@@ -5,9 +5,11 @@ import {PageNotFound} from "./components/page-not-found/page-not-found";
 import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {HomePageComponent} from "./components/home-page/home-page.component";
 
 const routes: Routes = [
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'map',
     component: MapLeafletComponent
@@ -25,8 +27,8 @@ const routes: Routes = [
     component: ProfilePageComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'home',
+    component: HomePageComponent
   },
   {
     path: '**',

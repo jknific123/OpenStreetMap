@@ -1,21 +1,32 @@
 
 
-<div class="container" *ngIf="currentUser; else loggedOut">
-  <header class="jumbotron">
-    <h3>
-      <strong>{{ currentUser.username }}</strong> Profile
-    </h3>
-  </header>
-  <p>
-    <strong>Email:</strong>
-    {{ currentUser.email }}
-  </p>
-  <strong>Roles:</strong>
-  <ul>
-    <li *ngFor="let role of currentUser.roles">
-      {{ role }}
-    </li>
-  </ul>
+<div class="container rounded bg-white mt-5 mb-5" *ngIf="currentUser; else loggedOut">
+
+  <form class="d-flex flex-column align-items-center text-center" [formGroup]="form" (submit)="submitUpdateUserData()">
+
+        <img class="rounded-circle mt-3" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <span class="font-weight-bold">{{currentUser.name}}</span>
+        <span class="text-black-50">{{currentUser.email}}</span>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile Settings</h4>
+        </div>
+
+        <div class="col-md-6"><label class="labels"> Name </label><input type="text" class="form-control" formControlName="name"></div>
+        <div class="col-md-6"><label class="labels"> Email </label><input type="email" class="form-control" formControlName="email"></div>
+        <div class="col-md-6"><label class="labels"> Password </label><input type="password" class="form-control" formControlName="password"></div>
+        <div class="col-md-6"><label class="labels"> Role </label><input type="text" class="form-control" formControlName="role"></div>
+
+        <div class="mt-5 mb-5 text-center" *ngIf="!isEditable">
+          <button class="btn btn-primary profile-button" type="button" (click)="onClickEdit()">Edit Profile</button>
+        </div>
+
+        <div class="mt-5 mb-5 text-center" *ngIf="isEditable">
+          <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+        </div>
+
+  </form>
+
 </div>
 
 <ng-template #loggedOut>

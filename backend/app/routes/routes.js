@@ -8,12 +8,12 @@ function authenticateToken(req, res, next){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) {
-        return res.sendStatus(401)
+        return res.sendStatus(403)
     }
     jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (err, user) => {
         if (err) {
             // ima token ampak je pretekel exp date
-            return res.sendStatus(403);
+            return res.sendStatus(401);
         }
         req.user = user
         next();
@@ -21,15 +21,16 @@ function authenticateToken(req, res, next){
 }
 
 // Users api
-router.get('/users', ctrlUsers.getAllUsers);
-router.get('/user/:id', ctrlUsers.getUserById);
-router.post('/register_user', ctrlUsers.registerUser);
+router.get('/users', authenticateToken, ctrlUsers.getAllUsers);
+router.get('/user/:id', authenticateToken, ctrlUsers.getUserById);
 router.put('/update_user/:id', authenticateToken, ctrlUsers.userUpdate);
-router.delete('/delete_user/:id', ctrlUsers.userDelete);
+router.delete('/delete_user/:id', authenticateToken, ctrlUsers.userDelete);
+router.post('/register_user', ctrlUsers.registerUser);
 
 // auth api
 router.post('/login', ctrlAuth.loginUser);
-router.delete('/logout', authenticateToken, ctrlAuth.logoutUser);
-router.post('/token', ctrlAuth.refreshAccessToken);
+router.post('/logout', authenticateToken, ctrlAuth.logoutUser);
+router.post('/refresh_token', ctrlAuth.refreshAccessToken)
+;
 
 module.exports = router;

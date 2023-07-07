@@ -2,10 +2,17 @@ require('dotenv').config()
 
 const dbjs = require('./app/models/db');
 const express = require('express');
+const cors = require('cors');
 // const mongoose =  require('mongoose');
 const routesApi = require('./app/routes/routes');
 
 const app = express();
+
+app.use(cors({
+    // port od angularja
+    origin: ['http://localhost:4200'],
+    credentials: true
+}));
 
 // uporabljamo json
 app.use(express.json());
