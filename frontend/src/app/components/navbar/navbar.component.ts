@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import { SessionStorageService } from "../../services/session.storage.service";
 import { AuthService } from "../../services/auth.service";
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnChanges {
+export class NavbarComponent implements OnInit {
 
   user!: User
   isLoggedIn$!: Observable<boolean>;
@@ -25,10 +25,6 @@ export class NavbarComponent implements OnInit, OnChanges {
         this.user = data;
       }
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.user = this.sessionStorageService.getUser();
   }
 
   userLogout() {
