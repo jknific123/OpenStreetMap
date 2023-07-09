@@ -13,7 +13,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
-import { NewNavbarComponent } from './components/new-navbar/new-navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { NewNavbarComponent } from './components/new-navbar/new-navbar.component
     RegistrationPageComponent,
     HomePageComponent,
     ProfilePageComponent,
-    NewNavbarComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

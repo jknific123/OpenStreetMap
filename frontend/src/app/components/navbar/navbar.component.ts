@@ -6,11 +6,11 @@ import { User } from "../../classes/user";
 import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-new-navbar',
-  templateUrl: './new-navbar.component.html',
-  styleUrls: ['./new-navbar.component.css']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class NewNavbarComponent implements OnInit, OnChanges {
+export class NavbarComponent implements OnInit, OnChanges {
 
   user!: User
   isLoggedIn$!: Observable<boolean>;
