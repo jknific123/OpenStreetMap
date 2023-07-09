@@ -21,7 +21,15 @@ export class SessionStorageService {
   public saveAuthToken(token: any): void {
     sessionStorage.removeItem(AUTH_TOKEN_KEY);
     sessionStorage.setItem(AUTH_TOKEN_KEY, token);
-    this.saveUser(token);
+
+    const decodedTokenData = this.getDecodedAccessToken(token);
+    const user = {
+      _id: decodedTokenData._id,
+      name: decodedTokenData.name,
+      email: decodedTokenData.email,
+      role: decodedTokenData.role
+    }
+    this.saveUser(user);
   }
 
   public saveRefreshToken(refreshToken: any): void {
@@ -39,15 +47,8 @@ export class SessionStorageService {
     return refreshToken != null ? refreshToken : '';
   }
 
-  public saveUser(userToken: any): void {
-    const decodedTokenData = this.getDecodedAccessToken(userToken);
+  public saveUser(user: User): void {
     sessionStorage.removeItem(USER_KEY);
-    const user = {
-      _id: decodedTokenData._id,
-      name: decodedTokenData.name,
-      email: decodedTokenData.email,
-      role: decodedTokenData.role
-    }
     sessionStorage.setItem(USER_KEY, JSON.stringify(user as User));
   }
 

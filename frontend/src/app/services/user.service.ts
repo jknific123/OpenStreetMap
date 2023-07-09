@@ -16,4 +16,9 @@ export class UserService {
     return this.http.get<any>(url);
   }
 
+  updateUserDataById(userId: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/update_user/${userId}`;
+    return this.http.put<any>(url, data);
+  }
+
 }

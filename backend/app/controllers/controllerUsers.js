@@ -65,19 +65,23 @@ const userUpdate = async (req, res) => {
             res.status(404).json({ message: 'Cannot find user by id for update.'});
         }
 
-        if (req.body.name != null) {
+        if (req.body.name != null && req.body.name !== '') {
             userById.name = req.body.name;
         }
 
-        if (req.body.email != null) {
+        if (req.body.email != null && req.body.email !== '') {
             userById.email = req.body.email;
         }
 
-        // TODO updejtat se more dat tudi geslo
-
-        if (req.body.role != null) {
-            userById.role = req.body.role;
+        if (req.body.password != null && req.body.password !== "") {
+            console.log('trying to update password for user');
+            userById.password = bcrypt.hashSync(req.body.password, 10);
         }
+
+        // zaenkrat ne omogocamo updejtanja role
+        // if (req.body.role != null || req.body.role !== '') {
+        //     userById.role = req.body.role;
+        // }
 
         const updatedUser = await userById.save();
         console.log('Successfully updated user.');

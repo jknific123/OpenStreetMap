@@ -72,7 +72,7 @@ const logoutUser = async (req, res) => {
 }
 
 function generateAccesToken(user) {
-    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '10s'});
+    return jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {expiresIn: '10m'});
 }
 
 const refreshAccessToken = async (req, res) => {
