@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Home</a>
+
+    <h3 style="color: #fff;"> Oceni kvaliteto bivanja </h3>
+
+    <div>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="(isLoggedIn$ | async) === false">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/registration">Registration</a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="(isLoggedIn$ | async) === true">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/map">Map</a>
+        </li>
+
+        <li class="nav-item">
+          <div class="dropdown">
+
+            <button class="btn btn-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <h6 class="mr-2">
+                <i class="far fa-user-circle fa-md mr-2"></i>
+                {{ this.user.name }}
+              </h6>
+            </button>
+
+            <div class="dropdown-menu">
+              <button class="dropdown-item" type="button" routerLink="/profile">Profil</button>
+              <button class="dropdown-item" type="button" (click)="userLogout()">Odjavi me</button>
+            </div>
+
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>

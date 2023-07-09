@@ -42,11 +42,21 @@ export class SessionStorageService {
   public saveUser(userToken: any): void {
     const decodedTokenData = this.getDecodedAccessToken(userToken);
     sessionStorage.removeItem(USER_KEY);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(decodedTokenData as User));
+    const user = {
+      _id: decodedTokenData._id,
+      name: decodedTokenData.name,
+      email: decodedTokenData.email,
+      role: decodedTokenData.role
+    }
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user as User));
   }
 
-  public getUser(): any {
-    return sessionStorage.getItem(USER_KEY) ? JSON.parse(JSON.stringify(sessionStorage.getItem(USER_KEY))) : {};
+  public getUser(): User {
+    const user = sessionStorage.getItem(USER_KEY);
+    if (user != null) {
+      return JSON.parse(user)
+    }
+    return {_id: "", email: "", name: "", role: ""};
   }
 
   public isLoggedIn(): boolean {

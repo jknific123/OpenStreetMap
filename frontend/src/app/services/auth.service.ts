@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from "../classes/user";
 import {environment} from "../../environments/environment";
 import {SessionStorageService} from "./session.storage.service";
@@ -17,6 +17,7 @@ export class AuthService {
               private sessionStorageService: SessionStorageService) {}
 
   private apiUrl = environment.apiUrl;
+  private loggedIn = new BehaviorSubject<boolean>(this.sessionStorageService.isLoggedIn());
 
   registerUser(userData: User): Observable<any> {
     const url = `${this.apiUrl}/register_user`;
@@ -37,5 +38,13 @@ export class AuthService {
     const url = `${this.apiUrl}/refresh_token`;
     const refreshToken = this.sessionStorageService.getRefreshToken();
     return this.http.post(url, {refreshToken: refreshToken});
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
+
+  setLoggedIn(value: boolean) {
+    this.loggedIn.next(value);
   }
 }

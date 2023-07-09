@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
+import { NewNavbarComponent } from './components/new-navbar/new-navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {httpInterceptorProviders} from "./helpers/http.interceptor";
     NavbarComponent,
     SidebarComponent,
     ProfilePageComponent,
+    NewNavbarComponent,
   ],
   imports: [
     BrowserModule,

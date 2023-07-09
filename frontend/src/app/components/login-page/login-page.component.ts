@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { SessionStorageService } from '../../services/session.storage.service';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +15,6 @@ export class LoginPageComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
 
   constructor(private authService: AuthService,
               private sessionStorageService: SessionStorageService,
@@ -38,6 +37,7 @@ export class LoginPageComponent implements OnInit {
         // saving auth token and user data
         this.sessionStorageService.saveAuthToken(data.accessToken)
         this.sessionStorageService.saveRefreshToken(data.refreshToken);
+        this.authService.setLoggedIn(true);
         // this.sessionStorageService.saveUser(data.accessToken);
 
         this.isLoginFailed = false;
