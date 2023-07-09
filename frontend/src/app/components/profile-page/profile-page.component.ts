@@ -33,6 +33,11 @@ export class ProfilePageComponent implements OnInit {
     this.enableInputFields();
   }
 
+  onClickCancleEdit() {
+    this.isEditable = false;
+    this.disableInputFields();
+  }
+
   submitUpdateUserData(): void {
     this.isEditable = false;
     this.disableInputFields();
