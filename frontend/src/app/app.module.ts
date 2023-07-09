@@ -11,8 +11,6 @@ import { PageNotFound } from './components/page-not-found/page-not-found';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
 import { NewNavbarComponent } from './components/new-navbar/new-navbar.component';
@@ -25,8 +23,6 @@ import { NewNavbarComponent } from './components/new-navbar/new-navbar.component
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
-    NavbarComponent,
-    SidebarComponent,
     ProfilePageComponent,
     NewNavbarComponent,
   ],
