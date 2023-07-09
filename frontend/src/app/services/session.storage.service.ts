@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import {User} from "../classes/user";
+import {BehaviorSubject} from "rxjs";
 
 const AUTH_TOKEN_KEY = 'auth-token';
 const REFRESH_TOKEN_KEY = 'refresh-token';
@@ -11,8 +12,9 @@ const USER_KEY = 'auth-user';
 })
 export class SessionStorageService {
 
-  constructor() {
-  }
+  constructor() {}
+
+  private userObject = new BehaviorSubject<User>(this.getUser());
 
   clean(): void {
     sessionStorage.clear();
@@ -50,6 +52,7 @@ export class SessionStorageService {
   public saveUser(user: User): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(user as User));
+    this.userObject.next(user as User);
   }
 
   public getUser(): User {
@@ -60,8 +63,13 @@ export class SessionStorageService {
     return {_id: "", email: "", name: "", role: ""};
   }
 
+  // TODO tole je treba refactorat ker je v auth service ista funkcija
   public isLoggedIn(): boolean {
     return sessionStorage.getItem(USER_KEY) != null;
+  }
+
+  get getUserObservable() {
+    return this.userObject.asObservable();
   }
 
   getDecodedAccessToken(token: string): any {

@@ -20,7 +20,11 @@ export class NavbarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.user = this.sessionStorageService.getUser();
+    this.sessionStorageService.getUserObservable.subscribe({
+      next: data => {
+        this.user = data;
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
