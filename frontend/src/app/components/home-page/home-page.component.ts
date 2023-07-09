@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
+import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +10,7 @@ import {UserService} from "../../services/user.service";
 export class HomePageComponent implements OnInit {
 
   items: any[];
-  users!: any[];
+  users!: User[];
   constructor(private userService: UserService) {
     this.items = [1, 2, 3];
   }
