@@ -49,24 +49,41 @@ export class MapLeafletComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
     this.markerService.makeCapitalMarkers(this.map);
+
+    // Register event listener here instead of inside the click method
+    this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
+      this.onClickLocation(e);
+    });
   }
 
   public reloadMap() {
     this.markerService.makeCapitalMarkers(this.map);
   }
 
-  onClickLocation() {
+  onClickLocation(e: { latlng: { lat: number; lng: number; }; }) {
+    console.log('click on map');
 
-    this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
-      // console.log(e.latlng); // get the coordinates
+    // pobrise trenutni pointer na mapi
+    if (this.marker) {
+      this.map.removeLayer(this.marker);
+    }
 
-      // pobrise trenutni pointer na mapi
-      if (this.marker) {
-        this.map.removeLayer(this.marker);
+    this.marker = L.marker([e.latlng.lat, e.latlng.lng]); // add the marker onclick
+    this.marker.addTo(this.map);
+
+    // klic na be osmnx
+    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng).subscribe({
+      next: data => {
+        console.log('POIS, data:', data);
+
+        data.features.forEach((poi: any) => {
+          console.log('poi: ', poi.properties.name)
+        })
+
+      },
+      error: err => {
+        console.log('Error getting POIS: ', err);
       }
-
-      this.marker = L.marker([e.latlng.lat, e.latlng.lng]); // add the marker onclick
-      this.marker.addTo(this.map);
     });
   }
 

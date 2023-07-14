@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,8 @@ export class MarkerService {
 
   constructor(private http: HttpClient) {
   }
+
+  private apiUrl = environment.apiUrl;
 
   makeCapitalMarkers(map: L.Map): void {
     this.http.get(this.capitals).subscribe((res: any) => {
@@ -22,4 +26,10 @@ export class MarkerService {
       }
     });
   }
+
+  getPointsOfInterest(lat: number, lng: number): Observable<any> {
+    const url = `${this.apiUrl}/get_pois`;
+    return this.http.post(url, {latitude: lat, longitude: lng});
+  }
+
 }
