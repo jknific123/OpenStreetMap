@@ -56,10 +56,6 @@ export class MapLeafletComponent implements AfterViewInit {
     });
   }
 
-  public reloadMap() {
-    this.markerService.makeCapitalMarkers(this.map);
-  }
-
   onClickLocation(e: { latlng: { lat: number; lng: number; }; }) {
     console.log('click on map');
 
@@ -85,6 +81,10 @@ export class MapLeafletComponent implements AfterViewInit {
         console.log('Error getting POIS: ', err);
       }
     });
+  }
+
+  public reloadMap() {
+    this.markerService.makeCapitalMarkers(this.map);
   }
 
 }
