@@ -6,6 +6,7 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {HomePageComponent} from "./components/home-page/home-page.component";
+import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 import { authGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapLeafletComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin-panel',
+    component: AdminPanelComponent,
     canActivate: [authGuard]
   },
   {

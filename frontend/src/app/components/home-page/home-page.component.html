@@ -1,21 +1,11 @@
 
-<div class="container w-100">
-  <div class="row ">
-    <div class="col-4 mb-1" *ngFor="let item of items">
-      <div class="card">
-            <h5 class="card-title" >{{item}}</h5>
-      </div>
-    </div>
+
+
+
+<div class="container rounded bg-white mt-4 mb-4" style="top: 80px">
+
+  <div class="d-flex flex-column align-items-center text-center">
+    <h3> Pozdravljeni, {{this.user.name}}! </h3>
   </div>
 
-  <div class="row ">
-    <div class="col-4 mb-1" *ngFor="let user of users">
-      <div class="card">
-            <h5 class="card-title" >{{user._id}}</h5>
-            <p>{{user.name}}</p>
-            <p>{{user.email}}</p>
-            <p>{{user.role}}</p>
-      </div>
-    </div>
-  </div>
 </div>

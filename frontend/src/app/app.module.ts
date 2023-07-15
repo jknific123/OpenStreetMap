@@ -16,6 +16,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { httpAuthInterceptorProvider } from "./helpers/http.interceptor";
 import { httpSpinnerInterceptorProvider } from "./helpers/loading.interceptor";
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { httpSpinnerInterceptorProvider } from "./helpers/loading.interceptor";
     ProfilePageComponent,
     NavbarComponent,
     SpinnerComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
