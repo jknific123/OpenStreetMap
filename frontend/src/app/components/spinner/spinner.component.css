@@ -1,65 +1,41 @@
-.cssload-container {
+
+.spinner__container {
   position: fixed;
+  z-index: 9000;
   width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
 }
 
-.cssload-speeding-wheel {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 48%;
-  top: 40%;
-  width: 63px;
-  height: 63px;
-  margin: 0 auto;
-  border: 4px solid rgb(0, 0, 0);
-  border-radius: 50%;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  animation: cssload-spin 500ms infinite linear;
-  -o-animation: cssload-spin 500ms infinite linear;
-  -ms-animation: cssload-spin 500ms infinite linear;
-  -webkit-animation: cssload-spin 500ms infinite linear;
-  -moz-animation: cssload-spin 500ms infinite linear;
+.spinner {
+  animation: Rotate 2.4s both infinite linear;
 }
 
-@keyframes cssload-spin {
+.path {
+  animation: DrawLine 1.6s both infinite alternate linear;
+  fill: none;
+  stroke: #000;
+  stroke-width: 50;
+}
+
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
-    transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 
-@-o-keyframes cssload-spin {
-  100% {
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
+@keyframes DrawLine {
+  0% {
+    stroke-dasharray: 0 126;
   }
-}
-
-@-ms-keyframes cssload-spin {
   100% {
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes cssload-spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-moz-keyframes cssload-spin {
-  100% {
-    -moz-transform: rotate(360deg);
-    transform: rotate(360deg);
+    stroke-dasharray: 126 126;
   }
 }
