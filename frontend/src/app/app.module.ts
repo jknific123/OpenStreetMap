@@ -12,8 +12,11 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
-import {httpInterceptorProviders} from "./helpers/http.interceptor";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { httpAuthInterceptorProvider } from "./helpers/http.interceptor";
+import { httpSpinnerInterceptorProvider } from "./helpers/loading.interceptor";
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomePageComponent,
     ProfilePageComponent,
     NavbarComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule
   ],
   providers: [MarkerService,
-  httpInterceptorProviders],
+  httpAuthInterceptorProvider,
+  httpSpinnerInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
