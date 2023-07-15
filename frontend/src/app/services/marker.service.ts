@@ -27,9 +27,9 @@ export class MarkerService {
     });
   }
 
-  getPointsOfInterest(lat: number, lng: number): Observable<any> {
+  getPointsOfInterest(lat: number, lng: number, distance: number): Observable<any> {
     const url = `${this.apiUrl}/get_pois`;
-    return this.http.post(url, {latitude: lat, longitude: lng});
+    return this.http.post(url, {latitude: lat, longitude: lng, distance: distance});
   }
 
 }

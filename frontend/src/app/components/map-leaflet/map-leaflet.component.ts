@@ -68,7 +68,7 @@ export class MapLeafletComponent implements AfterViewInit {
     this.marker.addTo(this.map);
 
     // klic na be osmnx
-    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng).subscribe({
+    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, 500).subscribe({
       next: data => {
         console.log('POIS, data:', data);
 
