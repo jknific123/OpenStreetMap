@@ -20,3 +20,6 @@ mongoose je treba met starejšo verzijo ker so v 6.0 odstranli callbacke
 
 CORS things - how to connect angular and node
 https://stackoverflow.com/questions/57009371/access-to-xmlhttprequest-at-from-origin-localhost3000-has-been-blocked
+
+Spinner tutorial
+https://danielk.tech/home/angular-how-to-add-a-loading-spinner
