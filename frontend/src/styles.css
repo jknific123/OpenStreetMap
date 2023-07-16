@@ -16,7 +16,8 @@ body {
   font-family: 'Roboto', sans-serif;
   /*background: #fafafa;*/
   /*background: #81d742;*/
-  background: #71cb9f;
+  /*background: #71cb9f;*/
+  background: rgba(5, 99, 101, 0.6);
   /*background: #00a2e8;*/
 }
 
