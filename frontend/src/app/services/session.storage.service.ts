@@ -6,6 +6,7 @@ import {BehaviorSubject} from "rxjs";
 const AUTH_TOKEN_KEY = 'auth-token';
 const REFRESH_TOKEN_KEY = 'refresh-token';
 const USER_KEY = 'auth-user';
+const TAG_PREFERENCES = 'saved-tag-preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,20 @@ export class SessionStorageService {
   get getUserObservable() {
     return this.userObject.asObservable();
   }
+
+  public saveTagPreferences(tags: any): void {
+    sessionStorage.removeItem(TAG_PREFERENCES);
+    sessionStorage.setItem(TAG_PREFERENCES, JSON.stringify(tags));
+  }
+
+  public getTagPreferences(): any {
+    const tagPreferences = sessionStorage.getItem(TAG_PREFERENCES);
+    if (tagPreferences != null) {
+      return JSON.parse(tagPreferences)
+    }
+    return {};
+  }
+
 
   getDecodedAccessToken(token: string): any {
     try {

@@ -1,0 +1,75 @@
+
+
+Zdravje:
+- dostopnost in bližina zdravstvenih ustanov - ne
+- onesnaženost zraka - kupernikus?
+
+TAGS = {
+        'amenity': ['pharmacy', 'hospital']
+        }
+
+Okolje:
+- oskrba (manjše trgovine, nakupovalna središča)
+- storitve (bankomat, pošta, lekarna, bolnica?)
+- bližina zelenih površin
+- igrišča, športni objekti/telovadnice, fitnes
+- kulturne ustanove?, knjižnice, gostinski lokali..
+
+TAGS = {
+         'shop': ['mall', 'supermarket']
+         'amenity': ['grocery']
+         'amenity': ['atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant'],
+         'landuse': ['grass', 'forest']
+         'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre']
+       }
+
+Transport:
+- bližina postaj javnega prevoza ter pogostost voženj (pogostost, št linij)
+- mobilnost z avtomobilom (oddaljenost od avtoceste)
+- mobilnost s kolesom (oddaljenost do BicikeLJ mest)
+
+TAGS = {
+        'highway': 'bus_stop',
+        'public_transport': 'station',
+        'amenity': ['bus_station']
+       }
+
+Izobraževanje:
+- osnovne šole
+- vrtci
+- izobraževalne ustanove, fakultete?
+
+TAGS = {
+        'amenity': ['school', 'kindergarten', 'university']
+        }
+
+
+
+
+    tags2 = {'shops': {'shop': True},
+             'malls': {'shop': 'mall'},
+             'grocery': {'shop': 'supermarket'},
+             'atm': {'amenity': 'atm'},
+             'post_office': {'amenity': 'post_office'},
+             'pharmacy': {'amenity': 'pharmacy'},
+             'hospital': {'amenity': 'hospital'},
+             'green_area': {'landuse': ['grass', 'forest'], 'leisure': ['park', 'garden', 'nature_reserve']},
+             'playground': {'leisure': 'playground'},
+             'sports_centre': {'leisure': 'sports_centre'},
+             'fitness_centre': {'leisure': 'fitness_centre', 'amenity': 'gym'},
+             'library': {'amenity': 'library'},
+             'restaurant': {'amenity': 'restaurant'},
+             'bus_stop': {'highway': 'bus_stop'},
+             'school': {'amenity': 'school'},
+             'kindergarten': {'amenity': 'kindergarten'},
+             'university': {'amenity': 'university'}}
+
+
+
+
+    tags3 = {'shop': True,
+             'amenity': ['atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant', 'school', 'kindergarten', 'university'],
+             'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre'],
+             'highway': 'bus_stop',
+             'public_transport': 'station',
+             'landuse': ['grass', 'forest']}

@@ -17,7 +17,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { httpAuthInterceptorProvider } from "./helpers/http.interceptor";
 import { httpSpinnerInterceptorProvider } from "./helpers/loading.interceptor";
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

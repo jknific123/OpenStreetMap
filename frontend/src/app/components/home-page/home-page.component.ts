@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
 import { SessionStorageService } from "../../services/session.storage.service";
+import { MarkerService } from "../../services/marker.service";
 import {User} from "../../classes/user";
 
 @Component({
@@ -11,7 +11,10 @@ import {User} from "../../classes/user";
 export class HomePageComponent implements OnInit {
 
   user!: User
-  constructor(public sessionStorageService: SessionStorageService) {}
+  options: any = [];
+
+  constructor(private sessionStorageService: SessionStorageService,
+              private markerService: MarkerService) {}
 
   ngOnInit(): void {
     this.sessionStorageService.getUserObservable.subscribe({
@@ -19,6 +22,14 @@ export class HomePageComponent implements OnInit {
         this.user = data;
       }
     });
+
+    this.options = this.markerService.getOptions;
+  }
+
+  onPreferenceSubmit(): void {
+    const tagResult = this.markerService.getSelectedTags();
+    this.sessionStorageService.saveTagPreferences(tagResult)
+    console.log(tagResult);
   }
 
 }

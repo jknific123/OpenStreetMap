@@ -43,3 +43,7 @@ Thumbs.db
 
 # envoirmental data
 .env
+
+# osmnx cache
+./cache
+/cache

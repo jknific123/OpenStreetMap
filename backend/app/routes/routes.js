@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ctrlUsers = require('../controllers/controllerUsers');
 const ctrlAuth = require('../controllers/controllerAuth');
+const ctrlPython = require('../controllers/controllerPython')
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res, next){
@@ -30,7 +31,10 @@ router.post('/register_user', ctrlUsers.registerUser);
 // auth api
 router.post('/login', ctrlAuth.loginUser);
 router.post('/logout', authenticateToken, ctrlAuth.logoutUser);
-router.post('/refresh_token', ctrlAuth.refreshAccessToken)
-;
+router.post('/refresh_token', ctrlAuth.refreshAccessToken);
+
+// python api
+router.post('/get_pois', ctrlPython.getPointsOfInterest);
+
 
 module.exports = router;
