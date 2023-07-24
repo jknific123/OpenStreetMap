@@ -7,6 +7,7 @@ const AUTH_TOKEN_KEY = 'auth-token';
 const REFRESH_TOKEN_KEY = 'refresh-token';
 const USER_KEY = 'auth-user';
 const TAG_PREFERENCES = 'saved-tag-preferences';
+const DISTANCE_PREFERENCES = 'saved-distance-preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,18 @@ export class SessionStorageService {
     return {};
   }
 
+  public saveDistancePreferences(distance: any): void {
+    sessionStorage.removeItem(DISTANCE_PREFERENCES);
+    sessionStorage.setItem(DISTANCE_PREFERENCES, JSON.stringify(distance));
+  }
+
+  public getDistancePreferences(): any {
+    const tagPreferences = sessionStorage.getItem(DISTANCE_PREFERENCES);
+    if (tagPreferences != null) {
+      return JSON.parse(tagPreferences)
+    }
+    return {};
+  }
 
   getDecodedAccessToken(token: string): any {
     try {

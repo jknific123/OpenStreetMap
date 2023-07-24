@@ -12,6 +12,8 @@ export class HomePageComponent implements OnInit {
 
   user!: User
   options: any = [];
+  distances = [500, 800, 1000];
+  selectedDistance: string = "500"; // default value
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService) {}
@@ -30,6 +32,12 @@ export class HomePageComponent implements OnInit {
     const tagResult = this.markerService.getSelectedTags();
     this.sessionStorageService.saveTagPreferences(tagResult)
     console.log(tagResult);
+  }
+
+  updateDistance(distance: string) {
+    this.selectedDistance = distance;
+    this.sessionStorageService.saveDistancePreferences(distance);
+    console.log('new selected distance: ' + this.selectedDistance);
   }
 
 }

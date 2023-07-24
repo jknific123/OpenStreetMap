@@ -74,7 +74,7 @@ export class MarkerService {
     });
   }
 
-  getPointsOfInterest(lat: number, lng: number, distance: number): Observable<any> {
+  getPointsOfInterest(lat: number, lng: number, distance: string): Observable<any> {
     const url = `${this.apiUrl}/get_pois`;
     // const tagPreferences = JSON.stringify(this.sessionStorageService.getTagPreferences());
     return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});

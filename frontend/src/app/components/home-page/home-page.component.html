@@ -9,6 +9,19 @@
 
     <h5> Izberite parametre, ki so pomembni za kvaliteto vašega bivanja: </h5>
 
+    <label for="distanceDropdown" class="mt-2"> Izberite razdaljo vašega iskanja: </label>
+
+    <div class="dropdown mt-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="distanceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ selectedDistance + 'm' }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="distanceDropdown">
+        <a class="dropdown-item" (click)="updateDistance('500')">500m</a>
+        <a class="dropdown-item" (click)="updateDistance('800')">800m</a>
+        <a class="dropdown-item" (click)="updateDistance('1000')">1000m</a>
+      </div>
+    </div>
+
   </div>
 
   <div *ngFor="let option of options" class="d-flex gap-3">

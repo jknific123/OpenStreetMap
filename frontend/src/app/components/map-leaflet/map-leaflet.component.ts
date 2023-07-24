@@ -1,7 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import * as L from 'leaflet';
 import {MarkerService} from "../../services/marker.service";
-
+import { SessionStorageService } from "../../services/session.storage.service";
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -28,7 +28,8 @@ export class MapLeafletComponent implements AfterViewInit {
   private map: any;
   private marker: any;
 
-  constructor(private markerService: MarkerService) {
+  constructor(private markerService: MarkerService,
+              private sessionStorageService: SessionStorageService) {
   }
 
   private initMap(): void {
@@ -68,7 +69,7 @@ export class MapLeafletComponent implements AfterViewInit {
     this.marker.addTo(this.map);
 
     // klic na be osmnx
-    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, 500).subscribe({
+    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, this.sessionStorageService.getDistancePreferences()).subscribe({
       next: data => {
         console.log('POIS, data:', data);
 
