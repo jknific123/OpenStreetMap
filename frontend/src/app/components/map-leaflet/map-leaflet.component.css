@@ -17,3 +17,6 @@
 #map {
   height: 100%;
 }
+
+/* za rdeco barvo prvotnega markerja */
+img.huechange { filter: hue-rotate(120deg); }
