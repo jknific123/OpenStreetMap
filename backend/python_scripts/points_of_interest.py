@@ -21,9 +21,6 @@ if __name__ == "__main__":
     distance = int(sys.argv[3])
     prefTags = json.loads(sys.argv[4])
 
-    # Convert prefTags to a dictionary
-    # prefTags = json.loads(prefTags.replace("'", "\""))
-
     # Get the amenities
     results = get_pois(latitude, longitude, distance, prefTags)
 
