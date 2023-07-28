@@ -11,7 +11,7 @@ const getPointsOfInterest = async (req, res) => {
     // console.log('stringified tags: ', tags)
 
 
-    exec(`python ./python_scripts/amenities.py ${latitude} ${longitude} ${distance} "${tags}"`, (error, stdout, stderr) => { // double quotes around tags
+    exec(`python ./python_scripts/points_of_interest.py ${latitude} ${longitude} ${distance} "${tags}"`, (error, stdout, stderr) => { // double quotes around tags
         if (error) {
             console.error(`exec error: ${error}`);
             res.status(500).send(error);
