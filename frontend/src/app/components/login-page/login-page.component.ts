@@ -38,6 +38,8 @@ export class LoginPageComponent implements OnInit {
         this.sessionStorageService.saveAuthToken(data.accessToken)
         this.sessionStorageService.saveRefreshToken(data.refreshToken);
         this.authService.setLoggedIn(true);
+        // shanimo default vrednost za razdaljo
+        this.sessionStorageService.saveDistancePreferences('500');
         // this.sessionStorageService.saveUser(data.accessToken);
 
         this.isLoginFailed = false;
