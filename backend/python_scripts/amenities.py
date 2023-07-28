@@ -5,10 +5,6 @@ import json
 
 def get_pois(latitude, longitude, distance, prefTags):
 
-    # The tags that correspond to grocery stores, green spaces, schools, and bus stations
-    tags = {'amenity': ['bus_station', 'school', 'grocery'],
-            'leisure': ['park', 'garden', 'nature_reserve']}
-
     # Define a point at the given latitude and longitude
     point = (latitude, longitude)
 
