@@ -88,6 +88,21 @@ export class MapLeafletComponent implements AfterViewInit {
 
         data.features.forEach((poi: any) => {
           console.log('poi: ', poi.properties.name)
+
+          // we save current pois to session storage
+          this.sessionStorageService.saveCurrentPois(data.features)
+
+          // create a marker for each POI and add a popup with the name of the POI
+          if (poi?.geometry?.type === 'Point') {
+            const poiPointMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
+              .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
+              .addTo(this.map);
+          } else {
+            const poiPolygonMarker = L.marker([poi?.geometry?.coordinates[0][0][1], poi?.geometry?.coordinates[0][0][0]])
+              .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
+              .addTo(this.map);
+          }
+
         })
 
       },
