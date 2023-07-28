@@ -2,3 +2,5 @@ osmnx
 geopandas
 matplotlib
 geopy
+scikit-learn
+networkx

@@ -23,3 +23,11 @@ https://stackoverflow.com/questions/57009371/access-to-xmlhttprequest-at-from-or
 
 Spinner tutorial
 https://danielk.tech/home/angular-how-to-add-a-loading-spinner
+
+This tells nodemon to ignore any changes in the cache directory:
+
+ "scripts": {
+    "devStart": "nodemon --ignore cache/ server.js"
+  }
+
+Ker osmnx nardi cache mapco in jo ob api klcih polni nodemon to smatra kot spremembe in restarta app..

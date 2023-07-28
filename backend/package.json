@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon --ignore cache/ server.js"
   },
   "author": "jknific",
   "license": "ISC",
