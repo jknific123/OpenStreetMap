@@ -19,6 +19,15 @@ import { httpSpinnerInterceptorProvider } from "./helpers/loading.interceptor";
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from "ngx-toastr";
+import {httpToastInterceptorProvider} from "./helpers/toast.interceptor";
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { PoiModalComponent } from './components/poi-modal/poi-modal.component';
+import {MatListModule} from "@angular/material/list";
+import {MatButtonModule} from "@angular/material/button";
+import { PoiReportComponent } from './components/poi-report/poi-report.component';
 
 @NgModule({
   declarations: [
@@ -41,10 +50,22 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatListModule,
+    MatButtonModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      enableHtml: true,  // enables HTML tags in the toast message
+      timeOut: 1000
+    })
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,
-  httpSpinnerInterceptorProvider],
+  httpSpinnerInterceptorProvider,
+  httpToastInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
