@@ -152,7 +152,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
           if (!this.hasPois) {
               // Disable the button and change its style if there are no POIs
               this.reportButton.setAttribute('disabled', 'true');
-              this.reportButton.style.opacity = '0.5';
+              // this.reportButton.style.opacity = '0.5';
               this.reportButton.style.cursor = 'not-allowed';
           }
 
@@ -193,7 +193,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         if (!this.hasPois) {
           // Disable the button and change its style if there are no POIs
           this.resetButton.setAttribute('disabled', 'true');
-          this.resetButton.style.opacity = '0.5';
+          // this.resetButton.style.opacity = '0.5';
           this.resetButton.style.cursor = 'not-allowed';
         }
 
@@ -228,7 +228,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       this.reportButton.style.cursor = 'pointer';
     } else {
       this.reportButton.setAttribute('disabled', 'true');
-      this.reportButton.style.opacity = '0.5';
+      // this.reportButton.style.opacity = '0.5';
       this.reportButton.style.cursor = 'not-allowed';
     }
   }
@@ -279,7 +279,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       this.resetButton.style.cursor = 'pointer';
     } else {
       this.resetButton.setAttribute('disabled', 'true');
-      this.resetButton.style.opacity = '0.5';
+      // this.resetButton.style.opacity = '0.5';
       this.resetButton.style.cursor = 'not-allowed';
     }
   }

@@ -21,7 +21,13 @@ def get_pois(latitude, longitude, distance, prefTags):
     # Add a new column to the GeoDataFrame for the distance to the point
     def calculate_distance(row):
         geom = row['geometry']
-        lon, lat = (geom.centroid.x, geom.centroid.y) if geom.type == 'Polygon' else (geom.x, geom.y)
+        if geom.geom_type == 'Polygon':
+            lon, lat = geom.centroid.x, geom.centroid.y
+        elif geom.geom_type == 'MultiPolygon':
+            # When encountering a MultiPolygon, we don't calculate the distance
+            return None
+        else:  # it's a Point
+            lon, lat = geom.x, geom.y
         try:
             return nx.shortest_path_length(G, node, ox.nearest_nodes(G, lon, lat), weight='length')
         except nx.NetworkXNoPath:

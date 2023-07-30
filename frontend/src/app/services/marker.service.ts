@@ -94,12 +94,17 @@ export class MarkerService {
         poiMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
           .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
           .addTo(map);
-      } else {
+        markers.push(poiMarker);
+      }
+      else if (poi?.geometry?.type === 'MultiPolygon') {
+        // skip for now
+      }
+      else {
         poiMarker = L.marker([poi?.geometry?.coordinates[0][0][1], poi?.geometry?.coordinates[0][0][0]])
           .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
           .addTo(map);
+        markers.push(poiMarker);
       }
-      markers.push(poiMarker);
 
     return markers;
   }
