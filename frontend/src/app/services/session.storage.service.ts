@@ -8,6 +8,8 @@ const REFRESH_TOKEN_KEY = 'refresh-token';
 const USER_KEY = 'auth-user';
 const TAG_PREFERENCES = 'saved-tag-preferences';
 const DISTANCE_PREFERENCES = 'saved-distance-preferences';
+const LOCATION_COORDINATES = 'saved-location-coordinates'
+const CURRENT_POIS = 'current-points-of-interest'
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,22 @@ export class SessionStorageService {
 
   private userObject = new BehaviorSubject<User>(this.getUser());
 
+  private currentPoisSubject = new BehaviorSubject<any[]>(this.getCurrentPois());
+  currentPoisChanges$ = this.currentPoisSubject.asObservable();
+
+  public currentMarkerCoordinatesSubject = new BehaviorSubject<{ lat: number, lon: number } | null>(this.getLocationCoordinates());
+  currentMarkerCoordinatesChanges$ = this.currentMarkerCoordinatesSubject.asObservable();
+
   clean(): void {
     sessionStorage.clear();
+  }
+  clearMapData(): void {
+    sessionStorage.removeItem(CURRENT_POIS);
+    sessionStorage.removeItem(LOCATION_COORDINATES);
+
+    // Emit defaults to reset POIs and marker coordinates in subscribers
+    this.currentPoisSubject.next([]);
+    this.currentMarkerCoordinatesSubject.next(null);
   }
 
   public saveAuthToken(token: any): void {
@@ -93,11 +109,44 @@ export class SessionStorageService {
   }
 
   public getDistancePreferences(): any {
-    const tagPreferences = sessionStorage.getItem(DISTANCE_PREFERENCES);
-    if (tagPreferences != null) {
-      return JSON.parse(tagPreferences)
+    const distancePreferences = sessionStorage.getItem(DISTANCE_PREFERENCES);
+    if (distancePreferences != null) {
+      return JSON.parse(distancePreferences)
     }
     return {};
+  }
+
+  public saveLocationCoordinates(latitude: number, longitude: number): void {
+    sessionStorage.removeItem(LOCATION_COORDINATES);
+    const coordinates = {
+      lat: latitude,
+      lon: longitude
+    };
+    sessionStorage.setItem(LOCATION_COORDINATES, JSON.stringify(coordinates));
+    this.currentMarkerCoordinatesSubject.next(coordinates);
+  }
+
+
+  public getLocationCoordinates(): any {
+    const locationCoordinates = sessionStorage.getItem(LOCATION_COORDINATES);
+    if (locationCoordinates != null) {
+      return JSON.parse(locationCoordinates)
+    }
+    return null;
+  }
+
+  public saveCurrentPois(pois: any): void {
+    sessionStorage.removeItem(CURRENT_POIS);
+    sessionStorage.setItem(CURRENT_POIS, JSON.stringify(pois));
+    this.currentPoisSubject.next(pois);
+  }
+
+  public getCurrentPois(): any {
+    const currentPois = sessionStorage.getItem(CURRENT_POIS);
+    if (currentPois != null) {
+      return JSON.parse(currentPois)
+    }
+    return [];
   }
 
   getDecodedAccessToken(token: string): any {

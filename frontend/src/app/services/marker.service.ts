@@ -4,6 +4,8 @@ import * as L from 'leaflet';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import { SessionStorageService } from "./session.storage.service";
+import {PoiMarker} from "../classes/poi-marker";
+import {GroupedMarker} from "../classes/grouped-marker";
 
 type OptionTag = {
   [name: string]: string[] | string;
@@ -73,6 +75,35 @@ export class MarkerService {
       }
     });
   }
+
+  showSavedPOIMarkers(map: L.Map, currentPois: any, markers: L.Marker[]): L.Marker[] {
+    // const currentPois = this.sessionStorageService.getCurrentPois();
+    // const markers: L.Marker[] = [];
+
+    currentPois.forEach((poi: PoiMarker) => {
+      this.showPoiMarker(map, poi, markers);
+    });
+
+    return markers;
+  }
+
+  showPoiMarker(map: L.Map, poi: PoiMarker, markers: L.Marker[]): L.Marker[] {
+
+      let poiMarker: L.Marker;
+      if (poi?.geometry?.type === 'Point') {
+        poiMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
+          .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
+          .addTo(map);
+      } else {
+        poiMarker = L.marker([poi?.geometry?.coordinates[0][0][1], poi?.geometry?.coordinates[0][0][0]])
+          .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties.description}<br>${Math.floor(poi.properties.distance)}m`)
+          .addTo(map);
+      }
+      markers.push(poiMarker);
+
+    return markers;
+  }
+
 
   getPointsOfInterest(lat: number, lng: number, distance: string): Observable<any> {
     const url = `${this.apiUrl}/get_pois`;
