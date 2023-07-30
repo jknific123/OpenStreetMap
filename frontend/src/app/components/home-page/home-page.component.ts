@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { SessionStorageService } from "../../services/session.storage.service";
 import { MarkerService } from "../../services/marker.service";
 import {User} from "../../classes/user";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +17,8 @@ export class HomePageComponent implements OnInit {
   selectedDistance: string = "500"; // default value
 
   constructor(private sessionStorageService: SessionStorageService,
-              private markerService: MarkerService) {}
+              private markerService: MarkerService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.sessionStorageService.getUserObservable.subscribe({
@@ -25,12 +27,25 @@ export class HomePageComponent implements OnInit {
       }
     });
 
-    this.options = this.markerService.getOptions;
+    const savedDistance = this.sessionStorageService.getDistancePreferences();
+    this.selectedDistance = savedDistance ? savedDistance : '500';
+
+    // Get the checkbox states from sessionStorage
+    const savedCheckboxStates = this.sessionStorageService.getOptionsTagPreferences();
+    if (savedCheckboxStates) {
+      this.options = savedCheckboxStates;
+    } else {
+      this.options = this.markerService.getOptions;
+    }
+
   }
 
   onPreferenceSubmit(): void {
     const tagResult = this.markerService.getSelectedTags();
     this.sessionStorageService.saveTagPreferences(tagResult)
+    // Save the checkbox states in sessionStorage
+    this.sessionStorageService.saveOptionsTagPreferences(this.options)
+    this.toastr.success('Success!');
     console.log(tagResult);
   }
 

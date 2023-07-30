@@ -8,6 +8,7 @@ const REFRESH_TOKEN_KEY = 'refresh-token';
 const USER_KEY = 'auth-user';
 const TAG_PREFERENCES = 'saved-tag-preferences';
 const DISTANCE_PREFERENCES = 'saved-distance-preferences';
+const OPTIONS_TAG_PREFERENCES = 'options-tag-preferences';
 const LOCATION_COORDINATES = 'saved-location-coordinates'
 const CURRENT_POIS = 'current-points-of-interest'
 
@@ -114,6 +115,19 @@ export class SessionStorageService {
       return JSON.parse(distancePreferences)
     }
     return {};
+  }
+
+  public saveOptionsTagPreferences(options: any): void {
+    sessionStorage.removeItem(OPTIONS_TAG_PREFERENCES);
+    sessionStorage.setItem(OPTIONS_TAG_PREFERENCES, JSON.stringify(options));
+  }
+
+  public getOptionsTagPreferences(): any {
+    const optionsTagPreferences = sessionStorage.getItem(OPTIONS_TAG_PREFERENCES);
+    if (optionsTagPreferences != null) {
+      return JSON.parse(optionsTagPreferences)
+    }
+    return null;
   }
 
   public saveLocationCoordinates(latitude: number, longitude: number): void {
