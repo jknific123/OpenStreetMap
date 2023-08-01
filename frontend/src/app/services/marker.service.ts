@@ -120,6 +120,10 @@ export class MarkerService {
     return this.options;
   }
 
+  updateOptions(options: any) {
+    this.options = options;
+  }
+
   getSelectedTags(): OptionTag {
     const result: OptionTag = {};
 

@@ -34,10 +34,11 @@ export class HomePageComponent implements OnInit {
     const savedCheckboxStates = this.sessionStorageService.getOptionsTagPreferences();
     if (savedCheckboxStates) {
       this.options = savedCheckboxStates;
+      // Update the options object in the MarkerService
+      this.markerService.updateOptions(savedCheckboxStates);
     } else {
       this.options = this.markerService.getOptions;
     }
-
   }
 
   onPreferenceSubmit(): void {
