@@ -52,6 +52,7 @@ export class HomePageComponent implements OnInit {
   updateDistance(distance: string) {
     this.selectedDistance = distance;
     this.sessionStorageService.saveDistancePreferences(distance);
+    this.toastr.success('Success!');
     console.log('new selected distance: ' + this.selectedDistance);
   }
 
