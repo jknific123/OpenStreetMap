@@ -45,7 +45,7 @@ export class MarkerService {
     },
     {
       name: 'Transport',
-      description: 'avtobusne postaje,BicikeLJ',
+      description: 'avtobusne postaje, BicikeLJ',
       tags: {
         'highway': ['bus_stop'],
         'public_transport': ['station'],

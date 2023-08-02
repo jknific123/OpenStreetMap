@@ -67,7 +67,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
     tiles.addTo(this.map);
 
     // Add the custom controls to the map
-    this.map.addControl(this.createCustomControl());
+    this.map.addControl(this.createReportControl());
     this.map.addControl(this.createResetControl());
   }
 
@@ -119,12 +119,12 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('POIS, data:', data);
         // first we clear all existing poi markers from the map
         this.clearPoiMarkers();
+        // we save current pois to session storage
+        this.sessionStorageService.saveCurrentPois(data.features)
 
         data.features.forEach((poi: PoiMarker) => {
           console.log('poi: ', poi.properties.name)
 
-          // we save current pois to session storage
-          this.sessionStorageService.saveCurrentPois(data.features)
           // then we show current poi marker on map and save it in poiMarker array
           this.markerService.showPoiMarker(this.map, poi, this.poiMarkers);
 
@@ -136,8 +136,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  createCustomControl() {
-      const customControl = L.Control.extend({
+  createReportControl() {
+      const reportControl = L.Control.extend({
         options: {
           position: 'topright'
         },
@@ -174,7 +174,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       });
 
-    return new customControl();
+    return new reportControl();
   }
 
   createResetControl() {
