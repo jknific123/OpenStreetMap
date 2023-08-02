@@ -45,11 +45,11 @@ export class MarkerService {
     },
     {
       name: 'Transport',
-      description: 'avtobusne postaje',
+      description: 'avtobusne postaje,BicikeLJ',
       tags: {
         'highway': ['bus_stop'],
         'public_transport': ['station'],
-        'amenity': ['bus_station']
+        'amenity': ['bus_station', 'bicycle_rental']
       },
       selected: false
     },
