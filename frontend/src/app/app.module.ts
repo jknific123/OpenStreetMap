@@ -23,8 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from "ngx-toastr";
 import {httpToastInterceptorProvider} from "./helpers/toast.interceptor";
 
-import { MatDialogModule } from '@angular/material/dialog';
-import { PoiModalComponent } from './components/poi-modal/poi-modal.component';
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import { PoiReportComponent } from './components/poi-report/poi-report.component';
@@ -41,6 +39,7 @@ import { PoiReportComponent } from './components/poi-report/poi-report.component
     NavbarComponent,
     SpinnerComponent,
     AdminPanelComponent,
+    PoiReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +50,6 @@ import { PoiReportComponent } from './components/poi-report/poi-report.component
     MatCheckboxModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    MatDialogModule,
     MatListModule,
     MatButtonModule,
     ToastrModule.forRoot({

@@ -1,0 +1,13 @@
+
+
+<div class="container rounded bg-white mt-4 mb-4" style="top: 80px">
+
+  <div *ngFor="let group of groupedMarkers">
+    <h2>{{ group.name }}</h2>
+    <ul>
+      <li *ngFor="let marker of group.markers">{{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m </li>
+    </ul>
+  </div>
+
+</div>
+

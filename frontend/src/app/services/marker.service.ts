@@ -116,6 +116,35 @@ export class MarkerService {
     return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});
   }
 
+  groupMarkersByTags(markers: any[], options: any[]): GroupedMarker[] {
+    let groups: { [key: string]: PoiMarker[] } = {};
+
+    // Create empty arrays for each group
+    options.forEach(option => {
+      groups[option.name] = [];
+    });
+
+    markers.forEach(marker => {
+      // Check each option
+      options.forEach(option => {
+        // Check each tag for the current option
+        Object.keys(option.tags).forEach(key => {
+          // Check if the marker has this tag
+          if(marker.properties[key]) {
+            // Check if the value of the tag is included in the current option tags
+            option.tags[key].forEach((tag: any) => {
+              if(marker.properties[key].includes(tag)) {
+                groups[option.name].push(marker);
+              }
+            });
+          }
+        });
+      });
+    });
+
+    return Object.keys(groups).map(groupName => ({ name: groupName, markers: groups[groupName] }));
+  }
+
   get getOptions() {
     return this.options;
   }

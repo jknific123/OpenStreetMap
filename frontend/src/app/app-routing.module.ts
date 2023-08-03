@@ -8,6 +8,7 @@ import {ProfilePageComponent} from "./components/profile-page/profile-page.compo
 import {HomePageComponent} from "./components/home-page/home-page.component";
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 import { authGuard } from "./guards/auth.guard";
+import {PoiReportComponent} from "./components/poi-report/poi-report.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapLeafletComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'poi-porocilo',
+    component: PoiReportComponent,
     canActivate: [authGuard]
   },
   {
