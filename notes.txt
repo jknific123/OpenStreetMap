@@ -31,3 +31,9 @@ This tells nodemon to ignore any changes in the cache directory:
   }
 
 Ker osmnx nardi cache mapco in jo ob api klcih polni nodemon to smatra kot spremembe in restarta app..
+
+
+MongoDB error v Compassu: connect ECONNREFUSED 127.0.0.1:27017
+
+- potrebno startat service
+https://stackoverflow.com/questions/46523321/mongoerror-connect-econnrefused-127-0-0-127017
