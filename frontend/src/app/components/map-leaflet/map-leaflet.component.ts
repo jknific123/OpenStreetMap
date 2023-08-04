@@ -101,9 +101,14 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       this.markerService.showSavedPOIMarkers(this.map, currentPois, this.poiMarkers);
     }
 
-    // Register event listener here instead of inside the click method
+    // Register event listener
     this.map.on("click", (e: { latlng: { lat: number; lng: number; }; }) => {
-      this.onClickLocation(e);
+      if (this.sessionStorageService.getTagPreferences()) {
+        this.onClickLocation(e);
+      }
+      else {
+        window.alert("Nimate izbranih parametrov kvalitete življenja!");
+      }
     });
   }
 

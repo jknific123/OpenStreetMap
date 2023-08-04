@@ -92,8 +92,13 @@ export class SessionStorageService {
   }
 
   public saveTagPreferences(tags: any): void {
-    sessionStorage.removeItem(TAG_PREFERENCES);
-    sessionStorage.setItem(TAG_PREFERENCES, JSON.stringify(tags));
+    if (Object.keys(tags).length !== 0) {
+      sessionStorage.removeItem(TAG_PREFERENCES);
+      sessionStorage.setItem(TAG_PREFERENCES, JSON.stringify(tags));
+    }
+    else {
+      sessionStorage.removeItem(TAG_PREFERENCES);
+    }
   }
 
   public getTagPreferences(): any {
@@ -101,7 +106,7 @@ export class SessionStorageService {
     if (tagPreferences != null) {
       return JSON.parse(tagPreferences)
     }
-    return {};
+    return null;
   }
 
   public saveDistancePreferences(distance: any): void {
