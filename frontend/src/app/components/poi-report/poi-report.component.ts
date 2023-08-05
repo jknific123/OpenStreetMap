@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MarkerService } from "src/app/services/marker.service";
 import { SessionStorageService } from "../../services/session.storage.service";
-import { GroupedMarker } from "../../classes/grouped-marker";
+import {LocationReport} from "../../classes/location-report";
+import {GroupedMarkers} from "../../classes/grouped-markers";
 
 @Component({
   selector: 'app-poi-report',
@@ -10,17 +11,23 @@ import { GroupedMarker } from "../../classes/grouped-marker";
 })
 export class PoiReportComponent implements OnInit {
 
-  groupedMarkers: GroupedMarker[] = [];
+  locationReport!: LocationReport;
+  groupedMarkerEntries: [string, GroupedMarkers][] = [];  // An array of key-value pairs
 
   constructor(private markerService: MarkerService,
               private sessionStorageService: SessionStorageService) {}
 
   ngOnInit(): void {
     const currentPois = this.sessionStorageService.getCurrentPois();
-    this.groupedMarkers = this.markerService.groupMarkersByTags(currentPois, this.markerService.getOptions);
+    const groupedMarkers = this.markerService.groupMarkersByTags(currentPois, this.markerService.getOptions);
+    console.log(groupedMarkers)
 
-    console.log(this.groupedMarkers)
+    this.locationReport = this.markerService.calculateRatings(groupedMarkers);
+    console.log('locReport: ', this.locationReport)
+
+    this.groupedMarkerEntries = Object.entries(this.locationReport.categories);
   }
 
   protected readonly Math = Math;
+  protected readonly Array = Array;
 }

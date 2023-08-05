@@ -1,6 +1,7 @@
-export class PoiMarker {
-  id!: string;
-  type!: string;
+export interface PoiMarker {
+  id: string;
+  type: string;
   properties: any;
   geometry: any;
+  rating: number;
 }

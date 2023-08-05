@@ -5,7 +5,9 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import { SessionStorageService } from "./session.storage.service";
 import {PoiMarker} from "../classes/poi-marker";
-import {GroupedMarker} from "../classes/grouped-marker";
+import {GroupedMarkers} from "../classes/grouped-markers";
+import {LocationReport} from "../classes/location-report";
+import {TagOptions} from "../classes/tag-options";
 
 type OptionTag = {
   [name: string]: string[] | string;
@@ -22,7 +24,7 @@ export class MarkerService {
 
   private apiUrl = environment.apiUrl;
 
-  options = [
+  options : TagOptions[] = [
     {
       name: 'Zdravje',
       description: 'bližina zdravstvenih ustanov npr. lekarna, bolnica',
@@ -54,7 +56,7 @@ export class MarkerService {
       selected: false
     },
     {
-      name: 'Izobraževanje',
+      name: 'Izobrazevanje',
       description: 'osnovne šole, vrtci, fakultete',
       tags: {
         'amenity': ['school', 'kindergarten', 'university']
@@ -116,7 +118,7 @@ export class MarkerService {
     return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});
   }
 
-  groupMarkersByTags(markers: any[], options: any[]): GroupedMarker[] {
+  groupMarkersByTags(markers: any[], options: any[]): GroupedMarkers[] {
     let groups: { [key: string]: PoiMarker[] } = {};
 
     // Create empty arrays for each group
@@ -142,8 +144,62 @@ export class MarkerService {
       });
     });
 
-    return Object.keys(groups).map(groupName => ({ name: groupName, markers: groups[groupName] }));
+    return Object.keys(groups).map(groupName => ({ name: groupName, markers: groups[groupName], groupRating: undefined }));
   }
+
+  calculateRatings(groupedMarkers: GroupedMarkers[]): LocationReport {
+    let overallScore = 0;
+    const maxFullScoreDistance = 500; // Score is 1 for markers within this distance
+    const selectedDistance = this.sessionStorageService.getDistancePreferences();
+    const locationCoordinates = this.sessionStorageService.getLocationCoordinates();
+
+    const categories: LocationReport['categories'] = {
+      Zdravje: { name: 'Zdravje', markers: [], groupRating: undefined },
+      Okolje: { name: 'Okolje', markers: [], groupRating: undefined },
+      Transport: { name: 'Transport', markers: [], groupRating: undefined },
+      Izobrazevanje: { name: 'Izobrazevanje', markers: [], groupRating: undefined }
+    };
+
+    for (let group of groupedMarkers) {
+      let groupScore = 0;
+      for (let marker of group.markers) {
+        const distance = marker.properties.distance;
+        let score: number;
+
+        if (distance <= maxFullScoreDistance) {
+          score = 1;
+        } else {
+          // Score decreases linearly with distance, from 1 at max_full_score_distance to 0 at selected_distance
+          score = Math.max(1 - (distance - maxFullScoreDistance) / (selectedDistance - maxFullScoreDistance), 0);
+        }
+
+        marker.rating = parseFloat(score.toFixed(2)); // save score for marker;
+        groupScore += score;
+      }
+
+      if (group.markers.length > 0) {
+        group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group
+      } else {
+        group.groupRating = 0;
+      }
+
+      overallScore += group.groupRating;
+
+      // Assign the group to the categories based on its name
+      (categories as any)[group.name] = group;
+    }
+
+    const overall_rating = parseFloat((overallScore / groupedMarkers.length).toFixed(2)); // overall score
+
+    return {
+    location: {
+      coordinates: [locationCoordinates.lat, locationCoordinates.lon]
+    },
+    categories: categories,
+    overall_rating: overall_rating
+    };
+  }
+
 
   get getOptions() {
     return this.options;
