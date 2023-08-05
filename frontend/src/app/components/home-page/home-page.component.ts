@@ -13,8 +13,7 @@ export class HomePageComponent implements OnInit {
 
   user!: User
   options: any = [];
-  distances = [500, 800, 1000];
-  selectedDistance: string = "500"; // default value
+  selectedDistance: string = "400"; // default value
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService,
@@ -28,7 +27,7 @@ export class HomePageComponent implements OnInit {
     });
 
     const savedDistance = this.sessionStorageService.getDistancePreferences();
-    this.selectedDistance = savedDistance ? savedDistance : '500';
+    this.selectedDistance = savedDistance ? savedDistance : '400';
 
     // Get the checkbox states from sessionStorage
     const savedCheckboxStates = this.sessionStorageService.getOptionsTagPreferences();
