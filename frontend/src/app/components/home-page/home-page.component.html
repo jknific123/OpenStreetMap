@@ -27,7 +27,7 @@
   <div *ngFor="let option of options" class="d-flex gap-3">
     <mat-checkbox [(ngModel)]="option.selected">
       <span >
-        {{ option.name }}:
+        {{ checkOptionName(option.name) }}:
         {{ option.description }}
       </span>
     </mat-checkbox>

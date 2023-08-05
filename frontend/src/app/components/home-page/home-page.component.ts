@@ -57,4 +57,11 @@ export class HomePageComponent implements OnInit {
     console.log('new selected distance: ' + this.selectedDistance);
   }
 
+  checkOptionName(optionName: string): string {
+    if (optionName === 'Izobrazevanje') {
+      return 'Izobraževanje';
+    }
+    else return optionName;
+  }
+
 }
