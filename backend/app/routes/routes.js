@@ -3,6 +3,7 @@ const router = express.Router();
 const ctrlUsers = require('../controllers/controllerUsers');
 const ctrlAuth = require('../controllers/controllerAuth');
 const ctrlPython = require('../controllers/controllerPython')
+const ctrlLocationReport = require('../controllers/controllerLocationReport');
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res, next){
@@ -36,5 +37,7 @@ router.post('/refresh_token', ctrlAuth.refreshAccessToken);
 // python api
 router.post('/get_pois', ctrlPython.getPointsOfInterest);
 
+// location report
+router.post('/save_location_report', ctrlLocationReport.saveLocationReport);
 
 module.exports = router;

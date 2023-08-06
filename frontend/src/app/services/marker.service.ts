@@ -78,6 +78,19 @@ export class MarkerService {
     });
   }
 
+  // API-s
+  getPointsOfInterest(lat: number, lng: number, distance: string): Observable<any> {
+    const url = `${this.apiUrl}/get_pois`;
+    // const tagPreferences = JSON.stringify(this.sessionStorageService.getTagPreferences());
+    return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});
+  }
+
+  saveLocationReport(locationReport: LocationReport): Observable<any> {
+    console.log('saving location report: ', locationReport);
+    const url = `${this.apiUrl}/save_location_report`;
+    return this.http.post(url, locationReport);
+  }
+
   showSavedPOIMarkers(map: L.Map, currentPois: any, markers: L.Marker[]): L.Marker[] {
     // const currentPois = this.sessionStorageService.getCurrentPois();
     // const markers: L.Marker[] = [];
@@ -109,13 +122,6 @@ export class MarkerService {
       }
 
     return markers;
-  }
-
-
-  getPointsOfInterest(lat: number, lng: number, distance: string): Observable<any> {
-    const url = `${this.apiUrl}/get_pois`;
-    // const tagPreferences = JSON.stringify(this.sessionStorageService.getTagPreferences());
-    return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});
   }
 
   groupMarkersByTags(markers: any[], options: any[]): GroupedMarkers[] {
@@ -192,21 +198,13 @@ export class MarkerService {
     const overall_rating = parseFloat((overallScore / groupedMarkers.length).toFixed(2)); // overall score
 
     return {
-    location: {
-      coordinates: [locationCoordinates.lat, locationCoordinates.lon]
-    },
-    categories: categories,
-    overall_rating: overall_rating
+      userId: this.sessionStorageService.getUser()._id,
+      location: {
+        coordinates: [locationCoordinates.lat, locationCoordinates.lon]
+      },
+      categories: categories,
+      overall_rating: overall_rating
     };
-  }
-
-
-  get getOptions() {
-    return this.options;
-  }
-
-  updateOptions(options: any) {
-    this.options = options;
   }
 
   getSelectedTags(): OptionTag {
@@ -231,6 +229,14 @@ export class MarkerService {
     // console.log('result: ', result);
 
     return result;
+  }
+
+  get getOptions() {
+    return this.options;
+  }
+
+  updateOptions(options: any) {
+    this.options = options;
   }
 
 }

@@ -15,7 +15,7 @@ app.use(cors({
 }));
 
 // uporabljamo json
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // vsi requesti ki imajo /api se routajo v routes.js fajlu
 app.use('/api', routesApi);
