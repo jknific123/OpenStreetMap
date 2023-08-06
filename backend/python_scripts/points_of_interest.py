@@ -12,6 +12,9 @@ def get_pois(latitude, longitude, distance, prefTags):
     # Create a GeoDataFrame of amenities near the point
     gdf = ox.features_from_point(point, prefTags, dist=distance)
 
+    # Filter out MultiPolygon from the GeoDataFrame
+    gdf = gdf.query("geometry.geom_type != 'MultiPolygon'")
+
     # Create a graph from the point within the specified distance
     G = ox.graph_from_point(point, dist=distance, dist_type='network', network_type='walk')
 
