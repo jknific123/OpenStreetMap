@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, TemplateRef, ViewChild} from '@angular/core';
 import { MarkerService } from "src/app/services/marker.service";
 import { SessionStorageService } from "../../services/session.storage.service";
 import {LocationReport} from "../../classes/location-report";
 import {GroupedMarkers} from "../../classes/grouped-markers";
 import {ToastrService} from "ngx-toastr";
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-poi-report',
@@ -11,13 +12,17 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./poi-report.component.css']
 })
 export class PoiReportComponent implements OnInit {
-
+  showModal:boolean = false;
   locationReport!: LocationReport;
   groupedMarkerEntries: [string, GroupedMarkers][] = [];  // An array of key-value pairs
+  reportName: string = '';
+
+  @ViewChild('reportNameDialog', { static: true }) reportNameDialog!: TemplateRef<any>;
 
   constructor(private markerService: MarkerService,
               private sessionStorageService: SessionStorageService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
     const currentPois = this.sessionStorageService.getCurrentPois();
@@ -36,13 +41,18 @@ export class PoiReportComponent implements OnInit {
       next: savedReport => {
         this.toastr.success('Location report saved successfully');
         console.log('savedReport: ', savedReport)
-
+        this.showModal = false;
       },
       error: err => {
         this.toastr.error('Error saving location report: ', err);
         console.log('Error saving location report: ', err);
       }
     });
+  }
+
+  openDialog(): void {
+    this.showModal = true;
+    console.log("s", this.showModal);
   }
 
   protected readonly Math = Math;

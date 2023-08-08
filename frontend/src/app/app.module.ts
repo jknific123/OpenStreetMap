@@ -26,6 +26,10 @@ import {httpToastInterceptorProvider} from "./helpers/toast.interceptor";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import { PoiReportComponent } from './components/poi-report/poi-report.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import { BaseModalComponent} from "./components/base-modal/base-modal.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { PoiReportComponent } from './components/poi-report/poi-report.component
     SpinnerComponent,
     AdminPanelComponent,
     PoiReportComponent,
+    BaseModalComponent
   ],
   imports: [
     BrowserModule,
@@ -52,13 +57,16 @@ import { PoiReportComponent } from './components/poi-report/poi-report.component
     BrowserAnimationsModule,
     MatListModule,
     MatButtonModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true,
       enableHtml: true,  // enables HTML tags in the toast message
       timeOut: 1000
-    })
+    }),
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,
