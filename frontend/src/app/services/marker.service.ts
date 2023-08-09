@@ -85,12 +85,6 @@ export class MarkerService {
     return this.http.post(url, {latitude: lat, longitude: lng, distance: distance, tags: this.sessionStorageService.getTagPreferences()});
   }
 
-  saveLocationReport(locationReport: LocationReport): Observable<any> {
-    console.log('saving location report: ', locationReport);
-    const url = `${this.apiUrl}/save_location_report`;
-    return this.http.post(url, locationReport);
-  }
-
   showSavedPOIMarkers(map: L.Map, currentPois: any, markers: L.Marker[]): L.Marker[] {
     // const currentPois = this.sessionStorageService.getCurrentPois();
     // const markers: L.Marker[] = [];

@@ -9,6 +9,7 @@ import {HomePageComponent} from "./components/home-page/home-page.component";
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 import { authGuard } from "./guards/auth.guard";
 import {LocationReportViewComponent} from "./components/location-report-view/location-report-view.component";
+import {LocationReportTableComponent} from "./components/location-report-table/location-report-table.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,12 @@ const routes: Routes = [
   {
     path: 'location-report',
     component: LocationReportViewComponent,
+    canActivate: [authGuard]
+  },
+  {
+    // path: 'location-report-list',
+    path: 'list',
+    component: LocationReportTableComponent,
     canActivate: [authGuard]
   },
   {

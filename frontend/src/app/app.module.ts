@@ -31,6 +31,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { BaseModalComponent} from "./components/base-modal/base-modal.component";
 import { BaseAccordionComponent } from './components/base-accordion/base-accordion.component';
+import { LocationReportTableComponent } from './components/location-report-table/location-report-table.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { BaseAccordionComponent } from './components/base-accordion/base-accordi
     AdminPanelComponent,
     LocationReportViewComponent,
     BaseModalComponent,
-    BaseAccordionComponent
+    BaseAccordionComponent,
+    LocationReportTableComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { BaseAccordionComponent } from './components/base-accordion/base-accordi
       timeOut: 1000
     }),
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    TableModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

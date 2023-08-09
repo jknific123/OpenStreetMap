@@ -20,7 +20,20 @@ const saveLocationReport = async (req, res) => {
     }
 }
 
+const getLocationReportsForUser = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const reports = await LocationReport.find({ userId: userId });
+        res.status(200).send({ success: true, reports });
+    } catch (error) {
+        console.log('Error occurred when fetching location reports: ', error);
+        res.status(500).send({ success: false, message: error.message });
+    }
+}
+
+// TODO usaj se delete location report
 
 module.exports = {
-    saveLocationReport
+    saveLocationReport,
+    getLocationReportsForUser
 }

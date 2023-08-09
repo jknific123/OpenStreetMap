@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, TemplateRef, ViewChild} from '@angular/core';
+import { LocationReportService } from "../../services/location.report.service";
 import { MarkerService } from "src/app/services/marker.service";
 import { SessionStorageService } from "../../services/session.storage.service";
 import {LocationReport} from "../../classes/location-report";
@@ -20,6 +21,7 @@ export class LocationReportViewComponent implements OnInit {
   @ViewChild('reportNameDialog', { static: true }) reportNameDialog!: TemplateRef<any>;
 
   constructor(private markerService: MarkerService,
+              private locationReportService: LocationReportService,
               private sessionStorageService: SessionStorageService,
               private toastr: ToastrService,
               public dialog: MatDialog) {}
@@ -41,7 +43,7 @@ export class LocationReportViewComponent implements OnInit {
     if (this.reportName. length > 0) {
       this.locationReport.reportName = this.reportName;
     }
-    this.markerService.saveLocationReport(this.locationReport).subscribe({
+    this.locationReportService.saveLocationReport(this.locationReport).subscribe({
       next: savedReport => {
         this.toastr.success('Location report saved successfully');
         console.log('savedReport: ', savedReport)
