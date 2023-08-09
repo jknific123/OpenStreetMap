@@ -166,7 +166,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
             L.DomEvent.stopPropagation(e);
 
               if (this.hasPois) {
-                  this.router.navigate(['/poi-porocilo']);
+                  this.router.navigate(['/location-report']);
               }
 
             console.log('buttonClicked');

@@ -25,7 +25,7 @@ import {httpToastInterceptorProvider} from "./helpers/toast.interceptor";
 
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
-import { PoiReportComponent } from './components/poi-report/poi-report.component';
+import { LocationReportViewComponent } from './components/location-report-view/location-report-view.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -44,7 +44,7 @@ import { BaseAccordionComponent } from './components/base-accordion/base-accordi
     NavbarComponent,
     SpinnerComponent,
     AdminPanelComponent,
-    PoiReportComponent,
+    LocationReportViewComponent,
     BaseModalComponent,
     BaseAccordionComponent
   ],

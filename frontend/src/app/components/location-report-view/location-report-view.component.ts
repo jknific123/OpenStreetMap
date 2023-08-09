@@ -7,11 +7,11 @@ import {ToastrService} from "ngx-toastr";
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-poi-report',
-  templateUrl: './poi-report.component.html',
-  styleUrls: ['./poi-report.component.css']
+  selector: 'app-location-report-view',
+  templateUrl: './location-report-view.component.html',
+  styleUrls: ['./location-report-view.component.css']
 })
-export class PoiReportComponent implements OnInit {
+export class LocationReportViewComponent implements OnInit {
   showModal:boolean = false;
   locationReport!: LocationReport;
   groupedMarkerEntries: [string, GroupedMarkers][] = [];  // An array of key-value pairs
