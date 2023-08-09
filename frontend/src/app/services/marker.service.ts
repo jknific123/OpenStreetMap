@@ -198,6 +198,7 @@ export class MarkerService {
     const overall_rating = parseFloat((overallScore / groupedMarkers.length).toFixed(2)); // overall score
 
     return {
+      reportName: '',
       userId: this.sessionStorageService.getUser()._id,
       location: {
         coordinates: [locationCoordinates.lat, locationCoordinates.lon]

@@ -23,6 +23,7 @@ const schemaGroupedMarkers = new Schema({
 
 // Define the main LocationReport schema
 const schemaLocationReport = new Schema({
+    reportName: String,
     userId: String,
     location: {
         coordinates: [Number]

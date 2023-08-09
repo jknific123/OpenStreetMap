@@ -38,6 +38,9 @@ export class PoiReportComponent implements OnInit {
 
   onSaveSubmit(): void {
     console.log('onSaveSubmit clicked')
+    if (this.reportName. length > 0) {
+      this.locationReport.reportName = this.reportName;
+    }
     this.markerService.saveLocationReport(this.locationReport).subscribe({
       next: savedReport => {
         this.toastr.success('Location report saved successfully');
