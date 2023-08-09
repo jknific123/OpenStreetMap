@@ -30,6 +30,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { BaseModalComponent} from "./components/base-modal/base-modal.component";
+import { BaseAccordionComponent } from './components/base-accordion/base-accordion.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BaseModalComponent} from "./components/base-modal/base-modal.component"
     SpinnerComponent,
     AdminPanelComponent,
     PoiReportComponent,
-    BaseModalComponent
+    BaseModalComponent,
+    BaseAccordionComponent
   ],
   imports: [
     BrowserModule,

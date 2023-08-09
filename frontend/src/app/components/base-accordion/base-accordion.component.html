@@ -1,0 +1,11 @@
+<!--<div class="base-accordion px-4 py-4 shadow rounded my-3">-->
+<div class="base-accordion custom-border-around--no-top mb-3 px-4" >
+  <div class="base-accordion__header d-flex justify-content-between " (click)="toggleAcc()">
+    <span class="base-accordion__title">Show more</span>
+    <span class="base-accordion__chevron" [ngClass]="{'rotated': accOpen}"> > </span>
+  </div>
+  <div class="base-accordion__body mt-3" *ngIf="accOpen">
+    <div class="custom-border-bottom mb-3"></div>
+    <ng-content></ng-content>
+  </div>
+</div>

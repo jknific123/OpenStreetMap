@@ -33,6 +33,7 @@ export class PoiReportComponent implements OnInit {
     console.log('locReport: ', this.locationReport)
 
     this.groupedMarkerEntries = Object.entries(this.locationReport.categories);
+    console.log('groupedMarkerEntries: ', this.groupedMarkerEntries)
   }
 
   onSaveSubmit(): void {
