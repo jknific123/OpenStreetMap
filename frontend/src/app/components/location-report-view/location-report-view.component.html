@@ -1,6 +1,6 @@
 
 <div class="container rounded bg-white p-5 mt-4 mb-4" style="top: 80px; max-width: 760px">
-      <h5 class="d-flex align-items-center">Category<div class="flex-grow-1"></div> <span class="">Rating</span></h5>
+      <h5 class="d-flex align-items-center">Category<div class="flex-grow-1 text-center">{{this.locationReport.reportName ? this.locationReport.reportName : ''}}</div> <span class="">Rating</span></h5>
       <div class="custom-border-bottom mb-4"></div>
       <div class="mb-4" *ngFor="let group of groupedMarkerEntries">
           <!-- Check if group.value is of type GroupedMarkers -->
