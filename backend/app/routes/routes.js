@@ -39,6 +39,6 @@ router.post('/get_pois', ctrlPython.getPointsOfInterest);
 
 // location report
 router.post('/save_location_report', ctrlLocationReport.saveLocationReport);
-router.get('/get_location_reports/:id', ctrlLocationReport.getLocationReportsForUser);
+router.get('/get_location_reports/:userId', ctrlLocationReport.getLocationReportsForUser);
 
 module.exports = router;
