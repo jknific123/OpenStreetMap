@@ -8,6 +8,7 @@ import {ProfilePageComponent} from "./components/profile-page/profile-page.compo
 import {HomePageComponent} from "./components/home-page/home-page.component";
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
 import { authGuard } from "./guards/auth.guard";
+import  { loginGuard} from "./guards/login-guard";
 import {LocationReportViewComponent} from "./components/location-report-view/location-report-view.component";
 import {LocationReportTableComponent} from "./components/location-report-table/location-report-table.component";
 
@@ -16,11 +17,13 @@ const routes: Routes = [
     path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'login',
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    canActivate: [loginGuard]
   },
   {
     path: 'registration',
-    component: RegistrationPageComponent
+    component: RegistrationPageComponent,
+    canActivate: [loginGuard]
   },
   {
     path: 'profile',

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import  { AuthService } from "../services/auth.service";
 import {map, take} from "rxjs/operators";
 
-export const authGuard = () => {
+export const loginGuard = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -13,9 +13,9 @@ export const authGuard = () => {
     take(1),
     map((isLoggedIn: boolean) => {
       if (!isLoggedIn){
-        router.navigate(['/login']);
-        return false;
+        return true;
       }
-      return true;
+      router.navigate(['/home']);
+      return false;
     }));
 };
