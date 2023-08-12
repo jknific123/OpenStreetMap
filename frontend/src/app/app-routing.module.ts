@@ -38,8 +38,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    // path: 'location-report-list',
-    path: 'list',
+    path: 'location-report-list',
     component: LocationReportTableComponent,
     canActivate: [authGuard]
   },
