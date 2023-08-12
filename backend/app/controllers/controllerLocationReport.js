@@ -24,10 +24,10 @@ const getLocationReportsForUser = async (req, res) => {
     try {
         const userId = req.params.userId;
         const reports = await LocationReport.find({ userId: userId });
-        res.status(200).send({ success: true, reports });
+        res.status(200).json(reports);
     } catch (error) {
         console.log('Error occurred when fetching location reports: ', error);
-        res.status(500).send({ success: false, message: error.message });
+        res.status(500).send({ message: error.message});
     }
 }
 

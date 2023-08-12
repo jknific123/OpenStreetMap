@@ -12,6 +12,7 @@ import {ToastrService} from "ngx-toastr";
 export class LocationReportTableComponent implements OnInit {
 
     reports!: LocationReport[];
+    reportsSortableData: any[] = [];
 
     constructor(private locationReportService: LocationReportService,
                 private sessionReportService: SessionStorageService,
@@ -19,10 +20,11 @@ export class LocationReportTableComponent implements OnInit {
 
     ngOnInit() {
         this.locationReportService.getLocationReportsForUser(this.sessionReportService.getUser()._id).subscribe({
-          next: (locationReportsData: any)  => {
+          next: (locationReportsData: LocationReport[])  => {
             this.toastr.success('Location reports loaded successfully');
             console.log('Location reports loaded successfully: ', locationReportsData);
-            this.reports = locationReportsData.reports;
+            this.reports = locationReportsData;
+            this.transformToSortableData(this.reports);
           },
           error: err => {
             this.toastr.error('Error loading location reports: ', err);
@@ -30,4 +32,24 @@ export class LocationReportTableComponent implements OnInit {
           }
         });
     }
+
+    transformToSortableData(reports: LocationReport[]) {
+
+      for (const report of reports) {
+        const reportData: any = {
+          reportName: report.reportName,
+          userId: report.userId,
+          location: {
+            coordinates: report.location.coordinates
+          },
+          zdravjeRating: report.categories.Zdravje?.groupRating,
+          okoljeRating: report.categories.Okolje?.groupRating,
+          transportRating: report.categories.Transport?.groupRating,
+          izobrazevanjeRating: report.categories.Izobrazevanje?.groupRating,
+          overall_rating: report.overall_rating
+        };
+        this.reportsSortableData.push(reportData);
+      }
+    }
+
 }

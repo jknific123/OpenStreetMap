@@ -1,31 +1,26 @@
-<div class="card">
-    <p-table [value]="reports" [tableStyle]="{ 'min-width': '50rem' }">
+<div class="container rounded bg-white p-5 mt-4 mb-4" style="top: 80px;">
+<!--    <p-table [value]="reports" [tableStyle]="{ 'min-width': '50rem' }">-->
+      <p-table [value]="reportsSortableData" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Zdravje</th>
-                <th>Okolje</th>
-                <th>Transport</th>
-                <th>Izobrazevanje</th>
-                <th>Skupna ocena</th>
-<!--                <th>Category</th>-->
-<!--                <th>Quantity</th>-->
+<!--                <th pSortableColumn="Report id" style="width:20%">Report id <p-sortIcon field="Report id"></p-sortIcon></th>-->
+                <th pSortableColumn="reportName" style="width:20%">Name <p-sortIcon field="reportName"></p-sortIcon></th>
+                <th pSortableColumn="zdravjeRating" style="width:15%">Zdravje <p-sortIcon field="zdravjeRating"></p-sortIcon></th>
+                <th pSortableColumn="okoljeRating" style="width:15%">Okolje <p-sortIcon field="okoljeRating"></p-sortIcon></th>
+                <th pSortableColumn="transportRating" style="width:15%">Transport <p-sortIcon field="transportRating"></p-sortIcon></th>
+                <th pSortableColumn="izobrazevanjeRating" style="width:20%">Izobraževanje <p-sortIcon field="izobrazevanjeRating"></p-sortIcon></th>
+                <th pSortableColumn="overall_rating" style="width:30%">Skupna ocena <p-sortIcon field="overall_rating"></p-sortIcon></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-report>
             <tr>
-                <td>{{ report._id }}</td>
+<!--                <td>{{ report._id }}</td>-->
                 <td>{{ report.reportName }}</td>
-                <td>{{ report.categories.Zdravje.groupRating }}</td>
-                <td>{{ report.categories.Okolje.groupRating }}</td>
-                <td>{{ report.categories.Transport.groupRating }}</td>
-                <td>{{ report.categories.Izobrazevanje.groupRating }}</td>
+                <td>{{ report.zdravjeRating }}</td>
+                <td>{{ report.okoljeRating }}</td>
+                <td>{{ report.transportRating }}</td>
+                <td>{{ report.izobrazevanjeRating }}</td>
                 <td>{{ report.overall_rating }}</td>
-
-<!--                <td>{{ report.category }}</td>-->
-<!--                <td>{{ report.quantity }}</td>-->
-            </tr>
         </ng-template>
     </p-table>
 </div>
