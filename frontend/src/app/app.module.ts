@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapLeafletComponent } from './components/map-leaflet/map-leaflet.component';
 import { PageNotFound } from './components/page-not-found/page-not-found';
-import { LoginPageComponent } from './components/login-page/login-page.component';
-import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -33,14 +31,14 @@ import { BaseModalComponent} from "./components/base-modal/base-modal.component"
 import { BaseAccordionComponent } from './components/base-accordion/base-accordion.component';
 import { LocationReportTableComponent } from './components/location-report-table/location-report-table.component';
 import { TableModule } from 'primeng/table';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapLeafletComponent,
     PageNotFound,
-    LoginPageComponent,
-    RegistrationPageComponent,
     HomePageComponent,
     ProfilePageComponent,
     NavbarComponent,
@@ -49,7 +47,9 @@ import { TableModule } from 'primeng/table';
     LocationReportViewComponent,
     BaseModalComponent,
     BaseAccordionComponent,
-    LocationReportTableComponent
+    LocationReportTableComponent,
+    LoginPageComponent,
+    RegistrationPageComponent
   ],
   imports: [
     BrowserModule,

@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {MapLeafletComponent} from "./components/map-leaflet/map-leaflet.component";
 import {PageNotFound} from "./components/page-not-found/page-not-found";
-import {LoginPageComponent} from "./components/login-page/login-page.component";
-import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 import {ProfilePageComponent} from "./components/profile-page/profile-page.component";
 import {HomePageComponent} from "./components/home-page/home-page.component";
 import {AdminPanelComponent} from "./components/admin-panel/admin-panel.component";
@@ -11,6 +9,8 @@ import { authGuard } from "./guards/auth.guard";
 import  { loginGuard} from "./guards/login-guard";
 import {LocationReportViewComponent} from "./components/location-report-view/location-report-view.component";
 import {LocationReportTableComponent} from "./components/location-report-table/location-report-table.component";
+import {LoginPageComponent} from "./components/login-page/login-page.component";
+import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
 
 const routes: Routes = [
   {

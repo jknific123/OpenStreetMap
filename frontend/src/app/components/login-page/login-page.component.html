@@ -1,18 +1,44 @@
-<div class="form-signin w-100 m-auto">
-  <form [formGroup]="form" (submit)="submit()">
-    <h1 class="h3 mb-3 fw-normal">Please log in</h1>
 
-    <div class="form-floating">
-      <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+<div class="grid align__item login-form">
+
+  <div class="register">
+    <div class="register__location-svg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="site__logo" width="56" height="84" viewBox="77.7 214.9 274.7 412">
+        <defs>
+          <linearGradient id="a" x1="0%" y1="0%" y2="0%">
+            <stop offset="0%" stop-color="#8ceabb"/>
+            <stop offset="100%" stop-color="#378f7b"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#a)"
+              d="M215 214.9c-83.6 123.5-137.3 200.8-137.3 275.9 0 75.2 61.4 136.1 137.3 136.1s137.3-60.9 137.3-136.1c0-75.1-53.7-152.4-137.3-275.9z"/>
+      </svg>
     </div>
 
-    <div class="form-floating">
-      <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-    </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+    <h1>Please log in</h1>
 
-    <div *ngIf="isLoginFailed" class="alert alert-danger"> Login failed: {{ errorMessage }}</div>
-    <div class="alert alert-success" *ngIf="isLoggedIn"> Log in was successful!</div>
-  </form>
+    <form [formGroup]="form" (submit)="submit()" class="form">
+
+      <div class="form__field">
+        <input formControlName="email" type="email" placeholder="name@example.com">
+      </div>
+
+      <div class="form__field">
+        <input formControlName="password" type="password" placeholder="Password">
+      </div>
+
+      <div class="form__field">
+        <input type="submit" value="Log in">
+      </div>
+
+      <div *ngIf="isLoginFailed" class="alert  alert-danger"> Login failed: {{ errorMessage }}</div>
+      <div class="alert alert-success" *ngIf="isLoggedIn"> Log in was successful!</div>
+
+    </form>
+
+    <p>Don't have an account yet? <a style="text-decoration: underline;" href="/registration">Register</a></p>
+
+  </div>
+
 </div>
