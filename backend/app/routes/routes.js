@@ -40,5 +40,6 @@ router.post('/get_pois', ctrlPython.getPointsOfInterest);
 // location report
 router.post('/save_location_report', ctrlLocationReport.saveLocationReport);
 router.get('/get_location_reports/:userId', ctrlLocationReport.getLocationReportsForUser);
+router.delete('/delete_location_report/:id', authenticateToken, ctrlLocationReport.locationReportDelete);
 
 module.exports = router;

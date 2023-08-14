@@ -23,4 +23,9 @@ export class LocationReportService {
     return this.http.get<LocationReport[]>(url);
   }
 
+  deleteLocationReportById(reportId: string): Observable<LocationReport> {
+    const url = `${this.apiUrl}/delete_location_report/${reportId}`;
+    return this.http.delete<LocationReport>(url);
+  }
+
 }

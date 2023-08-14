@@ -32,9 +32,20 @@ const getLocationReportsForUser = async (req, res) => {
     }
 }
 
-// TODO usaj se delete location report
+const locationReportDelete = (req, res) => {
+    LocationReport.findOneAndRemove({_id: req.params.id}, function(err, locationReport) {
+            if (err || !locationReport) {
+                res.status(404).json({message: err});
+            }
+            else {
+                console.log(`Successfully removed locationReport wit id ${req.params.id}`);
+                res.status(200).json(locationReport);
+            }
+        });
+};
 
 module.exports = {
     saveLocationReport,
-    getLocationReportsForUser
+    getLocationReportsForUser,
+    locationReportDelete
 }

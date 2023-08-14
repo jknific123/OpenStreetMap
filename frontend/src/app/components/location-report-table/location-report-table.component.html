@@ -11,6 +11,8 @@
                 <th pSortableColumn="izobrazevanjeRating" style="width:20%">Izobraževanje <p-sortIcon field="izobrazevanjeRating"></p-sortIcon></th>
                 <th pSortableColumn="overall_rating" style="width:30%">Skupna ocena <p-sortIcon field="overall_rating"></p-sortIcon></th>
                 <th style="width:30%">St. izbranih kategorij </th>
+                <th style="width:10%"></th>
+                <th style="width:10%"></th>
 
             </tr>
         </ng-template>
@@ -32,6 +34,17 @@
 
                 <td>{{ report.overall_rating }}%</td>
                 <td>{{ report.number_of_selected_categories }}</td>
+
+<!--                <td>-->
+<!--                    &lt;!&ndash; PrimeIcon for map &ndash;&gt;-->
+<!--                    <i class="pi pi-map-marker" (click)="viewOnMap(report)"></i>-->
+<!--                </td>-->
+
+                <td>
+                    <!-- PrimeIcon for delete -->
+                    <i class="pi pi-trash" (click)="deleteReport(report)"></i>
+                </td>
+
         </ng-template>
     </p-table>
 </div>

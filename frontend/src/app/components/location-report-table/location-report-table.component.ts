@@ -37,6 +37,7 @@ export class LocationReportTableComponent implements OnInit {
 
       for (const report of reports) {
         const reportData: any = {
+          _id: report._id,
           reportName: report.reportName,
           userId: report.userId,
           location: {
@@ -51,6 +52,28 @@ export class LocationReportTableComponent implements OnInit {
         };
         this.reportsSortableData.push(reportData);
       }
+    }
+
+    viewOnMap(report: LocationReport) {
+        // Logic to view the report on the map
+        console.log('View report on map:', report);
+    }
+
+    deleteReport(report: LocationReport) {
+        // Logic to delete the report
+        console.log('Delete report:', report);
+        this.locationReportService.deleteLocationReportById(report._id).subscribe({
+          next: (locationReport: LocationReport)  => {
+            this.toastr.success('Location report was deleted successfully');
+
+            // Remove the deleted report from the reportsSortableData array
+            this.reportsSortableData = this.reportsSortableData.filter(r => r._id !== report._id);
+          },
+          error: err => {
+            this.toastr.error('Error deleting location report: ', err);
+            console.log('Error deleting location report: ', err);
+          }
+        })
     }
 
 }

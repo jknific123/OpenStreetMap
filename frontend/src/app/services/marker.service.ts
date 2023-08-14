@@ -205,6 +205,7 @@ export class MarkerService {
     const overall_rating = parseFloat((overallScore / numSelectedCategories).toFixed(2)); // overall score in percentage
 
     return {
+      _id: '',
       reportName: '',
       userId: this.sessionStorageService.getUser()._id,
       location: {
