@@ -76,8 +76,8 @@ import { RegistrationPageComponent } from './components/registration-page/regist
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,
-  httpSpinnerInterceptorProvider,
-  httpToastInterceptorProvider],
+  httpSpinnerInterceptorProvider],
+  // httpToastInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -45,14 +45,14 @@ export class HomePageComponent implements OnInit {
     this.sessionStorageService.saveTagPreferences(tagResult)
     // Save the checkbox states in sessionStorage
     this.sessionStorageService.saveOptionsTagPreferences(this.options)
-    this.toastr.success('Success!');
+    this.toastr.success('Submitted new preferences!');
     console.log(tagResult);
   }
 
   updateDistance(distance: string) {
     this.selectedDistance = distance;
     this.sessionStorageService.saveDistancePreferences(distance);
-    this.toastr.success('Success!');
+    this.toastr.success('Updated the preferred distance!');
     console.log('new selected distance: ' + this.selectedDistance);
   }
 

@@ -107,7 +107,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         this.onClickLocation(e);
       }
       else {
-        window.alert("Nimate izbranih parametrov kvalitete življenja!");
+        // window.alert("Nimate izbranih parametrov kvalitete življenja!");
+        window.alert("Please pick preferred quality of life parameters!");
       }
     });
   }
