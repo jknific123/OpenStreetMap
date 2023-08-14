@@ -24,7 +24,6 @@ import {httpToastInterceptorProvider} from "./helpers/toast.interceptor";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
 import { LocationReportViewComponent } from './components/location-report-view/location-report-view.component';
-import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { BaseModalComponent} from "./components/base-modal/base-modal.component";
@@ -62,7 +61,6 @@ import { RegistrationPageComponent } from './components/registration-page/regist
     BrowserAnimationsModule,
     MatListModule,
     MatButtonModule,
-    MatDialogModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true,

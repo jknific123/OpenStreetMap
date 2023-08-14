@@ -5,7 +5,6 @@ import { SessionStorageService } from "../../services/session.storage.service";
 import {LocationReport} from "../../classes/location-report";
 import {GroupedMarkers} from "../../classes/grouped-markers";
 import {ToastrService} from "ngx-toastr";
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-location-report-view',
@@ -23,8 +22,7 @@ export class LocationReportViewComponent implements OnInit {
   constructor(private markerService: MarkerService,
               private locationReportService: LocationReportService,
               private sessionStorageService: SessionStorageService,
-              private toastr: ToastrService,
-              public dialog: MatDialog) {}
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     const currentPois = this.sessionStorageService.getCurrentPois();
