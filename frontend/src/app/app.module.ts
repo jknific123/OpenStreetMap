@@ -32,6 +32,7 @@ import { LocationReportTableComponent } from './components/location-report-table
 import { TableModule } from 'primeng/table';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
+import {RatingPipe} from "./helpers/pipes/rating-pipe";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { RegistrationPageComponent } from './components/registration-page/regist
     BaseAccordionComponent,
     LocationReportTableComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    RatingPipe
   ],
   imports: [
     BrowserModule,
