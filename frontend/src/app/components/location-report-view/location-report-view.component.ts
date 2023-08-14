@@ -50,7 +50,7 @@ export class LocationReportViewComponent implements OnInit {
         this.showModal = false;
       },
       error: err => {
-        this.toastr.error('Error saving location report: ', err);
+        this.toastr.error('Error saving location report!');
         console.log('Error saving location report: ', err);
       }
     });

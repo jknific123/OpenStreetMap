@@ -27,7 +27,7 @@ export class LocationReportTableComponent implements OnInit {
             this.transformToSortableData(this.reports);
           },
           error: err => {
-            this.toastr.error('Error loading location reports: ', err);
+            this.toastr.error('Error loading location reports!');
             console.log('Error loading location reports: ', err);
           }
         });
@@ -70,7 +70,7 @@ export class LocationReportTableComponent implements OnInit {
             this.reportsSortableData = this.reportsSortableData.filter(r => r._id !== report._id);
           },
           error: err => {
-            this.toastr.error('Error deleting location report: ', err);
+            this.toastr.error('Error deleting location report!');
             console.log('Error deleting location report: ', err);
           }
         })
