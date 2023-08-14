@@ -34,6 +34,7 @@ const schemaLocationReport = new Schema({
         Transport: { type: schemaGroupedMarkers, default: {} },
         Izobrazevanje: { type: schemaGroupedMarkers, default: {} }
     },
+    number_of_selected_categories: Number,
     overall_rating: Number,
     created_at: { type: Date, default: Date.now }
 });

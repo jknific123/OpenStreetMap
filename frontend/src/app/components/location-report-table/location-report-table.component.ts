@@ -42,10 +42,11 @@ export class LocationReportTableComponent implements OnInit {
           location: {
             coordinates: report.location.coordinates
           },
-          zdravjeRating: report.categories.Zdravje?.groupRating,
-          okoljeRating: report.categories.Okolje?.groupRating,
-          transportRating: report.categories.Transport?.groupRating,
-          izobrazevanjeRating: report.categories.Izobrazevanje?.groupRating,
+          zdravjeRating: report.categories.Zdravje?.groupRating != -999 ? report.categories.Zdravje?.groupRating : '-',
+          okoljeRating: report.categories.Okolje?.groupRating != -999 ? report.categories.Okolje?.groupRating : '-',
+          transportRating: report.categories.Transport?.groupRating != -999 ? report.categories.Transport?.groupRating : '-',
+          izobrazevanjeRating: report.categories.Izobrazevanje?.groupRating != -999 ? report.categories.Izobrazevanje?.groupRating : '-',
+          number_of_selected_categories: report.number_of_selected_categories,
           overall_rating: report.overall_rating
         };
         this.reportsSortableData.push(reportData);

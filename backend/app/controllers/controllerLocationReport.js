@@ -10,6 +10,7 @@ const saveLocationReport = async (req, res) => {
             userId: req.body.userId,
             location: req.body.location,
             categories: req.body.categories,
+            number_of_selected_categories: req.body.number_of_selected_categories,
             overall_rating: req.body.overall_rating
         });
         await report.save();

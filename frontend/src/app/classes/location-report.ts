@@ -12,5 +12,6 @@ export interface LocationReport {
         Transport?: GroupedMarkers;
         Izobrazevanje?: GroupedMarkers;
     };
+    number_of_selected_categories: number;
     overall_rating: number;
 }

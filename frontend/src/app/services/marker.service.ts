@@ -149,9 +149,14 @@ export class MarkerService {
 
   calculateRatings(groupedMarkers: GroupedMarkers[]): LocationReport {
     let overallScore = 0;
-    const maxFullScoreDistance = 500; // Score is 1 for markers within this distance
+    const maxFullScoreDistance = 500; // Score is 100 for markers within this distance
     const selectedDistance = this.sessionStorageService.getDistancePreferences();
     const locationCoordinates = this.sessionStorageService.getLocationCoordinates();
+    const categoriesPreferences = this.sessionStorageService.getOptionsTagPreferences();
+
+    const selectedCategoryNames = categoriesPreferences
+        .filter((category: { selected: boolean; }) => category.selected)
+        .map((category: { name: string; }) => category.name);
 
     const categories: LocationReport['categories'] = {
       Zdravje: { name: 'Zdravje', markers: [], groupRating: undefined },
@@ -160,36 +165,44 @@ export class MarkerService {
       Izobrazevanje: { name: 'Izobrazevanje', markers: [], groupRating: undefined }
     };
 
+    let numSelectedCategories = 0;
+
     for (let group of groupedMarkers) {
       let groupScore = 0;
-      for (let marker of group.markers) {
-        const distance = marker.properties.distance;
-        let score: number;
+      if (selectedCategoryNames.includes(group.name)) {
+        for (let marker of group.markers) {
+            const distance = marker.properties.distance;
+            let score: number;
 
-        if (distance <= maxFullScoreDistance) {
-          score = 1;
-        } else {
-          // Score decreases linearly with distance, from 1 at max_full_score_distance to 0 at selected_distance
-          score = Math.max(1 - (distance - maxFullScoreDistance) / (selectedDistance - maxFullScoreDistance), 0);
+            if (distance <= maxFullScoreDistance) {
+                score = 100;
+            } else {
+                // Score decreases linearly with distance, from 100 at max_full_score_distance to 0 at selected_distance
+                score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedDistance - maxFullScoreDistance), 0);
+            }
+
+            marker.rating = parseFloat(score.toFixed(2)); // save score for marker in percentage
+            groupScore += score;
         }
 
-        marker.rating = parseFloat(score.toFixed(2)); // save score for marker;
-        groupScore += score;
-      }
+        if (group.markers.length > 0) {
+            group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group in percentage
+        } else {
+            group.groupRating = 0;
+        }
 
-      if (group.markers.length > 0) {
-        group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group
+        overallScore += group.groupRating;
+
+        // Assign the group to the categories based on its name
+        numSelectedCategories++;
+        (categories as any)[group.name] = group;
       } else {
-        group.groupRating = 0;
+        group.groupRating = -999;
+        (categories as any)[group.name] = group;
       }
-
-      overallScore += group.groupRating;
-
-      // Assign the group to the categories based on its name
-      (categories as any)[group.name] = group;
     }
 
-    const overall_rating = parseFloat((overallScore / groupedMarkers.length).toFixed(2)); // overall score
+    const overall_rating = parseFloat((overallScore / numSelectedCategories).toFixed(2)); // overall score in percentage
 
     return {
       reportName: '',
@@ -198,9 +211,11 @@ export class MarkerService {
         coordinates: [locationCoordinates.lat, locationCoordinates.lon]
       },
       categories: categories,
+      number_of_selected_categories: numSelectedCategories,
       overall_rating: overall_rating
     };
   }
+
 
   getSelectedTags(): OptionTag {
     const result: OptionTag = {};

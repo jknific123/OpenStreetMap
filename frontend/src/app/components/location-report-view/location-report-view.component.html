@@ -6,8 +6,10 @@
           <!-- Check if group.value is of type GroupedMarkers -->
             <ng-container *ngIf="group[1]?.groupRating !== undefined && group[1]?.markers">
                 <h3 class="d-flex align-items-center px-2">{{ group[0] }}
-                      <div class="custom-border-bottom mx-4"></div>
-                  <span>{{ group[1].groupRating | number: '1.2-2' }}</span>
+                  <div class="custom-border-bottom mx-4"></div>
+
+                  <span *ngIf="group[1].groupRating == -999"> - </span>
+                  <span *ngIf="group[1].groupRating != -999">{{ group[1].groupRating | number: '1.2-2' }}%</span>
                 </h3>
 <!--                <ul class="pl-5" *ngIf="Array.isArray(group[1].markers)">-->
 <!--                    <li *ngFor="let marker of group[1].markers">-->
@@ -23,7 +25,7 @@
               </app-base-accordion>
             </ng-container>
       </div>
-    <h2 class="d-flex align-items-center">Overall Rating:<div class="custom-border-bottom mx-3"></div> <span class="">{{ locationReport.overall_rating | number: '1.2-2' }}</span></h2>
+    <h2 class="d-flex align-items-center">Overall Rating:<div class="custom-border-bottom mx-3"></div> <span class="">{{ locationReport.overall_rating | number: '1.2-2' }}%</span></h2>
 
       <div class="d-flex flex-column align-items-center">
   <!--      <button class="btn btn-primary mb-4 " type="button" (click)="onSaveSubmit()">Save location report</button>-->
