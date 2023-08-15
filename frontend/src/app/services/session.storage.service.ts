@@ -12,6 +12,8 @@ const OPTIONS_TAG_PREFERENCES = 'options-tag-preferences';
 const LOCATION_COORDINATES = 'saved-location-coordinates';
 const CURRENT_POIS = 'current-points-of-interest';
 const SELECTED_PROFILE ='selected-profile';
+const CHECKBOX_SELECTED = 'checkbox-selected';
+const TAB_VIEW_ACTIVE_INDEX = 'tab-view-active-index';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +104,10 @@ export class SessionStorageService {
     }
   }
 
+  public deleteTagPreferences(): any {
+    sessionStorage.removeItem(TAG_PREFERENCES);
+  }
+
   public getTagPreferences(): any {
     const tagPreferences = sessionStorage.getItem(TAG_PREFERENCES);
     if (tagPreferences != null) {
@@ -126,6 +132,10 @@ export class SessionStorageService {
   public saveOptionsTagPreferences(options: any): void {
     sessionStorage.removeItem(OPTIONS_TAG_PREFERENCES);
     sessionStorage.setItem(OPTIONS_TAG_PREFERENCES, JSON.stringify(options));
+  }
+
+  public deleteOptionsTagPreferences(): any {
+    sessionStorage.removeItem(OPTIONS_TAG_PREFERENCES);
   }
 
   public getOptionsTagPreferences(): any {
@@ -174,12 +184,37 @@ export class SessionStorageService {
     sessionStorage.setItem(SELECTED_PROFILE, JSON.stringify(profile));
   }
 
-  public getSelectedProfile(): any {
+  public deleteSelectedProfile(): any {
+    sessionStorage.removeItem(SELECTED_PROFILE);
+  }
+
+  public getSelectedProfile(): string | null {
     const profile = sessionStorage.getItem(SELECTED_PROFILE);
-    if (profile != null) {
-      return JSON.parse(profile)
-    }
-    return {};
+    return profile != null ? JSON.parse(profile) : null;
+  }
+
+  public saveCheckboxSelected(checkboxSelected: boolean): void {
+    sessionStorage.removeItem(CHECKBOX_SELECTED);
+    sessionStorage.setItem(CHECKBOX_SELECTED, JSON.stringify(checkboxSelected));
+  }
+
+  public deleteCheckboxSelected(): any {
+    sessionStorage.removeItem(CHECKBOX_SELECTED);
+  }
+
+  public getCheckboxSelected(): boolean | null {
+    const checkboxSelected = sessionStorage.getItem(CHECKBOX_SELECTED);
+    return checkboxSelected != null ? JSON.parse(checkboxSelected) : null;
+  }
+
+  public saveTabViewActiveIndex(tabViewActiveIndex: number): void {
+    sessionStorage.removeItem(TAB_VIEW_ACTIVE_INDEX);
+    sessionStorage.setItem(TAB_VIEW_ACTIVE_INDEX, JSON.stringify(tabViewActiveIndex));
+  }
+
+  public getTabViewActiveIndex(): number | null {
+    const tabViewActiveIndex = sessionStorage.getItem(TAB_VIEW_ACTIVE_INDEX);
+    return tabViewActiveIndex != null ? JSON.parse(tabViewActiveIndex) : null;
   }
 
   getDecodedAccessToken(token: string): any {

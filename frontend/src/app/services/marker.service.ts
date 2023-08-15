@@ -65,6 +65,34 @@ export class MarkerService {
     }
   ];
 
+  profileOptions: TagOptions[] = [
+    {
+      name: 'Family',
+      description: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
+        ' It emphasizes safety, educational opportunities, and recreational facilities.',
+      tags: {
+        'amenity': ['school', 'hospital', 'clinic', 'restaurant', 'kindergarten'],
+        'leisure': ['playground', 'park', 'sports_centre', 'swimming_pool'],
+        'healthcare': ['pediatric'],
+        'cuisine': ['family'],
+        'shop': ['toys', 'supermarket', 'grocery']
+      },
+      selected: false
+    },
+    {
+      name: 'Pensioner',
+      description: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
+        ' convenience, healthcare, and opportunities for passive recreation.',
+      tags: {
+        'amenity': ['hospital', 'pharmacy', 'social_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
+        'leisure': ['park'],
+        'public_transport': ['station'],
+        'highway': ['bus_stop'],
+        'shop': ['supermarket', 'grocery', 'optician'],
+      },
+      selected: false
+    }
+  ];
 
   makeCapitalMarkers(map: L.Map): void {
     this.http.get(this.capitals).subscribe((res: any) => {
@@ -218,10 +246,10 @@ export class MarkerService {
   }
 
 
-  getSelectedTags(): OptionTag {
+  getSelectedTags(options: TagOptions[]): OptionTag {
     const result: OptionTag = {};
 
-    this.options
+    options
       .filter(opt => opt.selected) // Filter out the necessary objects
       .forEach(option => {
         for (let i = 0; i < Object.keys(option.tags).length; i++) {
@@ -248,6 +276,14 @@ export class MarkerService {
 
   updateOptions(options: any) {
     this.options = options;
+  }
+
+  get getProfileOptions() {
+    return this.profileOptions;
+  }
+
+  updateProfileOptions(optionsProfile: any) {
+    this.profileOptions = optionsProfile;
   }
 
 }

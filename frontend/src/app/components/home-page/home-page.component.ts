@@ -3,6 +3,7 @@ import { SessionStorageService } from "../../services/session.storage.service";
 import { MarkerService } from "../../services/marker.service";
 import {User} from "../../classes/user";
 import { ToastrService } from 'ngx-toastr';
+import {TagOptions} from "../../classes/tag-options";
 
 @Component({
   selector: 'app-home-page',
@@ -13,8 +14,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   user!: User
   options: any = [];
+  profileOptions: any = [];
   selectedDistance: string = "400"; // default value
-  selectedProfile: any;
+  selectedProfile: string | null = null;
+  checkboxSelected: boolean = false;
+  activeIndex: number = 0;
+
+  disableProfilesHeader: boolean = false;
+  disableCategoriesHeader: boolean = false;
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService,
@@ -40,8 +47,21 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       this.options = this.markerService.getOptions;
     }
 
+    // setting correct active index
+    this.activeIndex = this.sessionStorageService.getTabViewActiveIndex() || 0;
+    console.log('activeIndex: ', this.activeIndex);
+    console.log('activeIndex: ', this.sessionStorageService.getTabViewActiveIndex());
+
+
     // Get saved profile from sessionStorage
     this.selectedProfile = this.sessionStorageService.getSelectedProfile();
+    if (this.selectedProfile) {
+      this.disableCategoriesHeader = true;
+    }
+    else if (this.sessionStorageService.getCheckboxSelected()) {
+      this.disableProfilesHeader = true;
+    }
+    this.profileOptions = this.markerService.getProfileOptions;
   }
 
   ngAfterViewInit(): void {
@@ -50,15 +70,26 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     if (tabNav) {
       tabNav.style.justifyContent = 'center';
     }
+    // let headerTitle = document.querySelector('.home-page .p-card-title') as HTMLElement;
+    // if (headerTitle) {
+    //   headerTitle.style.textAlign = 'center';
+    // }
   }
 
   onPreferenceSubmit(): void {
-    const tagResult = this.markerService.getSelectedTags();
+    // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
+    const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
     this.sessionStorageService.saveTagPreferences(tagResult)
     // Save the checkbox states in sessionStorage
     this.sessionStorageService.saveOptionsTagPreferences(this.options)
+    // Save correct active index value in sessionStorage
+    if (this.sessionStorageService.getSelectedProfile()) {
+        this.sessionStorageService.saveTabViewActiveIndex(0);
+    }
+    else {
+      this.sessionStorageService.saveTabViewActiveIndex(1);
+    }
     this.toastr.success('Submitted new preferences!');
-    console.log(tagResult);
   }
 
   updateDistance(distance: string) {
@@ -78,21 +109,45 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   setSelectedProfile(profile: string) {
 
     if (this.selectedProfile === profile) {
+      // ko drugic kliknemo na isti profil ga deselectamo, setamo disable categories header na false
       this.selectedProfile = null;
-      sessionStorage.removeItem('selected-profile');
+      this.disableCategoriesHeader = false;
+      this.sessionStorageService.deleteSelectedProfile();
+      this.sessionStorageService.deleteTagPreferences();
+      this.sessionStorageService.deleteOptionsTagPreferences();
+      this.profileOptions.forEach((profileOption: TagOptions) => {
+        if (profileOption.name === profile) {
+          profileOption.selected = false;
+        }
+      })
     }
     else {
       this.selectedProfile = profile;
+      this.disableCategoriesHeader = true;
       this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
+      this.profileOptions.forEach((profileOption: TagOptions) => {
+        if (profileOption.name === this.selectedProfile) {
+          profileOption.selected = true;
+        }
+      })
     }
-
-    if (this.selectedProfile === 'familyProfile') {
-      // TODO logics
-    }
-    else if (this.selectedProfile === 'pensionerProfile') {
-      // TODO logics
-    }
-
   }
 
+  onCheckboxClicked() {
+    // Check if any checkbox is selected
+    const anySelected = this.options.some((option: { selected: any; }) => option.selected);
+
+    if (anySelected) {
+      this.checkboxSelected = true;
+      this.sessionStorageService.saveCheckboxSelected(true);
+      this.disableProfilesHeader = true;
+    } else {
+      this.checkboxSelected = false;
+      this.sessionStorageService.saveTabViewActiveIndex(0);
+      this.sessionStorageService.deleteCheckboxSelected();
+      this.sessionStorageService.deleteTagPreferences();
+      this.sessionStorageService.deleteOptionsTagPreferences();
+      this.disableProfilesHeader = false;
+    }
+  }
 }
