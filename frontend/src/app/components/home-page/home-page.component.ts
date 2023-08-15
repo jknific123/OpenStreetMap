@@ -79,7 +79,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     if (this.selectedProfile === profile) {
       this.selectedProfile = null;
-      sessionStorage.removeItem("activeProfile");
+      sessionStorage.removeItem('selected-profile');
     }
     else {
       this.selectedProfile = profile;
