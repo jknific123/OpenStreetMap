@@ -33,6 +33,8 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
@@ -79,7 +81,9 @@ import {RatingPipe} from "./helpers/pipes/rating-pipe";
     TableModule,
     TabViewModule,
     CardModule,
-    CheckboxModule
+    CheckboxModule,
+    DropdownModule,
+    ButtonModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

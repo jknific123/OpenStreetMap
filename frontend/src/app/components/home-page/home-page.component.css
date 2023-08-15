@@ -8,3 +8,7 @@
 .p-tabPanel--custom-container {
   gap: 40px ;
 }
+
+.dropdown-button {
+  background-color: #007bff !important;
+}
