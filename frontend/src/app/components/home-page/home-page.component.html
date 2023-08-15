@@ -1,8 +1,4 @@
-
-
-
-
-<div class="container rounded bg-white mt-4 mb-4">
+<div class="home-page container rounded bg-white mt-4 mb-4">
 
   <div class="d-flex flex-column align-items-center text-center pt-4">
     <h3> Pozdravljeni, {{this.user.name}}! </h3>
@@ -11,7 +7,7 @@
 
     <label for="distanceDropdown" class="mt-2"> Izberite razdaljo vašega iskanja: </label>
 
-    <div class="dropdown mt-2">
+    <div class="dropdown mt-2 mb-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="distanceDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ selectedDistance + 'm' }}
       </button>
@@ -24,14 +20,52 @@
 
   </div>
 
-  <div *ngFor="let option of options" class="d-flex gap-3">
-    <mat-checkbox [(ngModel)]="option.selected">
-      <span >
-        {{ checkOptionName(option.name) }}:
-        {{ option.description }}
-      </span>
-    </mat-checkbox>
-  </div>
+  <!-- PrimeNG TabView component -->
+  <p-tabView>
+
+    <!-- Profiles Tab -->
+    <p-tabPanel header="Profiles">
+      <!-- PrimeNG Cards for Profiles -->
+      <div class="p-tabPanel--custom-container d-flex ">
+        <!-- Family Friendly Card -->
+        <div class="p-col-6" (click)="setSelectedProfile('familyProfile')" [ngClass]="{'selected': selectedProfile === 'familyProfile'}">
+            <p-card header="Family friendly" [style]="{background: 'transparent'}">
+              <p>Details or description about the Family Friendly profile.</p>
+            </p-card>
+        </div>
+
+        <!-- Pensioner Friendly Card -->
+        <div class="p-col-6" (click)="setSelectedProfile('pensionerProfile')" [ngClass]="{'selected': selectedProfile === 'pensionerProfile'}">
+            <p-card header="Pensioner friendly" [style]="{background: 'transparent'}">
+              <p>Details or description about the Pensioner Friendly profile.</p>
+            </p-card>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <!-- Categories Tab -->
+    <p-tabPanel header="Categories">
+      <div *ngFor="let option of options" class="d-flex gap-3">
+        <mat-checkbox [(ngModel)]="option.selected">
+          <span >
+            {{ checkOptionName(option.name) }}:
+            {{ option.description }}
+          </span>
+        </mat-checkbox>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+
+
+<!--  <div *ngFor="let option of options" class="d-flex gap-3">-->
+<!--    <mat-checkbox [(ngModel)]="option.selected">-->
+<!--      <span >-->
+<!--        {{ checkOptionName(option.name) }}:-->
+<!--        {{ option.description }}-->
+<!--      </span>-->
+<!--    </mat-checkbox>-->
+<!--  </div>-->
 
   <div class="d-flex flex-column align-items-center">
     <button class="btn btn-primary mb-4 " type="button" (click)="onPreferenceSubmit()">Submit Preferences</button>

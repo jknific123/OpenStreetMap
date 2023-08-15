@@ -30,6 +30,10 @@ import { BaseModalComponent} from "./components/base-modal/base-modal.component"
 import { BaseAccordionComponent } from './components/base-accordion/base-accordion.component';
 import { LocationReportTableComponent } from './components/location-report-table/location-report-table.component';
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
+import { CardModule } from 'primeng/card';
+import { CheckboxModule } from 'primeng/checkbox';
+
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import {RatingPipe} from "./helpers/pipes/rating-pipe";
@@ -72,7 +76,10 @@ import {RatingPipe} from "./helpers/pipes/rating-pipe";
     }),
     MatFormFieldModule,
     MatInputModule,
-    TableModule
+    TableModule,
+    TabViewModule,
+    CardModule,
+    CheckboxModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

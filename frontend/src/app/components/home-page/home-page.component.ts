@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import { SessionStorageService } from "../../services/session.storage.service";
 import { MarkerService } from "../../services/marker.service";
 import {User} from "../../classes/user";
@@ -9,11 +9,12 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, AfterViewInit {
 
   user!: User
   options: any = [];
   selectedDistance: string = "400"; // default value
+  selectedProfile: any;
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService,
@@ -38,6 +39,17 @@ export class HomePageComponent implements OnInit {
     } else {
       this.options = this.markerService.getOptions;
     }
+
+    // Get saved profile from sessionStorage
+    this.selectedProfile = this.sessionStorageService.getSelectedProfile();
+  }
+
+  ngAfterViewInit(): void {
+    // for centering the headers of tab view
+    let tabNav = document.querySelector('.home-page .p-tabview-nav') as HTMLElement;
+    if (tabNav) {
+      tabNav.style.justifyContent = 'center';
+    }
   }
 
   onPreferenceSubmit(): void {
@@ -61,6 +73,26 @@ export class HomePageComponent implements OnInit {
       return 'Izobraževanje';
     }
     else return optionName;
+  }
+
+  setSelectedProfile(profile: string) {
+
+    if (this.selectedProfile === profile) {
+      this.selectedProfile = null;
+      sessionStorage.removeItem("activeProfile");
+    }
+    else {
+      this.selectedProfile = profile;
+      this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
+    }
+
+    if (this.selectedProfile === 'familyProfile') {
+      // TODO logics
+    }
+    else if (this.selectedProfile === 'pensionerProfile') {
+      // TODO logics
+    }
+
   }
 
 }

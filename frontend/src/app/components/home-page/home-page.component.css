@@ -1,0 +1,10 @@
+.selected {
+  transition: all 0.2s ease-in-out;
+  background-color: lightgreen !important;
+  /*opacity: 0.8;*/
+  /*background: #71CB9F !important;*/
+}
+
+.p-tabPanel--custom-container {
+  gap: 40px ;
+}

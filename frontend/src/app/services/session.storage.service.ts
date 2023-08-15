@@ -9,8 +9,9 @@ const USER_KEY = 'auth-user';
 const TAG_PREFERENCES = 'saved-tag-preferences';
 const DISTANCE_PREFERENCES = 'saved-distance-preferences';
 const OPTIONS_TAG_PREFERENCES = 'options-tag-preferences';
-const LOCATION_COORDINATES = 'saved-location-coordinates'
-const CURRENT_POIS = 'current-points-of-interest'
+const LOCATION_COORDINATES = 'saved-location-coordinates';
+const CURRENT_POIS = 'current-points-of-interest';
+const SELECTED_PROFILE ='selected-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -166,6 +167,19 @@ export class SessionStorageService {
       return JSON.parse(currentPois)
     }
     return [];
+  }
+
+  public saveSelectedProfile(profile: any): void {
+    sessionStorage.removeItem(SELECTED_PROFILE);
+    sessionStorage.setItem(SELECTED_PROFILE, JSON.stringify(profile));
+  }
+
+  public getSelectedProfile(): any {
+    const profile = sessionStorage.getItem(SELECTED_PROFILE);
+    if (profile != null) {
+      return JSON.parse(profile)
+    }
+    return {};
   }
 
   getDecodedAccessToken(token: string): any {
