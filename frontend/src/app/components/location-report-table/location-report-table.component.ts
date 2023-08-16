@@ -76,4 +76,23 @@ export class LocationReportTableComponent implements OnInit {
         })
     }
 
+  convertToEnglish(category: string): string {
+    if (category === 'Izobraževanje') {
+      // return 'Izobraževanje';,
+      return 'Education';
+    } else if (category === 'Okolje') {
+      return 'Environment';
+    } else if (category === 'Transport') {
+      return 'Transportation';
+    } else if (category === 'Zdravje') {
+      return 'Health';
+    } else if (category === 'Skupna ocena') {
+      return 'Overall rating';
+    }
+    else if (category === 'St. izbranih kategorij') {
+      return 'Num. of selected categories';
+    }
+    else return category;
+  }
+
 }

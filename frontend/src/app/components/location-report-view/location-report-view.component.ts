@@ -60,7 +60,6 @@ export class LocationReportViewComponent implements OnInit {
   }
 
   convertToEnglish(category: string): string {
-    console.log('category: ', category)
     if (category === 'Izobrazevanje') {
       // return 'Izobraževanje';,
       return 'Education';
@@ -71,7 +70,7 @@ export class LocationReportViewComponent implements OnInit {
     } else if (category === 'Zdravje') {
       return 'Health';
     }
-    else return '';
+    else return category;
   }
 
   protected readonly Math = Math;
