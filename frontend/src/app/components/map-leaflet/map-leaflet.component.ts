@@ -150,7 +150,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         onAdd: (map: any) => {
           this.reportButton = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom');
 
-          this.reportButton.innerText = 'Generiraj poročilo';
+          // this.reportButton.innerText = 'Generiraj poročilo';
+          this.reportButton.innerText = 'Generate report';
           this.reportButton.style.backgroundColor = 'white';
           this.reportButton.style.width = '200px';
           this.reportButton.style.height = '40px';
@@ -191,7 +192,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       onAdd: (map: any) => {
         // Reset button
         this.resetButton = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom');
-        this.resetButton.innerText = 'Ponastavi zemljevid';
+        // this.resetButton.innerText = 'Ponastavi zemljevid';
+        this.resetButton.innerText = 'Reset map';
         this.resetButton.style.backgroundColor = 'white';
         this.resetButton.style.width = '200px';
         this.resetButton.style.height = '40px';
