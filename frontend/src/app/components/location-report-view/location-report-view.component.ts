@@ -5,6 +5,7 @@ import { SessionStorageService } from "../../services/session.storage.service";
 import {LocationReport} from "../../classes/location-report";
 import {GroupedMarkers} from "../../classes/grouped-markers";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-location-report-view',
@@ -22,7 +23,8 @@ export class LocationReportViewComponent implements OnInit {
   constructor(private markerService: MarkerService,
               private locationReportService: LocationReportService,
               private sessionStorageService: SessionStorageService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private router: Router) {}
 
   ngOnInit(): void {
     const currentPois = this.sessionStorageService.getCurrentPois();
@@ -46,6 +48,7 @@ export class LocationReportViewComponent implements OnInit {
         this.toastr.success('Location report saved successfully');
         console.log('savedReport: ', savedReport)
         this.showModal = false;
+        this.router.navigate(['/location-report-list'])
       },
       error: err => {
         this.toastr.error('Error saving location report!');
