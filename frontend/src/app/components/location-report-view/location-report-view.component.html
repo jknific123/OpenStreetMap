@@ -5,7 +5,7 @@
       <div class="mb-4" *ngFor="let group of groupedMarkerEntries">
           <!-- Check if group.value is of type GroupedMarkers -->
             <ng-container *ngIf="group[1]?.groupRating !== undefined && group[1]?.markers">
-                <h3 class="d-flex align-items-center px-2">{{ group[0] }}
+                <h3 class="d-flex align-items-center px-2">{{ convertToEnglish(group[0]) }}
                   <div class="custom-border-bottom mx-4"></div>
 
                   <span *ngIf="group[1].groupRating == -999"> - </span>

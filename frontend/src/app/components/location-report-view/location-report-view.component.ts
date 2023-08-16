@@ -59,6 +59,21 @@ export class LocationReportViewComponent implements OnInit {
     console.log("s", this.showModal);
   }
 
+  convertToEnglish(category: string): string {
+    console.log('category: ', category)
+    if (category === 'Izobrazevanje') {
+      // return 'Izobraževanje';,
+      return 'Education';
+    } else if (category === 'Okolje') {
+      return 'Environment';
+    } else if (category === 'Transport') {
+      return 'Transportation';
+    } else if (category === 'Zdravje') {
+      return 'Health';
+    }
+    else return '';
+  }
+
   protected readonly Math = Math;
   protected readonly Array = Array;
 }

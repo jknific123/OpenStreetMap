@@ -33,14 +33,14 @@
         <!-- Family Friendly Card -->
         <div class="p-col-6" (click)="setSelectedProfile('Family')" [ngClass]="{'selected': selectedProfile === 'Family'}">
             <p-card header="{{this.profileOptions[0].name + ' friendly'}}" [style]="{background: 'transparent', textAlign: 'center'}">
-              <p> {{this.profileOptions[0].description}} </p>
+              <p> {{this.profileOptions[0].descriptionENG}} </p>
             </p-card>
         </div>
 
         <!-- Pensioner Friendly Card -->
         <div class="p-col-6" (click)="setSelectedProfile('Pensioner')" [ngClass]="{'selected': selectedProfile === 'Pensioner'}">
             <p-card header="{{this.profileOptions[1].name + ' friendly'}}" [style]="{background: 'transparent', textAlign: 'center'}">
-              <p> {{this.profileOptions[1].description}} </p>
+              <p> {{this.profileOptions[1].descriptionENG}} </p>
             </p-card>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <mat-checkbox [(ngModel)]="option.selected" (change)="onCheckboxClicked()">
           <span >
             {{ checkOptionName(option.name) }}:
-            {{ option.description }}
+            {{ option.descriptionENG }}
           </span>
         </mat-checkbox>
       </div>

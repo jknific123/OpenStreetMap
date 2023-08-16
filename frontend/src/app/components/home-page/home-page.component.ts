@@ -101,7 +101,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   checkOptionName(optionName: string): string {
     if (optionName === 'Izobrazevanje') {
-      return 'Izobraževanje';
+      // return 'Izobraževanje';,
+      return 'Education';
+    } else if (optionName === 'Okolje') {
+      return 'Environment';
+    } else if (optionName === 'Transport') {
+      return 'Transportation';
+    } else if (optionName === 'Zdravje') {
+      return 'Health';
     }
     else return optionName;
   }

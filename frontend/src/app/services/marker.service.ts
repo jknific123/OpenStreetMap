@@ -28,6 +28,7 @@ export class MarkerService {
     {
       name: 'Zdravje',
       description: 'bližina zdravstvenih ustanov npr. lekarna, bolnica',
+      descriptionENG: 'proximity to medical facilities, e.g. pharmacy, hospital',
       tags: {
         'amenity': ['pharmacy', 'hospital']
       },
@@ -37,6 +38,8 @@ export class MarkerService {
       name: 'Okolje',
       description: 'oskrba, stortive, zelene površine, manjše trgovine, nakupovalna središča,' +
         ' bankomat, pošta, parki, gozd, vrtovi, športni objekti, igrišče, fitnes, knižnica gostinski lokali',
+      descriptionENG: 'supply, services, green areas, small shops, shopping centers,' +
+        ' ATM, post office, parks, forest, gardens, sports facilities, playground, fitness center, library, restaurants',
       tags: {
         'shop': ['mall', 'supermarket'],
         'amenity': ['grocery', 'atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant'],
@@ -48,6 +51,7 @@ export class MarkerService {
     {
       name: 'Transport',
       description: 'avtobusne postaje, BicikeLJ',
+      descriptionENG: 'bus stations, BicikeLJ',
       tags: {
         'highway': ['bus_stop'],
         'public_transport': ['station'],
@@ -58,6 +62,7 @@ export class MarkerService {
     {
       name: 'Izobrazevanje',
       description: 'osnovne šole, vrtci, fakultete',
+      descriptionENG: 'elementary schools, kindergartens, colleges',
       tags: {
         'amenity': ['school', 'kindergarten', 'university']
       },
@@ -69,6 +74,8 @@ export class MarkerService {
     {
       name: 'Family',
       description: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
+        ' It emphasizes safety, educational opportunities, and recreational facilities.',
+      descriptionENG: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
         ' It emphasizes safety, educational opportunities, and recreational facilities.',
       tags: {
         'amenity': ['school', 'hospital', 'clinic', 'restaurant', 'kindergarten'],
@@ -82,6 +89,8 @@ export class MarkerService {
     {
       name: 'Pensioner',
       description: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
+        ' convenience, healthcare, and opportunities for passive recreation.',
+      descriptionENG: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
         ' convenience, healthcare, and opportunities for passive recreation.',
       tags: {
         'amenity': ['hospital', 'pharmacy', 'social_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
