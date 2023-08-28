@@ -1,0 +1,28 @@
+# Ignore node modules and logs
+**/node_modules/
+*.log
+.cache/
+# Ignore Git and editor files/folders
+.git/
+.gitignore
+*.swp
+*.swo
+*.idea/
+.vscode/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Python compiled files and caches
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Ignore any .env files that might contain sensitive information
+*.env
+
+# Ignore other unnecessary files
+*.bak
+*.tmp
+*.md

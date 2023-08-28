@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+console.log('node environment: ', process.env.NODE_ENV);
 let dbURI = process.env.DATABASE_URL;
 if (process.env.NODE_ENV === 'production') {
     // TODO ko bo treba gostit aplikacijo je treba v .env dodat se ta url

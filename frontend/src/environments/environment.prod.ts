@@ -1,6 +1,5 @@
 export const environment = {
-  // TODO ko bom mel produkcijo
-  // apiUrl: 'https://dogwalkers-02.herokuapp.com/api',
-  // chatUrl: 'https://dogwalkers-02.herokuapp.com',
+  // apiUrl: 'https://quality-of-life-app.fly.dev/api',
+  apiUrl: 'https://quality-of-life-app-production.up.railway.app/api',
   production: true
 };
