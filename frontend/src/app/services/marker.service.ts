@@ -27,24 +27,26 @@ export class MarkerService {
   options : TagOptions[] = [
     {
       name: 'Zdravje',
-      description: 'bližina zdravstvenih ustanov npr. lekarna, bolnica',
-      descriptionENG: 'proximity to medical facilities, e.g. pharmacy, hospital',
+      description: 'bližina zdravstvenih ustanov npr. lekarna, bolnica, optika',
+      descriptionENG: 'proximity to medical facilities, e.g. pharmacy, hospital, optician',
       tags: {
-        'amenity': ['pharmacy', 'hospital']
+        'amenity': ['pharmacy', 'hospital', 'clinic'],
+        'shop': ['optician'],
+        'healthcare': ['pediatric']
       },
       selected: false
     },
     {
       name: 'Okolje',
       description: 'oskrba, stortive, zelene površine, manjše trgovine, nakupovalna središča,' +
-        ' bankomat, pošta, parki, gozd, vrtovi, športni objekti, igrišče, fitnes, knižnica gostinski lokali',
+        ' bankomat, pošta, parki, gozdovi, vrtovi, športni objekti, igrišče, fitnes, knižnica, gostinski lokali',
       descriptionENG: 'supply, services, green areas, small shops, shopping centers,' +
         ' ATM, post office, parks, forest, gardens, sports facilities, playground, fitness center, library, restaurants',
       tags: {
         'shop': ['mall', 'supermarket'],
-        'amenity': ['grocery', 'atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant'],
+        'amenity': ['grocery', 'atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant', 'bank'],
         'landuse': ['grass', 'forest'],
-        'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre']
+        'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool']
       },
       selected: false
     },
@@ -64,7 +66,7 @@ export class MarkerService {
       description: 'osnovne šole, vrtci, fakultete',
       descriptionENG: 'elementary schools, kindergartens, colleges',
       tags: {
-        'amenity': ['school', 'kindergarten', 'university']
+        'amenity': ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre']
       },
       selected: false
     }
