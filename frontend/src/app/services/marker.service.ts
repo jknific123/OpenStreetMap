@@ -80,11 +80,13 @@ export class MarkerService {
       descriptionENG: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
         ' It emphasizes safety, educational opportunities, and recreational facilities.',
       tags: {
-        'amenity': ['school', 'hospital', 'clinic', 'restaurant', 'kindergarten'],
+        'amenity': ['school', 'hospital', 'clinic', 'restaurant', 'kindergarten', 'bus_station'],
         'leisure': ['playground', 'park', 'sports_centre', 'swimming_pool'],
         'healthcare': ['pediatric'],
         'cuisine': ['family'],
-        'shop': ['toys', 'supermarket', 'grocery']
+        'shop': ['toys', 'supermarket', 'grocery'],
+        'public_transport': ['station'],
+        'highway': ['bus_stop'],
       },
       selected: false
     },
@@ -95,7 +97,7 @@ export class MarkerService {
       descriptionENG: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
         ' convenience, healthcare, and opportunities for passive recreation.',
       tags: {
-        'amenity': ['hospital', 'pharmacy', 'social_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
+        'amenity': ['hospital', 'pharmacy', 'social_centre', 'community_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
         'leisure': ['park'],
         'public_transport': ['station'],
         'highway': ['bus_stop'],
