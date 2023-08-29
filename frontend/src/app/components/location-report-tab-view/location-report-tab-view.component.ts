@@ -26,13 +26,10 @@ export class LocationReportTabViewComponent implements OnInit, AfterViewInit {
       this.locationReportService.getLocationReportsForUser(this.sessionReportService.getUser()._id).subscribe({
         next: (locationReportsData: LocationReport[])  => {
           this.toastr.success('Location reports loaded successfully');
-          console.log('Location reports loaded successfully: ', locationReportsData);
+          // console.log('Location reports loaded successfully: ', locationReportsData);
           this.reports = locationReportsData;
           this.transformToSortableData(this.reports);
           this.sortReportsByType(this.reportsSortableData);
-          console.log(this.reportsCategories)
-          console.log(this.reportsFamilyProfile)
-          console.log(this.reportsPensionerProfile)
         },
         error: err => {
           this.toastr.error('Error loading location reports!');

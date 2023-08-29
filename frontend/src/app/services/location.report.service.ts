@@ -13,7 +13,6 @@ export class LocationReportService {
   private apiUrl = environment.apiUrl;
 
   saveLocationReport(locationReport: LocationReport): Observable<any> {
-    console.log('saving location report: ', locationReport);
     const url = `${this.apiUrl}/save_location_report`;
     return this.http.post(url, locationReport);
   }

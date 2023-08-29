@@ -38,8 +38,6 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   submit(): void {
-    console.log(this.form.getRawValue());
-    console.log(this.form.value);
 
     if (this.form.invalid) {
       // Touch all fields to trigger the error messages

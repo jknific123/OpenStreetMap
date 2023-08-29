@@ -32,7 +32,6 @@ export class NavbarComponent implements OnInit {
   userLogout() {
     this.authService.logoutUser().subscribe({
       next: data => {
-        console.log('Logout was succesfull!', data);
 
         this.authService.setLoggedIn(false);
         this.sessionStorageService.clean();

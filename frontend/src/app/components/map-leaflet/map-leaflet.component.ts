@@ -93,7 +93,6 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // this.markerService.makeCapitalMarkers(this.map);
     const currentPois = this.sessionStorageService.getCurrentPois();
-    console.log('hasPois', !!currentPois)
     this.hasPois = !!currentPois;  // Set hasPois to true if there are any POIs
 
     // so we have all markers saved in this.poiMarkers array, also show all saved markers from sessionStorage
@@ -171,7 +170,6 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
                   this.router.navigate(['/location-report']);
               }
 
-            console.log('buttonClicked');
           }
 
         // Prevent the click event from propagating
@@ -212,7 +210,6 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
           // Reset the map
           this.resetMap();
 
-          console.log('reset button clicked');
         }
 
         // Prevent the click event from propagating

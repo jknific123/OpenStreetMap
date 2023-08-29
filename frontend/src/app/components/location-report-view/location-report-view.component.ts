@@ -33,23 +33,22 @@ export class LocationReportViewComponent implements OnInit {
     console.log(groupedMarkers)
 
     this.locationReport = this.markerService.calculateRatings(groupedMarkers);
-    console.log('locReport: ', this.locationReport)
+    // console.log('locReport: ', this.locationReport)
 
     this.groupedMarkerEntries = Object.entries(this.locationReport.categories);
-    console.log('groupedMarkerEntries: ', this.groupedMarkerEntries)
+    // console.log('groupedMarkerEntries: ', this.groupedMarkerEntries)
 
     this.reportType = this.getReportType();
   }
 
   onSaveSubmit(): void {
-    console.log('onSaveSubmit clicked')
     if (this.reportName. length > 0) {
       this.locationReport.reportName = this.reportName;
     }
     this.locationReportService.saveLocationReport(this.locationReport).subscribe({
       next: savedReport => {
         this.toastr.success('Location report saved successfully');
-        console.log('savedReport: ', savedReport)
+        // console.log('savedReport: ', savedReport)
         this.showModal = false;
         this.router.navigate(['/location-report-list'])
       },
@@ -62,7 +61,6 @@ export class LocationReportViewComponent implements OnInit {
 
   openDialog(): void {
     this.showModal = true;
-    console.log("s", this.showModal);
   }
 
   convertToEnglish(category: string): string {

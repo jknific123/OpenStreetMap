@@ -49,9 +49,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // setting correct active index
     this.activeIndex = this.sessionStorageService.getTabViewActiveIndex() || 0;
-    console.log('activeIndex: ', this.activeIndex);
-    console.log('activeIndex: ', this.sessionStorageService.getTabViewActiveIndex());
-
 
     // Get saved profile from sessionStorage
     this.selectedProfile = this.sessionStorageService.getSelectedProfile();
@@ -96,7 +93,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.selectedDistance = distance;
     this.sessionStorageService.saveDistancePreferences(distance);
     this.toastr.success('Updated the preferred distance!');
-    console.log('new selected distance: ' + this.selectedDistance);
+    // console.log('new selected distance: ' + this.selectedDistance);
   }
 
   checkOptionName(optionName: string): string {

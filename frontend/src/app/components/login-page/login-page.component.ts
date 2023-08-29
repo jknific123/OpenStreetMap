@@ -30,7 +30,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
-    console.log(this.form.getRawValue());
     this.authService.loginUser(this.form.getRawValue()).subscribe({
       next: data => {
         // saving auth token and user data

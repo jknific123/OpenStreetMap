@@ -24,7 +24,6 @@ export class LocationReportTableComponent implements OnInit {
 
     deleteReport(report: LocationReport) {
         // Logic to delete the report
-        console.log('Delete report:', report);
         this.locationReportService.deleteLocationReportById(report._id).subscribe({
           next: (locationReport: LocationReport)  => {
             this.toastr.success('Location report was deleted successfully');
