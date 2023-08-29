@@ -24,7 +24,6 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: '',
       email: '',
       password: ''
     });
@@ -34,7 +33,6 @@ export class LoginPageComponent implements OnInit {
     console.log(this.form.getRawValue());
     this.authService.loginUser(this.form.getRawValue()).subscribe({
       next: data => {
-        console.log('login succeded, data:', data);
         // saving auth token and user data
         this.sessionStorageService.saveAuthToken(data.accessToken)
         this.sessionStorageService.saveRefreshToken(data.refreshToken);
