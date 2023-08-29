@@ -80,7 +80,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
     const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
     this.sessionStorageService.saveTagPreferences(tagResult)
-    // Save the checkbox states in sessionStorage
+    // Save the checkbox states in sessionStorage or all options selected when profile is selected
     this.sessionStorageService.saveOptionsTagPreferences(this.options)
     // Save correct active index value in sessionStorage
     if (this.sessionStorageService.getSelectedProfile()) {
@@ -127,6 +127,8 @@ export class HomePageComponent implements OnInit, AfterViewInit {
           profileOption.selected = false;
         }
       })
+      // set all options to deselected because we deselected profile
+      this.setAllOptionsSelectedValueForProfileOption(false);
     }
     else {
       this.selectedProfile = profile;
@@ -137,6 +139,8 @@ export class HomePageComponent implements OnInit, AfterViewInit {
           profileOption.selected = true;
         }
       })
+      // set all options to selected because we chose profile
+      this.setAllOptionsSelectedValueForProfileOption(true);
     }
   }
 
@@ -155,6 +159,12 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       this.sessionStorageService.deleteTagPreferences();
       this.sessionStorageService.deleteOptionsTagPreferences();
       this.disableProfilesHeader = false;
+    }
+  }
+
+  setAllOptionsSelectedValueForProfileOption(value: boolean) {
+    for (let option of this.options) {
+      option.selected = value;
     }
   }
 }
