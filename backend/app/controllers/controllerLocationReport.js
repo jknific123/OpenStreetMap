@@ -7,6 +7,7 @@ const saveLocationReport = async (req, res) => {
     try {
         const report = new LocationReport({
             reportName: req.body.reportName,
+            reportType: req.body.reportType,
             userId: req.body.userId,
             location: req.body.location,
             categories: req.body.categories,

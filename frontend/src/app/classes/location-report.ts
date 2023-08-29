@@ -3,6 +3,7 @@ import {GroupedMarkers} from "./grouped-markers";
 export interface LocationReport {
     _id: string;
     reportName: string;
+    reportType: string;
     userId: string;
     location: {
         coordinates: number[];
