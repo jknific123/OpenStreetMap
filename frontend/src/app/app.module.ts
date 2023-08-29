@@ -39,6 +39,7 @@ import { ButtonModule } from 'primeng/button';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import {RatingPipe} from "./helpers/pipes/rating-pipe";
+import { LocationReportTabViewComponent } from './components/location-report-tab-view/location-report-tab-view.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {RatingPipe} from "./helpers/pipes/rating-pipe";
     LocationReportTableComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    RatingPipe
+    RatingPipe,
+    LocationReportTabViewComponent
   ],
   imports: [
     BrowserModule,

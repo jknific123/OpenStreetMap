@@ -1,0 +1,21 @@
+
+<div class="container rounded bg-white p-4 mt-4 mb-4" style="max-width: 90%">
+  <p-tabView>
+    <p-tabPanel header="Categories">
+      <app-location-report-table
+        [reportsSortableData]="reportsCategories"
+      ></app-location-report-table>
+    </p-tabPanel>
+    <p-tabPanel header="Family">
+      <app-location-report-table
+        [reportsSortableData]="reportsFamilyProfile"
+      ></app-location-report-table>
+    </p-tabPanel>
+    <p-tabPanel header="Pensioner">
+      <app-location-report-table
+        [reportsSortableData]="reportsPensionerProfile"
+      ></app-location-report-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+

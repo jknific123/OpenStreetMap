@@ -11,6 +11,7 @@ import {LocationReportViewComponent} from "./components/location-report-view/loc
 import {LocationReportTableComponent} from "./components/location-report-table/location-report-table.component";
 import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {RegistrationPageComponent} from "./components/registration-page/registration-page.component";
+import {LocationReportTabViewComponent} from "./components/location-report-tab-view/location-report-tab-view.component";
 
 const routes: Routes = [
   {
@@ -42,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'location-report-list',
-    component: LocationReportTableComponent,
+    component: LocationReportTabViewComponent,
     canActivate: [authGuard]
   },
   {
