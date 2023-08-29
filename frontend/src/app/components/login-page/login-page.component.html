@@ -21,11 +21,11 @@
     <form [formGroup]="form" (submit)="submit()" class="form">
 
       <div class="form__field">
-        <input formControlName="email" type="email" placeholder="name@example.com">
+        <input formControlName="email" type="email" placeholder="name@example.com" autocomplete="email">
       </div>
 
       <div class="form__field">
-        <input formControlName="password" type="password" placeholder="Password">
+        <input formControlName="password" type="password" placeholder="Password" autocomplete="current-password">
       </div>
 
       <div class="form__field">
