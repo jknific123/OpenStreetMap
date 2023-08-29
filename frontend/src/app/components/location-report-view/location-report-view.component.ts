@@ -17,6 +17,7 @@ export class LocationReportViewComponent implements OnInit {
   locationReport!: LocationReport;
   groupedMarkerEntries: [string, GroupedMarkers][] = [];  // An array of key-value pairs
   reportName: string = '';
+  reportType: string = '';
 
   @ViewChild('reportNameDialog', { static: true }) reportNameDialog!: TemplateRef<any>;
 
@@ -36,6 +37,8 @@ export class LocationReportViewComponent implements OnInit {
 
     this.groupedMarkerEntries = Object.entries(this.locationReport.categories);
     console.log('groupedMarkerEntries: ', this.groupedMarkerEntries)
+
+    this.reportType = this.getReportType();
   }
 
   onSaveSubmit(): void {
@@ -76,6 +79,19 @@ export class LocationReportViewComponent implements OnInit {
     else return category;
   }
 
+  getReportType(): string {
+    let tmpReportType = 'Categories';
+    const selectedProfile = this.sessionStorageService.getSelectedProfile();
+    if (selectedProfile) {
+      if (selectedProfile === 'Family') {
+        tmpReportType = 'Family';
+      }
+      else if (selectedProfile === 'Pensioner') {
+        tmpReportType = 'Pensioner';
+      }
+    }
+    return tmpReportType;
+  }
+
   protected readonly Math = Math;
-  protected readonly Array = Array;
 }
