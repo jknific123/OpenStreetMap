@@ -86,6 +86,8 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     else {
       this.sessionStorageService.saveTabViewActiveIndex(1);
     }
+    // clear map data
+    this.sessionStorageService.clearMapData();
     this.toastr.success('Submitted new preferences!');
   }
 
