@@ -41,6 +41,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return this.authService.refreshToken().pipe(
       switchMap((response) => {
         const newAuthToken = response.accessToken;
+        // saving new auth token to session
+        this.sessionStorageService.saveAuthToken(newAuthToken);
 
         request = request.clone({
           headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + newAuthToken)
