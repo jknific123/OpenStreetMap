@@ -124,6 +124,14 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('POIS, data:', data);
         // first we clear all existing poi markers from the map
         this.clearPoiMarkers();
+        // filter through pois and check for name field, if no value assign a descriptive value based on other fields
+        data.features.forEach((poi: PoiMarker) => {
+          if (!poi.properties['name']) {
+            // console.log('old name: ', poi.properties.name)
+            poi.properties['name'] = this.markerService.getNameForPOI(poi.properties);
+            // console.log('constructed new name: ', poi, poi.properties.name)
+          }
+        })
         // we save current pois to session storage
         this.sessionStorageService.saveCurrentPois(data.features)
 
