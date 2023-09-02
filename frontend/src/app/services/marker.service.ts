@@ -295,62 +295,6 @@ export class MarkerService {
     return result;
   }
 
-  getNameForPOI(properties: any): string {
-    // If the name is available, return it
-    if (properties['name']) {
-        return properties['name'];
-    }
-
-    // Try to construct a descriptive name from various tags
-
-    // Handle amenity-related tags
-    if (properties['amenity']) {
-        switch (properties['amenity']) {
-            case 'restaurant':
-                return properties['cuisine']
-                    ? `${properties['cuisine'].charAt(0).toUpperCase() + properties['cuisine'].slice(1)} restaurant`
-                    : 'Restaurant';
-            case 'university':
-            case 'college':
-                return properties['short_name'] || properties['alt_name'] || 'Educational Institution';
-            case 'hospital':
-            case 'clinic':
-                return properties['healthcare']
-                    ? `${properties['healthcare'].charAt(0).toUpperCase() + properties['healthcare'].slice(1)} hospital`
-                    : 'medical facility';
-            default:
-                return properties['amenity'].charAt(0) + properties['amenity'].slice(1);
-        }
-    }
-
-    // Handle shop-related tags
-    if (properties['shop']) {
-        return properties['brand']
-            ? `${properties['brand']} store`
-            : `${properties['shop'].charAt(0).toUpperCase() + properties['shop'].slice(1)} shop`;
-    }
-
-    // Handle other key tags
-    const tags = ['leisure', 'landuse', 'healthcare', 'office', 'building'];
-
-    for (let tag of tags) {
-        if (properties[tag]) {
-            return properties[tag].charAt(0) + properties[tag].slice(1);
-        }
-    }
-
-    // Use address information if available
-    if (properties['addr:street']) {
-        return `Place on ${properties['addr:street']}`;
-    }
-    if (properties['addr:city']) {
-        return `Location in ${properties['addr:city']}`;
-    }
-
-    // If none of the above, return a default name
-    return 'Unknown Point of Interest';
-  }
-
   get getOptions() {
     return this.options;
   }

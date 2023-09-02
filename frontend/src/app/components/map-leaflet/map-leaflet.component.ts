@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import * as L from 'leaflet';
 import {MarkerService} from "../../services/marker.service";
+import { PoisService } from "../../services/pois.service";
 import { SessionStorageService } from "../../services/session.storage.service";
 import { PoiMarker } from "../../classes/poi-marker";
 import { Router } from "@angular/router";
@@ -38,6 +39,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
   private resetButton?: HTMLButtonElement;
 
   constructor(private markerService: MarkerService,
+              private poisService: PoisService,
               private sessionStorageService: SessionStorageService,
               private router: Router) {}
 
@@ -128,9 +130,9 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         data.features.forEach((poi: PoiMarker) => {
           if (!poi.properties['name']) {
             // console.log('old name: ', poi.properties.name)
-            poi.properties['name'] = this.markerService.getNameForPOI(poi.properties);
-            // console.log('constructed new name: ', poi, poi.properties.name)
+            poi.properties['name'] = this.poisService.getNameForPOI(poi.properties);
           }
+          poi.properties['poiType'] = this.poisService.getTypeForPOI(poi.properties);
         })
         // we save current pois to session storage
         this.sessionStorageService.saveCurrentPois(data.features)

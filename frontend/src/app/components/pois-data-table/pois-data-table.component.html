@@ -2,6 +2,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Distance from location</th>
             <th>Rating</th>
         </tr>
@@ -9,6 +10,7 @@
     <ng-template pTemplate="body" let-poi>
         <tr>
             <td>{{ poi.properties.name }}</td>
+            <td>{{ poi.properties.poiType }}</td>
             <td>{{ Math.floor(poi.properties.distance) }}m</td>
             <td>{{ poi.rating | number: '1.2-2' }}%</td>
         </tr>
