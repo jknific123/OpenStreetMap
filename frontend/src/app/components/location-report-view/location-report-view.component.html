@@ -17,13 +17,20 @@
 <!--                        {{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m | {{ marker.rating | number: '1.2-2' }}-->
 <!--                    </li>-->
 <!--                </ul>-->
-              <app-base-accordion [accTitle]="group[0]" *ngIf="group[1].markers.length > 0">
-                  <ul class="pl-5" >
-                    <li *ngFor="let marker of group[1].markers">
-                        {{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m | {{ marker.rating | number: '1.2-2' }}
-                    </li>
-                  </ul>
-              </app-base-accordion>
+<!--              <app-base-accordion [accTitle]="group[0]" *ngIf="group[1].markers.length > 0">-->
+<!--                  <ul class="pl-5" >-->
+<!--                    <li *ngFor="let marker of group[1].markers">-->
+<!--                        {{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m | {{ marker.rating | number: '1.2-2' }}-->
+<!--                    </li>-->
+<!--                  </ul>-->
+<!--              </app-base-accordion>-->
+                <p-accordion [activeIndex]="1">
+                    <p-accordionTab header="Show more" *ngIf="group[1].markers.length > 0">
+                      <app-pois-data-table [pois]="group[1].markers">
+                      </app-pois-data-table>
+                    </p-accordionTab>
+                </p-accordion>
+
             </ng-container>
       </div>
     <h2 class="d-flex align-items-center">Overall Rating:<div class="custom-border-bottom mx-3"></div> <span class="">{{ locationReport.overall_rating | number: '1.2-2' }}%</span></h2>

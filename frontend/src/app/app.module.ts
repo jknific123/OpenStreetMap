@@ -35,11 +35,13 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
+import { AccordionModule } from 'primeng/accordion';
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
 import {RatingPipe} from "./helpers/pipes/rating-pipe";
 import { LocationReportTabViewComponent } from './components/location-report-tab-view/location-report-tab-view.component';
+import { PoisDataTableComponent } from './components/pois-data-table/pois-data-table.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { LocationReportTabViewComponent } from './components/location-report-tab
     LoginPageComponent,
     RegistrationPageComponent,
     RatingPipe,
-    LocationReportTabViewComponent
+    LocationReportTabViewComponent,
+    PoisDataTableComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import { LocationReportTabViewComponent } from './components/location-report-tab
     CardModule,
     CheckboxModule,
     DropdownModule,
-    ButtonModule
+    ButtonModule,
+    AccordionModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,
