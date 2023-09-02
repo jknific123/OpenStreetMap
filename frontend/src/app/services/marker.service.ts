@@ -41,11 +41,11 @@ export class MarkerService {
       description: 'oskrba, stortive, zelene površine, manjše trgovine, nakupovalna središča,' +
         ' bankomat, pošta, parki, gozdovi, vrtovi, športni objekti, igrišče, fitnes, knižnica, gostinski lokali',
       descriptionENG: 'supply, services, green areas, small shops, shopping centers,' +
-        ' ATM, post office, parks, forest, gardens, sports facilities, playground, fitness center, library, restaurants',
+        ' ATM, post office, parks, gardens, sports facilities, playground, fitness center, library, restaurants',
       tags: {
         'shop': ['mall', 'supermarket'],
         'amenity': ['grocery', 'atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant', 'bank'],
-        'landuse': ['forest'], // 'grass',
+        // 'landuse': ['forest'], // 'grass',
         'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool']
       },
       selected: false
