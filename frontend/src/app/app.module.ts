@@ -79,7 +79,7 @@ import { PoisDataTableComponent } from './components/pois-data-table/pois-data-t
       preventDuplicates: true,
       closeButton: true,
       enableHtml: true,  // enables HTML tags in the toast message
-      timeOut: 1000
+      timeOut: 800
     }),
     MatFormFieldModule,
     MatInputModule,
