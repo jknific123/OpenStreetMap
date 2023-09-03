@@ -5,7 +5,7 @@
     <h3> Hello, {{this.user.name}}! </h3>
 
 <!--    <h5> Izberite parametre, ki so pomembni za kvaliteto vašega bivanja: </h5>-->
-    <h5> Choose the parameters that are important for your quality of life: </h5>
+    <h5> Choose the parameters that are important for quality of your life: </h5>
 
 <!--    <label for="distanceDropdown" class="mt-2"> Izberite razdaljo vašega iskanja: </label>-->
     <label for="distanceDropdown" class="mt-2"> Select the distance of your search: </label>
@@ -51,7 +51,7 @@
       <div *ngFor="let option of options" class="d-flex gap-3" >
         <mat-checkbox [(ngModel)]="option.selected" (change)="onCheckboxClicked()">
           <span >
-            {{ checkOptionName(option.name) }}:
+            <strong>{{ checkOptionName(option.name) }}:</strong>
             {{ option.descriptionENG }}
           </span>
         </mat-checkbox>

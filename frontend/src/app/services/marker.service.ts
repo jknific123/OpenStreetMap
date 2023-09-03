@@ -44,7 +44,7 @@ export class MarkerService {
         ' ATM, post office, parks, gardens, sports facilities, playground, fitness center, library, restaurants',
       tags: {
         'shop': ['mall', 'supermarket'],
-        'amenity': ['grocery', 'atm', 'post_office', 'pharmacy', 'hospital', 'library', 'restaurant', 'bank'],
+        'amenity': ['grocery', 'atm', 'post_office', 'library', 'restaurant', 'bank'],
         // 'landuse': ['forest'], // 'grass',
         'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool']
       },
@@ -77,8 +77,8 @@ export class MarkerService {
       name: 'Family',
       description: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
         ' It emphasizes safety, educational opportunities, and recreational facilities.',
-      descriptionENG: 'The Family profile focuses on amenities and features that cater to the needs of families, especially those with young children.' +
-        ' It emphasizes safety, educational opportunities, and recreational facilities.',
+      descriptionENG: 'The Family profile focuses on catering for the needs of families, especially those with young children. It emphasizes educational opportunities, sport and recreational facilities.' +
+        '',
       tags: {
         'amenity': ['school', 'hospital', 'clinic', 'restaurant', 'kindergarten', 'bus_station'],
         'leisure': ['playground', 'park', 'sports_centre', 'swimming_pool'],
@@ -94,8 +94,7 @@ export class MarkerService {
       name: 'Pensioner',
       description: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
         ' convenience, healthcare, and opportunities for passive recreation.',
-      descriptionENG: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
-        ' convenience, healthcare, and opportunities for passive recreation.',
+      descriptionENG: 'The Pensioner profile is tailored for the older population. It focuses on  grocery stores, healthcare, opportunities for passive recreation and adult education.',
       tags: {
         'amenity': ['hospital', 'pharmacy', 'social_centre', 'community_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
         'leisure': ['park'],
@@ -140,9 +139,13 @@ export class MarkerService {
   showPoiMarker(map: L.Map, poi: PoiMarker, markers: L.Marker[]): L.Marker[] {
 
       let poiMarker: L.Marker;
+      const popup = poi.properties?.description != '' && poi.properties?.description != undefined
+        ? `<b>${poi.properties.name}</b><br>${poi.properties?.description}<br><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m`
+        :`<b>${poi.properties.name}</b><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m`;
+
       if (poi?.geometry?.type === 'Point') {
         poiMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
-          .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties?.description}<br>${Math.floor(poi.properties.distance)}m`)
+          .bindPopup(popup)
           .addTo(map);
         markers.push(poiMarker);
       }
@@ -151,7 +154,7 @@ export class MarkerService {
       }
       else {
         poiMarker = L.marker([poi?.geometry?.coordinates[0][0][1], poi?.geometry?.coordinates[0][0][0]])
-          .bindPopup(`<b>${poi.properties.name}</b><br>${poi.properties?.description}<br>${Math.floor(poi.properties.distance)}m`)
+          .bindPopup(popup)
           .addTo(map);
         markers.push(poiMarker);
       }

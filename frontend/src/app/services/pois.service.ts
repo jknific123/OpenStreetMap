@@ -113,6 +113,11 @@ export class PoisService {
         }
     }
 
+    // Handle highway bus stop
+    if (properties['highway'] && properties['highway'] === 'bus_stop') {
+        return 'bus stop';
+    }
+
     // Handle shop-related tags
     if (properties['shop']) {
         return 'shop';
@@ -120,7 +125,24 @@ export class PoisService {
 
     // Handle other key tags
     if (properties['leisure']) {
-        return properties['leisure'].charAt(0) + properties['leisure'].slice(1);
+        switch (properties['leisure']) {
+            case 'playground':
+                return 'playground';
+            case 'park':
+                return 'park';
+            case 'sports_centre':
+                return 'sports centre';
+            case 'swimming_pool':
+                return 'swimming pool';
+            case 'garden':
+                return 'garden';
+            case 'nature_reserve':
+                return 'nature reserve';
+            case 'fitness_centre':
+                return 'fitness centre';
+            default:
+                return properties['amenity'].charAt(0).toUpperCase() + properties['amenity'].slice(1);
+        }
     }
 
     if (properties['landuse']) {
