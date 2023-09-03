@@ -6,7 +6,7 @@
 }
 
 .p-tabPanel--custom-container {
-  gap: 40px ;
+  /*gap: 40px ;*/
 }
 
 .dropdown-button {
@@ -14,5 +14,29 @@
 }
 
 .home-page{
-  max-width: 90%;
+  max-width: 80%;
+}
+
+.equal-flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*.equal-flex-item {*/
+/*    flex: 1;*/
+/*    margin: 0 10px; !* Optional, for spacing between cards *!*/
+/*}*/
+
+.equal-flex-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 10px; /* Optional, for spacing between cards */
+}
+
+.p-card-class {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
 }

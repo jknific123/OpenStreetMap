@@ -29,16 +29,16 @@
     <!-- Profiles Tab -->
     <p-tabPanel header="Profiles" [disabled]="disableProfilesHeader">
       <!-- PrimeNG Cards for Profiles -->
-      <div class="p-tabPanel--custom-container d-flex justify-content-center">
+      <div class="equal-flex-container ">
         <!-- Family Friendly Card -->
-        <div class="p-col-6" (click)="setSelectedProfile('Family')" [ngClass]="{'selected': selectedProfile === 'Family'}">
+        <div class="equal-flex-item" (click)="setSelectedProfile('Family')" [ngClass]="{'selected': selectedProfile === 'Family'}">
             <p-card header="{{this.profileOptions[0].name + ' friendly'}}" [style]="{background: 'transparent', textAlign: 'center'}">
               <p> {{this.profileOptions[0].descriptionENG}} </p>
             </p-card>
         </div>
 
         <!-- Pensioner Friendly Card -->
-        <div class="p-col-6" (click)="setSelectedProfile('Pensioner')" [ngClass]="{'selected': selectedProfile === 'Pensioner'}">
+        <div class="equal-flex-item" (click)="setSelectedProfile('Pensioner')" [ngClass]="{'selected': selectedProfile === 'Pensioner'}">
             <p-card header="{{this.profileOptions[1].name + ' friendly'}}" [style]="{background: 'transparent', textAlign: 'center'}">
               <p> {{this.profileOptions[1].descriptionENG}} </p>
             </p-card>
