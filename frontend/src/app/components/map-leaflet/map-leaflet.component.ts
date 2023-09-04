@@ -6,6 +6,7 @@ import { SessionStorageService } from "../../services/session.storage.service";
 import { PoiMarker } from "../../classes/poi-marker";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -41,7 +42,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private markerService: MarkerService,
               private poisService: PoisService,
               private sessionStorageService: SessionStorageService,
-              private router: Router) {}
+              private router: Router,
+              private toastr: ToastrService) {}
 
   redIcon = new L.Icon({
       iconUrl:
@@ -117,33 +119,42 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
   onClickLocation(e: { latlng: { lat: number; lng: number; }; }) {
     console.log('click on map');
 
-    // Save coordinates to session and the BehaviorSubject will be updated too
-    this.sessionStorageService.saveLocationCoordinates(e.latlng.lat, e.latlng.lng);
-
     // Call to backend osmnx API
     this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, this.sessionStorageService.getDistancePreferences()).subscribe({
       next: data => {
         console.log('POIS, data:', data);
-        // first we clear all existing poi markers from the map
-        this.clearPoiMarkers();
-        // filter through pois and check for name field, if no value assign a descriptive value based on other fields
-        data.features.forEach((poi: PoiMarker) => {
-          if (!poi.properties['name']) {
-            // console.log('old name: ', poi.properties.name)
-            poi.properties['name'] = this.poisService.getNameForPOI(poi.properties);
-          }
-          poi.properties['poiType'] = this.poisService.getTypeForPOI(poi.properties);
-        })
-        // we save current pois to session storage
-        this.sessionStorageService.saveCurrentPois(data.features)
+        if (data?.features) {
 
-        data.features.forEach((poi: PoiMarker) => {
-          console.log('poi: ', poi.properties.name)
+          // Save coordinates to session and the BehaviorSubject will be updated too
+          this.sessionStorageService.saveLocationCoordinates(e.latlng.lat, e.latlng.lng);
 
-          // then we show current poi marker on map and save it in poiMarker array
-          this.markerService.showPoiMarker(this.map, poi, this.poiMarkers);
+          // first we clear all existing poi markers from the map
+          this.clearPoiMarkers();
 
-        });
+          // filter through pois and check for name field, if no value assign a descriptive value based on other fields
+          data.features.forEach((poi: PoiMarker) => {
+            if (!poi.properties['name']) {
+              // console.log('old name: ', poi.properties.name)
+              poi.properties['name'] = this.poisService.getNameForPOI(poi.properties);
+            }
+            poi.properties['poiType'] = this.poisService.getTypeForPOI(poi.properties);
+          })
+
+          // we save current pois to session storage
+          this.sessionStorageService.saveCurrentPois(data.features)
+
+          data.features.forEach((poi: PoiMarker) => {
+            console.log('poi: ', poi.properties.name)
+
+            // then we show current poi marker on map and save it in poiMarker array
+            this.markerService.showPoiMarker(this.map, poi, this.poiMarkers);
+
+          });
+        } else {
+          this.toastr.warning('No points of interest found for your query.', 'Warning', {
+            timeOut: 1800
+          });
+        }
       },
       error: err => {
         console.log('Error getting POIS: ', err);

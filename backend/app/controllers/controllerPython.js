@@ -21,9 +21,15 @@ const getPointsOfInterest = async (req, res) => {
         // Parse the Python script's output (stdout) to a JavaScript object
         const results = JSON.parse(stdout);
 
-        // Send the results to the client
-        res.send(results);
-        // res.send(stdout);
+        // Check if the results contain the error key
+        if (results.error) {
+            // Handle the error - currently only no pois found
+            res.send({});
+        } else {
+            // Send the successful results to the client
+            res.send(results);
+        }
+
     });
 
 };

@@ -48,8 +48,13 @@ if __name__ == "__main__":
     distance = int(sys.argv[3])
     prefTags = json.loads(sys.argv[4])
 
-    # Get the amenities
-    results = get_pois(latitude, longitude, distance, prefTags)
+    try:
+        # Get the amenities
+        results = get_pois(latitude, longitude, distance, prefTags)
 
-    # Convert the results to JSON and print them
-    print(json.dumps(results))
+        # Convert the results to JSON and print them
+        print(json.dumps(results))
+
+    except ox._errors.EmptyOverpassResponse:
+        # Handle the exception by printing a custom error message
+        print(json.dumps({"error": "No data elements found in the server response."}))
