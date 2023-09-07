@@ -7,7 +7,8 @@ const AUTH_TOKEN_KEY = 'auth-token';
 const REFRESH_TOKEN_KEY = 'refresh-token';
 const USER_KEY = 'auth-user';
 const TAG_PREFERENCES = 'saved-tag-preferences';
-const DISTANCE_PREFERENCES = 'saved-distance-preferences';
+const MIN_DISTANCE_PREFERENCES = 'min-distance-preferences';
+const MAX_DISTANCE_PREFERENCES = 'max-distance-preferences';
 const OPTIONS_TAG_PREFERENCES = 'options-tag-preferences';
 const LOCATION_COORDINATES = 'saved-location-coordinates';
 const CURRENT_POIS = 'current-points-of-interest';
@@ -116,17 +117,30 @@ export class SessionStorageService {
     return null;
   }
 
-  public saveDistancePreferences(distance: any): void {
-    sessionStorage.removeItem(DISTANCE_PREFERENCES);
-    sessionStorage.setItem(DISTANCE_PREFERENCES, JSON.stringify(distance));
+  public saveMinDistancePreferences(minDistance: any): void {
+    sessionStorage.removeItem(MIN_DISTANCE_PREFERENCES);
+    sessionStorage.setItem(MIN_DISTANCE_PREFERENCES, JSON.stringify(minDistance));
   }
 
-  public getDistancePreferences(): any {
-    const distancePreferences = sessionStorage.getItem(DISTANCE_PREFERENCES);
-    if (distancePreferences != null) {
-      return JSON.parse(distancePreferences)
+  public saveMaxDistancePreferences(maxDistance: any): void {
+    sessionStorage.removeItem(MAX_DISTANCE_PREFERENCES);
+    sessionStorage.setItem(MAX_DISTANCE_PREFERENCES, JSON.stringify(maxDistance));
+  }
+
+  public getMinDistancePreferences(): any {
+    const minDistancePreferences = sessionStorage.getItem(MIN_DISTANCE_PREFERENCES);
+    if (minDistancePreferences != null) {
+      return JSON.parse(minDistancePreferences)
     }
-    return {};
+    return null;
+  }
+
+  public getMaxDistancePreferences(): any {
+    const maxDistancePreferences = sessionStorage.getItem(MAX_DISTANCE_PREFERENCES);
+    if (maxDistancePreferences != null) {
+      return JSON.parse(maxDistancePreferences)
+    }
+    return null;
   }
 
   public saveOptionsTagPreferences(options: any): void {

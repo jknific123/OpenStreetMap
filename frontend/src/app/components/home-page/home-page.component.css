@@ -40,3 +40,7 @@
   flex-direction: column;
   background-color: red;
 }
+
+.input-spacing > div:not(:last-child) {
+    margin-right: 20px; /* You can adjust this value as needed */
+}

@@ -194,7 +194,7 @@ export class MarkerService {
   calculateRatings(groupedMarkers: GroupedMarkers[]): LocationReport {
     let overallScore = 0;
     const maxFullScoreDistance = 500; // Score is 100 for markers within this distance
-    const selectedDistance = this.sessionStorageService.getDistancePreferences();
+    const selectedMaxDistance = this.sessionStorageService.getMaxDistancePreferences();
     const locationCoordinates = this.sessionStorageService.getLocationCoordinates();
     const categoriesPreferences = this.sessionStorageService.getOptionsTagPreferences();
 
@@ -222,7 +222,7 @@ export class MarkerService {
                 score = 100;
             } else {
                 // Score decreases linearly with distance, from 100 at max_full_score_distance to 0 at selected_distance
-                score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedDistance - maxFullScoreDistance), 0);
+                score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedMaxDistance - maxFullScoreDistance), 0);
             }
 
             marker.rating = parseFloat(score.toFixed(2)); // save score for marker in percentage

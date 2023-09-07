@@ -15,13 +15,16 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   user!: User
   options: any = [];
   profileOptions: any = [];
-  selectedDistance: string = "400"; // default value
   selectedProfile: string | null = null;
   checkboxSelected: boolean = false;
   activeIndex: number = 0;
 
   disableProfilesHeader: boolean = false;
   disableCategoriesHeader: boolean = false;
+
+  minDistance: number = 500;
+  maxDistance: number = 1000;
+  isValidMinMax: boolean = true;
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService,
@@ -34,8 +37,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       }
     });
 
-    const savedDistance = this.sessionStorageService.getDistancePreferences();
-    this.selectedDistance = savedDistance ? savedDistance : '400';
+    // geting saved distances
+    if (this.sessionStorageService.getMinDistancePreferences()) {
+      this.minDistance = this.sessionStorageService.getMinDistancePreferences();
+    }
+
+    if (this.sessionStorageService.getMaxDistancePreferences()) {
+      this.maxDistance = this.sessionStorageService.getMaxDistancePreferences();
+    }
 
     // Get the checkbox states from sessionStorage
     const savedCheckboxStates = this.sessionStorageService.getOptionsTagPreferences();
@@ -74,6 +83,17 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   onPreferenceSubmit(): void {
+
+    if (!this.isValidMinMax) {
+      console.log("Error regarding min and max values")
+      this.toastr.warning("Error regarding min and max values is still present!")
+      return;
+    }
+
+    // saving the selected distances
+    this.sessionStorageService.saveMinDistancePreferences(this.minDistance);
+    this.sessionStorageService.saveMaxDistancePreferences(this.maxDistance);
+
     // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
     const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
     this.sessionStorageService.saveTagPreferences(tagResult)
@@ -89,13 +109,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     // clear map data
     this.sessionStorageService.clearMapData();
     this.toastr.success('Submitted new preferences!');
-  }
-
-  updateDistance(distance: string) {
-    this.selectedDistance = distance;
-    this.sessionStorageService.saveDistancePreferences(distance);
-    this.toastr.success('Updated the preferred distance!');
-    // console.log('new selected distance: ' + this.selectedDistance);
   }
 
   checkOptionName(optionName: string): string {
@@ -166,4 +179,13 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       option.selected = value;
     }
   }
+
+  validateMinMax() {
+    if (this.minDistance > this.maxDistance) {
+      this.isValidMinMax = false;
+    } else {
+      this.isValidMinMax = true;
+    }
+  }
+
 }

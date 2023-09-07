@@ -36,6 +36,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { AccordionModule } from 'primeng/accordion';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
@@ -79,7 +80,7 @@ import { PoisDataTableComponent } from './components/pois-data-table/pois-data-t
       preventDuplicates: true,
       closeButton: true,
       enableHtml: true,  // enables HTML tags in the toast message
-      timeOut: 800
+      timeOut: 1000
     }),
     MatFormFieldModule,
     MatInputModule,
@@ -89,7 +90,8 @@ import { PoisDataTableComponent } from './components/pois-data-table/pois-data-t
     CheckboxModule,
     DropdownModule,
     ButtonModule,
-    AccordionModule
+    AccordionModule,
+    InputNumberModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

@@ -120,7 +120,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('click on map');
 
     // Call to backend osmnx API
-    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, this.sessionStorageService.getDistancePreferences()).subscribe({
+    this.markerService.getPointsOfInterest(e.latlng.lat, e.latlng.lng, this.sessionStorageService.getMaxDistancePreferences()).subscribe({
       next: data => {
         console.log('POIS, data:', data);
         if (data?.features) {
