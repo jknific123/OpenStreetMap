@@ -69,7 +69,16 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     else if (this.sessionStorageService.getCheckboxSelected()) {
       this.disableProfilesHeader = true;
     }
-    this.profileOptions = this.markerService.getProfileOptions;
+
+    // Get the profile options from sessionStorage
+    const savedProfileOptionsStates = this.sessionStorageService.getProfileOptionsTagPreferences();
+    if (savedProfileOptionsStates) {
+      this.profileOptions = savedProfileOptionsStates;
+      // Update the profileOptions object in the MarkerService
+      this.markerService.updateProfileOptions(savedProfileOptionsStates);
+    } else {
+      this.profileOptions = this.markerService.getProfileOptions;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -110,6 +119,9 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     // Save the checkbox states in sessionStorage or all options selected when profile is selected
     this.sessionStorageService.saveOptionsTagPreferences(this.options)
 
+    // Save the profile options states in sessionStorage
+    this.sessionStorageService.saveProfileOptionsTagPreferences(this.profileOptions);
+
     // Save correct active index value in sessionStorage
     if (this.sessionStorageService.getSelectedProfile()) {
         this.sessionStorageService.saveTabViewActiveIndex(0);
@@ -120,7 +132,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // clear map data
     this.sessionStorageService.clearMapData();
-    this.toastr.success('Submitted new preferences!');
+    this.toastr.success('Successfully submited preferences!');
     this.router.navigate(['/map'])
   }
 

@@ -10,6 +10,7 @@ const TAG_PREFERENCES = 'saved-tag-preferences';
 const MIN_DISTANCE_PREFERENCES = 'min-distance-preferences';
 const MAX_DISTANCE_PREFERENCES = 'max-distance-preferences';
 const OPTIONS_TAG_PREFERENCES = 'options-tag-preferences';
+const PROFILE_OPTIONS_TAG_PREFERENCES = 'profile-options-tag-preferences';
 const LOCATION_COORDINATES = 'saved-location-coordinates';
 const CURRENT_POIS = 'current-points-of-interest';
 const SELECTED_PROFILE ='selected-profile';
@@ -148,6 +149,11 @@ export class SessionStorageService {
     sessionStorage.setItem(OPTIONS_TAG_PREFERENCES, JSON.stringify(options));
   }
 
+  public saveProfileOptionsTagPreferences(profileOptions: any): void {
+    sessionStorage.removeItem(PROFILE_OPTIONS_TAG_PREFERENCES);
+    sessionStorage.setItem(PROFILE_OPTIONS_TAG_PREFERENCES, JSON.stringify(profileOptions));
+  }
+
   public deleteOptionsTagPreferences(): any {
     sessionStorage.removeItem(OPTIONS_TAG_PREFERENCES);
   }
@@ -156,6 +162,14 @@ export class SessionStorageService {
     const optionsTagPreferences = sessionStorage.getItem(OPTIONS_TAG_PREFERENCES);
     if (optionsTagPreferences != null) {
       return JSON.parse(optionsTagPreferences)
+    }
+    return null;
+  }
+
+  public getProfileOptionsTagPreferences(): any {
+    const profileOptionsTagPreferences = sessionStorage.getItem(PROFILE_OPTIONS_TAG_PREFERENCES);
+    if (profileOptionsTagPreferences != null) {
+      return JSON.parse(profileOptionsTagPreferences)
     }
     return null;
   }
