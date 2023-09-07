@@ -222,7 +222,8 @@ export class MarkerService {
                 score = 100;
             } else {
                 // Score decreases linearly with distance, from 100 at max_full_score_distance to 0 at selected_distance
-                score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedMaxDistance - maxFullScoreDistance), 0);
+                // score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedMaxDistance - maxFullScoreDistance), 0);
+                score = distance / (maxFullScoreDistance - selectedMaxDistance) + selectedMaxDistance / (selectedMaxDistance - maxFullScoreDistance);
             }
 
             marker.rating = parseFloat(score.toFixed(2)); // save score for marker in percentage
