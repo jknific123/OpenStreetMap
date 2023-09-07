@@ -4,6 +4,7 @@ import { MarkerService } from "../../services/marker.service";
 import {User} from "../../classes/user";
 import { ToastrService } from 'ngx-toastr';
 import {TagOptions} from "../../classes/tag-options";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
@@ -28,7 +29,8 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
   constructor(private sessionStorageService: SessionStorageService,
               private markerService: MarkerService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.sessionStorageService.getUserObservable.subscribe({
@@ -90,15 +92,24 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       return;
     }
 
+    // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
+    const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
+    if (Object.keys(tagResult).length == 0) {
+      console.log("No tags selected, chose profile or categories")
+      this.toastr.warning("Please choose a profile or categories!")
+      return;
+    }
+
     // saving the selected distances
     this.sessionStorageService.saveMinDistancePreferences(this.minDistance);
     this.sessionStorageService.saveMaxDistancePreferences(this.maxDistance);
 
-    // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
-    const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
+    // saving selected tags
     this.sessionStorageService.saveTagPreferences(tagResult)
+
     // Save the checkbox states in sessionStorage or all options selected when profile is selected
     this.sessionStorageService.saveOptionsTagPreferences(this.options)
+
     // Save correct active index value in sessionStorage
     if (this.sessionStorageService.getSelectedProfile()) {
         this.sessionStorageService.saveTabViewActiveIndex(0);
@@ -106,9 +117,11 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     else {
       this.sessionStorageService.saveTabViewActiveIndex(1);
     }
+
     // clear map data
     this.sessionStorageService.clearMapData();
     this.toastr.success('Submitted new preferences!');
+    this.router.navigate(['/map'])
   }
 
   checkOptionName(optionName: string): string {
