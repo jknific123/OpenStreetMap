@@ -5,6 +5,8 @@ export interface LocationReport {
     reportName: string;
     reportType: string;
     userId: string;
+    minDistance: number;
+    maxDistance: number;
     location: {
         coordinates: number[];
     };

@@ -9,6 +9,8 @@ const saveLocationReport = async (req, res) => {
             reportName: req.body.reportName,
             reportType: req.body.reportType,
             userId: req.body.userId,
+            minDistance: req.body.minDistance,
+            maxDistance: req.body.maxDistance,
             location: req.body.location,
             categories: req.body.categories,
             number_of_selected_categories: req.body.number_of_selected_categories,

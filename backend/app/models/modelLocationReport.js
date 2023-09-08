@@ -26,6 +26,8 @@ const schemaLocationReport = new Schema({
     reportName: String,
     reportType: String,
     userId: String,
+    minDistance: Number,
+    maxDistance: Number,
     location: {
         coordinates: [Number]
     },
