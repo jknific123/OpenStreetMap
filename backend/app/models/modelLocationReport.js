@@ -11,7 +11,8 @@ const schemaPoiMarker = new Schema({
         type: { type: String, enum: ['Point', 'Polygon'], required: true },
         coordinates: Schema.Types.Mixed
     },
-    rating: Number
+    rating: Number,
+    maxTypeRating: Number
 });
 
 // Define the GroupedMarkers schema
