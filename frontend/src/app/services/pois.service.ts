@@ -168,4 +168,112 @@ export class PoisService {
     return 'Unknown type';
   }
 
+  getRealTypeForPOI(properties: any): string {
+    // Check for the most specific and defining tags first
+
+    // Handle amenity-related tags
+    if (properties['amenity']) {
+        switch (properties['amenity']) {
+            case 'restaurant':
+                return 'restaurant';
+            case 'pharmacy':
+                return 'pharmacy';
+            case 'hospital':
+                return 'hospital';
+            case 'clinic':
+                return 'clinic';
+            case 'optician':
+                return 'optician';
+            case 'pediatric':
+                return 'pediatric';
+            case 'mall':
+                return 'mall';
+            case 'supermarket':
+                return 'supermarket';
+            case 'grocery':
+                return 'grocery';
+            case 'atm':
+                return 'atm';
+            case 'post_office':
+                return 'post_office';
+            case 'library':
+                return 'library';
+            case 'bank':
+                return 'bank';
+            case 'university':
+                return 'university';
+            case 'college':
+                return 'college';
+            case 'school':
+                return 'school';
+            case 'kindergarten':
+                return 'kindergarten';
+            case 'bus_stop':
+                return 'bus_stop';
+            case 'bus_station':
+                return 'bus stop';
+            case 'station':
+                return 'station';
+            case 'bicycle_rental':
+                return 'bicycle_rental';
+            default:
+                return properties['amenity'].charAt(0) + properties['amenity'].slice(1);
+        }
+    }
+
+    // Handle highway bus stop
+    if (properties['highway'] && properties['highway'] === 'bus_stop') {
+        return 'bus_stop';
+    }
+
+    // Handle shop-related tags
+    if (properties['shop']) {
+        return 'shop';
+    }
+
+    // Handle other key tags
+    if (properties['leisure']) {
+        switch (properties['leisure']) {
+            case 'playground':
+                return 'playground';
+            case 'park':
+                return 'park';
+            case 'sports_centre':
+                return 'sports_centre';
+            case 'swimming_pool':
+                return 'swimming_pool';
+            case 'garden':
+                return 'garden';
+            case 'nature_reserve':
+                return 'nature_reserve';
+            case 'fitness_centre':
+                return 'fitness_centre';
+            default:
+                return properties['amenity'].charAt(0) + properties['amenity'].slice(1);
+        }
+    }
+
+    if (properties['landuse']) {
+        switch (properties['landuse']) {
+            case 'grass':
+                return 'grassland';
+            case 'forest':
+                return 'forest';
+            default:
+                return properties['landuse'].charAt(0) + properties['landuse'].slice(1);
+        }
+    }
+
+    if (properties['office']) {
+        return 'office';
+    }
+
+    if (properties['building']) {
+        return 'building';
+    }
+
+    // If none of the above, return a default type
+    return 'Unknown type';
+  }
+
 }

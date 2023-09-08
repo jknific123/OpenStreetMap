@@ -138,6 +138,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
               poi.properties['name'] = this.poisService.getNameForPOI(poi.properties);
             }
             poi.properties['poiType'] = this.poisService.getTypeForPOI(poi.properties);
+            poi.properties['realType'] = this.poisService.getRealTypeForPOI(poi.properties);
           })
 
           // we save current pois to session storage
