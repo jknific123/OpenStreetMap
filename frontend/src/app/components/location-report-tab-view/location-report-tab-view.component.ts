@@ -61,6 +61,8 @@ export class LocationReportTabViewComponent implements OnInit, AfterViewInit {
           reportName: report.reportName,
           reportType: report.reportType,
           userId: report.userId,
+          minDistance: report.minDistance,
+          maxDistance: report.maxDistance,
           location: {
             coordinates: report.location.coordinates
           },

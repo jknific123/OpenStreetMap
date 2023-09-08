@@ -4,6 +4,9 @@
             <tr>
 <!--                <th pSortableColumn="Report id" style="width:20%">Report id <p-sortIcon field="Report id"></p-sortIcon></th>-->
                 <th pSortableColumn="reportName" style="width:10%">Name <p-sortIcon field="reportName"></p-sortIcon></th>
+                <th pSortableColumn="minDistance" style="width:10%">Min distance<p-sortIcon field="minDistance"></p-sortIcon></th>
+                <th pSortableColumn="maxDistance" style="width:10%">Max distance<p-sortIcon field="maxDistance"></p-sortIcon></th>
+
                 <th pSortableColumn="zdravjeRating" style="width:14%"> {{convertToEnglish('Zdravje')}} <p-sortIcon field="zdravjeRating"></p-sortIcon></th>
                 <th pSortableColumn="okoljeRating" style="width:14%"> {{convertToEnglish('Okolje')}}  <p-sortIcon field="okoljeRating"></p-sortIcon></th>
                 <th pSortableColumn="transportRating" style="width:15%">{{convertToEnglish('Transport')}}  <p-sortIcon field="transportRating"></p-sortIcon></th>
@@ -19,6 +22,9 @@
             <tr>
 <!--                <td>{{ report._id }}</td>-->
                 <td>{{ report.reportName }}</td>
+                <td>{{ report.minDistance }} m</td>
+                <td>{{ report.maxDistance }} m</td>
+
                 <td *ngIf="report.zdravjeRating !== '-'">{{ report.zdravjeRating }}%</td>
                 <td *ngIf="report.zdravjeRating === '-'">{{ report.zdravjeRating }}</td>
 
@@ -34,10 +40,10 @@
                 <td>{{ report.overall_rating }}%</td>
                 <td>{{ report.number_of_selected_categories }}</td>
 
-<!--                <td>-->
-<!--                    &lt;!&ndash; PrimeIcon for map &ndash;&gt;-->
-<!--                    <i class="pi pi-map-marker" (click)="viewOnMap(report)"></i>-->
-<!--                </td>-->
+                <td>
+                    <!-- PrimeIcon for map -->
+                    <i class="pi pi-map-marker" (click)="viewOnMap(report)"></i>
+                </td>
 
                 <td>
                     <!-- PrimeIcon for delete -->
