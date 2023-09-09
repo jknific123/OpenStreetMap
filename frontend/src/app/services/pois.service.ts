@@ -74,8 +74,10 @@ export class PoisService {
             case 'pharmacy':
                 return 'pharmacy';
             case 'hospital':
+                return 'hospital';
             case 'clinic':
-                return 'medical facility';
+                return 'clinic';
+                // return 'medical facility';
             case 'optician':
                 return 'optician';
             case 'pediatric':
@@ -84,7 +86,7 @@ export class PoisService {
                 return 'shopping mall';
             case 'supermarket':
             case 'grocery':
-                return 'supermarket';
+                return 'grocery';
             case 'atm':
                 return 'atm';
             case 'post_office':
@@ -105,7 +107,7 @@ export class PoisService {
             case 'bus_station':
                 return 'bus stop';
             case 'station':
-                return 'station';
+                return 'bus stop';
             case 'bicycle_rental':
                 return 'bicycle rental';
             default:
@@ -120,7 +122,13 @@ export class PoisService {
 
     // Handle shop-related tags
     if (properties['shop']) {
-        return 'shop';
+        switch (properties['shop']) {
+          case 'optician':
+                return 'optician';
+          default:
+            return 'shop';
+        }
+        // return 'shop';
     }
 
     // Handle other key tags
@@ -187,9 +195,8 @@ export class PoisService {
             case 'pediatric':
                 return 'pediatric';
             case 'mall':
-                return 'mall';
+                return 'mall'
             case 'supermarket':
-                return 'supermarket';
             case 'grocery':
                 return 'grocery';
             case 'atm':
@@ -209,11 +216,11 @@ export class PoisService {
             case 'kindergarten':
                 return 'kindergarten';
             case 'bus_stop':
-                return 'bus_stop';
+                return 'bus stop';
             case 'bus_station':
                 return 'bus stop';
             case 'station':
-                return 'station';
+                return 'bus stop';
             case 'bicycle_rental':
                 return 'bicycle_rental';
             default:
@@ -223,12 +230,18 @@ export class PoisService {
 
     // Handle highway bus stop
     if (properties['highway'] && properties['highway'] === 'bus_stop') {
-        return 'bus_stop';
+        return 'bus stop';
     }
 
     // Handle shop-related tags
     if (properties['shop']) {
-        return 'shop';
+        switch (properties['shop']) {
+          case 'optician':
+                return 'optician';
+          default:
+            return 'shop';
+        }
+        // return 'shop';
     }
 
     // Handle other key tags

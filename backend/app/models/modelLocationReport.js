@@ -19,6 +19,7 @@ const schemaPoiMarker = new Schema({
 const schemaGroupedMarkers = new Schema({
     name: String,
     markers: [schemaPoiMarker],
+    bestMarkers: [schemaPoiMarker],
     groupRating: Number
 });
 

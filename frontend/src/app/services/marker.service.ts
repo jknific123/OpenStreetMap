@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import * as L from 'leaflet';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import { SessionStorageService } from "./session.storage.service";
+import {SessionStorageService} from "./session.storage.service";
 import {PoiMarker} from "../classes/poi-marker";
 import {GroupedMarkers} from "../classes/grouped-markers";
 import {LocationReport} from "../classes/location-report";
@@ -71,6 +71,38 @@ export class MarkerService {
       selected: false
     }
   ];
+
+  optionsTypes = [
+    {
+      name: 'Zdravje',
+      tags: ['pharmacy', 'hospital', 'clinic', 'optician', 'pediatric'],
+      tagsProfileFamily: ['hospital', 'clinic', 'pediatric'],
+      tagsProfilePensioner: ['pharmacy', 'hospital', 'clinic', 'optician'],
+      tagsProfileStudent: []
+    },
+    {
+      name: 'Okolje',
+      tags: ['shop', 'grocery', 'mall', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'park',
+        'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool'],
+      tagsProfileFamily: ['shop', 'grocery', 'mall', 'restaurant', 'park', 'playground', 'sports_centre', 'swimming_pool'],
+      tagsProfilePensioner: ['shop', 'grocery', 'post_office', 'library', 'bank', 'park',],
+      tagsProfileStudent: []
+    },
+    {
+      name: 'Transport',
+      tags: ['bus stop', 'bicycle_rental'],
+      tagsProfileFamily: ['bus stop'],
+      tagsProfilePensioner: ['bus stop'],
+      tagsProfileStudent: ['bus stop', 'bicycle_rental']
+    },
+    {
+      name: 'Izobrazevanje',
+      tags: ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre'],
+      tagsProfileFamily: ['school', 'kindergarten',],
+      tagsProfilePensioner: ['social_centre', 'community_centre'],
+      tagsProfileStudent: ['university']
+    }
+  ]
 
   profileOptions: TagOptions[] = [
     {
@@ -188,7 +220,39 @@ export class MarkerService {
       });
     });
 
-    return Object.keys(groups).map(groupName => ({ name: groupName, markers: groups[groupName], groupRating: undefined }));
+    return Object.keys(groups).map(groupName => ({ name: groupName, markers: groups[groupName], bestMarkers: [], groupRating: undefined }));
+  }
+
+  getAllTypesForCategory(reportType: string, group: GroupedMarkers, allTypesForCategory: any, markersByTypeMap: any): any {
+    this.optionsTypes.forEach(option => {
+        if (option.name === group.name) {
+          if (reportType === 'Categories') {
+              allTypesForCategory = option.tags;
+              return;
+          }
+          else if (reportType === 'Family') {
+              allTypesForCategory = option.tagsProfileFamily;
+              return;
+          }
+          else if (reportType === 'Pensioner') {
+              allTypesForCategory = option.tagsProfilePensioner;
+              return;
+          }
+          else if (reportType === 'Student') {
+              allTypesForCategory = option.tagsProfileStudent;
+              return;
+          } else {
+            console.log('Probably not the right types were selected!')
+          }
+        }
+    });
+    // console.log('allTypesForCategory', allTypesForCategory)
+    allTypesForCategory.forEach((type: any) => {
+      markersByTypeMap[type] = [];
+    })
+    // console.log('markersByTypeMap', markersByTypeMap)
+
+    return [allTypesForCategory, markersByTypeMap];
   }
 
   calculateRatings(groupedMarkers: GroupedMarkers[]): LocationReport {
@@ -203,17 +267,36 @@ export class MarkerService {
         .map((category: { name: string; }) => category.name);
 
     const categories: LocationReport['categories'] = {
-      Zdravje: { name: 'Zdravje', markers: [], groupRating: undefined },
-      Okolje: { name: 'Okolje', markers: [], groupRating: undefined },
-      Transport: { name: 'Transport', markers: [], groupRating: undefined },
-      Izobrazevanje: { name: 'Izobrazevanje', markers: [], groupRating: undefined }
+      Zdravje: { name: 'Zdravje', markers: [], bestMarkers: [], groupRating: undefined },
+      Okolje: { name: 'Okolje', markers: [], bestMarkers: [], groupRating: undefined },
+      Transport: { name: 'Transport', markers: [], bestMarkers: [], groupRating: undefined },
+      Izobrazevanje: { name: 'Izobrazevanje', markers: [], bestMarkers: [], groupRating: undefined }
     };
+
+    let tmpReportType = 'Categories';
+    const selectedProfile = this.sessionStorageService.getSelectedProfile();
+    if (selectedProfile) {
+      if (selectedProfile === 'Family') {
+        tmpReportType = 'Family';
+      }
+      else if (selectedProfile === 'Pensioner') {
+        tmpReportType = 'Pensioner';
+      }
+    }
 
     let numSelectedCategories = 0;
 
     for (let group of groupedMarkers) {
-      let groupScore = 0;
+      // let groupScore = 0;
       if (selectedCategoryNames.includes(group.name)) {
+
+        let markersByTypeMap: { [type: string]: any[] } = {};
+        let bestRatedMarkersMap: { [type: string]: any } = {};
+        let allTypesForCategory: string[] = [];
+
+        // we get all unique types for category
+        [allTypesForCategory, markersByTypeMap] = this.getAllTypesForCategory(tmpReportType, group, allTypesForCategory, markersByTypeMap);
+        // calculate ratings for all markers
         for (let marker of group.markers) {
             const distance = marker.properties.distance;
             let score: number;
@@ -227,11 +310,54 @@ export class MarkerService {
             }
 
             marker.rating = parseFloat(score.toFixed(2)); // save score for marker in percentage
-            groupScore += score;
+            // groupScore += score;
+            if (markersByTypeMap[marker.properties.realType]) {
+              markersByTypeMap[marker.properties.realType].push(marker);
+            }
+            // console.log('marker: ', marker);
+            // console.log('markersByTypeMap: ', markersByTypeMap);
         }
 
+        // saving the best rated marker for every type
+        for (let type in markersByTypeMap) {
+          if (markersByTypeMap[type].length > 0) {
+              bestRatedMarkersMap[type] = markersByTypeMap[type].reduce((maxObj, currentObj) => {
+                  return (currentObj.rating > maxObj.rating) ? currentObj : maxObj;
+              });
+          }
+        }
+        // setting the missing types values to 0
+        allTypesForCategory.forEach(type => {
+          if (!bestRatedMarkersMap[type]) {
+            bestRatedMarkersMap[type] = 0;
+          }
+        });
+        // console.log('bestRatedMarkersMap: ', bestRatedMarkersMap)
+
+        // summing best rated pois of all types
+        let sumOfRatings = Object.values(bestRatedMarkersMap).reduce((acc, curr) => {
+          if (typeof curr === 'object' && curr.hasOwnProperty('rating')) {
+            return acc + curr.rating;
+          }
+          return acc;
+        }, 0);
+        // console.log('sumOfRatings', sumOfRatings);
+
+        let numberOfTypesInCategory = Object.keys(bestRatedMarkersMap).length;
+        // console.log('numberOfTypesInCategory', numberOfTypesInCategory);
+
+        let markersArray = Object.values(bestRatedMarkersMap).filter(value => typeof value === 'object' && value.hasOwnProperty('rating'));
+        // console.log(markersArray);
+
+        let groupScore = sumOfRatings / numberOfTypesInCategory;
+        // console.log('groupScore', groupScore);
+
+        // group.groupRating = parseFloat((groupScore / allTypesForCategory.length).toFixed(2));
+
         if (group.markers.length > 0) {
-            group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group in percentage
+            // group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group in percentage
+            group.groupRating = parseFloat((groupScore).toFixed(2));
+            group.bestMarkers = markersArray;
         } else {
             group.groupRating = 0;
         }
@@ -248,17 +374,6 @@ export class MarkerService {
     }
 
     const overall_rating = parseFloat((overallScore / numSelectedCategories).toFixed(2)); // overall score in percentage
-
-    let tmpReportType = 'Categories';
-    const selectedProfile = this.sessionStorageService.getSelectedProfile();
-    if (selectedProfile) {
-      if (selectedProfile === 'Family') {
-        tmpReportType = 'Family';
-      }
-      else if (selectedProfile === 'Pensioner') {
-        tmpReportType = 'Pensioner';
-      }
-    }
 
     return {
       _id: '',

@@ -31,6 +31,13 @@ export class LocationReportViewComponent implements OnInit {
     const currentPois = this.sessionStorageService.getCurrentPois();
     const groupedMarkers = this.markerService.groupMarkersByTags(currentPois, this.markerService.getOptions);
     console.log(groupedMarkers)
+    // groupedMarkers.forEach(category => {
+    //   console.log('category: ', category.name)
+    //   console.log('markers: ', category.markers)
+    //   category.markers.forEach(marker => {
+    //     console.log(marker.properties.name, ' ', marker.properties.realType, ' ', marker.rating)
+    //   })
+    // });
 
     this.locationReport = this.markerService.calculateRatings(groupedMarkers);
     // console.log('locReport: ', this.locationReport)

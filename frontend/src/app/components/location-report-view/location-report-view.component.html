@@ -26,7 +26,8 @@
 <!--              </app-base-accordion>-->
                 <p-accordion [activeIndex]="1">
                     <p-accordionTab header="Show more" *ngIf="group[1].markers.length > 0">
-                      <app-pois-data-table [pois]="group[1].markers">
+<!--                      <app-pois-data-table [pois]="group[1].markers">-->
+                      <app-pois-data-table [pois]="group[1].bestMarkers">
                       </app-pois-data-table>
                     </p-accordionTab>
                 </p-accordion>
