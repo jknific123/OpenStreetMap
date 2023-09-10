@@ -1,6 +1,7 @@
 .map-leaflet__container {
   /*min-height: 80vh;*/
   display:flex;
+  height: 90vh; /* Adjust this value as needed */
   /*max-width: 1400px;*/
   /*margin: 0 auto;*/
   margin-right: 30px

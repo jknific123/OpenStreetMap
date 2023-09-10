@@ -1,17 +1,16 @@
-
-<div class=" rounded bg-white p-5 mt-4 mb-4" style="top: 80px;">
+<div class="rounded bg-white pt-5 pl-5 pr-5 pb-3 mt-4 mb-4">
       <h5 class="text-center"> Report type: {{this.reportType}} </h5>
       <h5 class="d-flex align-items-center">Category<div class="flex-grow-1 text-center">{{this.locationReport.reportName ? this.locationReport.reportName : ''}}</div> <span class="">Rating</span></h5>
       <div class="custom-border-bottom mb-4"></div>
       <div class="mb-4" *ngFor="let group of groupedMarkerEntries">
           <!-- Check if group.value is of type GroupedMarkers -->
-            <ng-container *ngIf="group[1]?.groupRating !== undefined && group[1]?.markers">
-                <h3 class="d-flex align-items-center px-2">{{ convertToEnglish(group[0]) }}
+            <ng-container *ngIf="group[1]?.groupRating !== undefined">
+                <h4 class="d-flex align-items-center px-2">{{ convertToEnglish(group[0]) }}
                   <div class="custom-border-bottom mx-4"></div>
 
                   <span *ngIf="group[1].groupRating == -999"> - </span>
                   <span *ngIf="group[1].groupRating != -999">{{ group[1].groupRating | number: '1.2-2' }}%</span>
-                </h3>
+                </h4>
 
                 <p-accordion [activeIndex]="1">
                     <p-accordionTab header="Show more" *ngIf="group[1].markers.length > 0">
@@ -24,16 +23,16 @@
             </ng-container>
       </div>
 
-    <h2 class="d-flex align-items-center">
+    <h3 class="d-flex align-items-center">
       Overall Rating:
       <div class="custom-border-bottom mx-3"></div>
       <span *ngIf="locationReport.overall_rating == -999"> - </span>
       <span *ngIf="locationReport.overall_rating != -999">{{ locationReport.overall_rating | number: '1.2-2' }}%</span>
-    </h2>
+    </h3>
 
       <div class="d-flex flex-column align-items-center">
   <!--      <button class="btn btn-primary mb-4 " type="button" (click)="onSaveSubmit()">Save location report</button>-->
-        <button class="btn btn-primary mb-4 " type="button" (click)="openDialog()">Save location report</button>
+        <button class="btn btn-primary mb-2 " type="button" (click)="openDialog()">Save location report</button>
       </div>
 
 </div>
