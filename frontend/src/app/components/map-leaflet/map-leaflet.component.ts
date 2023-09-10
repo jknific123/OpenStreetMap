@@ -39,6 +39,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
   private reportButton?: HTMLButtonElement;
   private resetButton?: HTMLButtonElement;
 
+  showModal:boolean = false;
+
   constructor(private markerService: MarkerService,
               private poisService: PoisService,
               private sessionStorageService: SessionStorageService,
@@ -111,7 +113,8 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       else {
         // window.alert("Nimate izbranih parametrov kvalitete življenja!");
-        window.alert("Please pick preferred quality of life parameters!");
+        // window.alert("Please pick preferred quality of life parameters!");
+        this.showModal = true;
       }
     });
   }
@@ -161,6 +164,11 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('Error getting POIS: ', err);
       }
     });
+  }
+
+  onBackToPreferences() {
+    console.log('routing home from map')
+    this.router.navigate(['/home'])
   }
 
   createReportControl() {
