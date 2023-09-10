@@ -71,7 +71,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
     tiles.addTo(this.map);
 
     // Add the custom controls to the map
-    this.map.addControl(this.createReportControl());
+    // this.map.addControl(this.createReportControl());
     this.map.addControl(this.createResetControl());
   }
 
@@ -79,7 +79,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
     this.poisSubscription = this.sessionStorageService.currentPoisChanges$
       .subscribe(pois => {
         this.hasPois = pois.length > 0;
-        this.updateButtonState();
+        // this.updateButtonState();
         this.updateResetButtonState();
       });
 
@@ -289,7 +289,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Reset the report button state
     this.hasPois = false;
-    this.updateButtonState();
+    // this.updateButtonState();
 
     // Reset the reset button state
     this.updateResetButtonState();
