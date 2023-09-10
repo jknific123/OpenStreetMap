@@ -1,23 +1,26 @@
-import {Component, OnInit, Input, TemplateRef, ViewChild} from '@angular/core';
-import { LocationReportService } from "../../services/location.report.service";
-import { MarkerService } from "src/app/services/marker.service";
-import { SessionStorageService } from "../../services/session.storage.service";
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {LocationReportService} from "../../services/location.report.service";
+import {MarkerService} from "src/app/services/marker.service";
+import {SessionStorageService} from "../../services/session.storage.service";
 import {LocationReport} from "../../classes/location-report";
 import {GroupedMarkers} from "../../classes/grouped-markers";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-location-report-view',
   templateUrl: './location-report-view.component.html',
   styleUrls: ['./location-report-view.component.css']
 })
-export class LocationReportViewComponent implements OnInit {
+export class LocationReportViewComponent implements OnInit, OnDestroy {
   showModal:boolean = false;
   locationReport!: LocationReport;
   groupedMarkerEntries: [string, GroupedMarkers][] = [];  // An array of key-value pairs
   reportName: string = '';
   reportType: string = '';
+
+  private poisSubscription?: Subscription;
 
   @ViewChild('reportNameDialog', { static: true }) reportNameDialog!: TemplateRef<any>;
 
@@ -28,7 +31,46 @@ export class LocationReportViewComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit(): void {
-    const currentPois = this.sessionStorageService.getCurrentPois();
+    // const currentPois = this.sessionStorageService.getCurrentPois();
+    this.poisSubscription = this.sessionStorageService.currentPoisChanges$.subscribe(pois => {
+      if (pois && pois.length > 0) {
+        this.updateLocationReport(pois);
+      } else {
+        console.log('Currently no pois data.')
+        this.showEmptyReport();
+      }
+    });
+    // console.log('location report: ', this.locationReport)
+  }
+
+  showEmptyReport() {
+    this.locationReport = {
+      _id: '',
+      reportName: '',
+      reportType: '',
+      userId: '',
+      minDistance: -999,
+      maxDistance: -999,
+      location: {
+        coordinates: []
+      },
+      categories: {
+        Zdravje: { name: 'Zdravje', markers: [], bestMarkers: [], groupRating: -999 },
+        Okolje: { name: 'Okolje', markers: [], bestMarkers: [], groupRating: -999 },
+        Transport: { name: 'Transport', markers: [], bestMarkers: [], groupRating: -999 },
+        Izobrazevanje: { name: 'Izobrazevanje', markers: [], bestMarkers: [], groupRating: -999 }
+      },
+      number_of_selected_categories: -999,
+      overall_rating: -999
+    };
+
+    this.groupedMarkerEntries = Object.entries(this.locationReport.categories);
+    // console.log('groupedMarkerEntries: ', this.groupedMarkerEntries)
+
+    this.reportType = this.getReportType();
+  }
+
+  updateLocationReport(currentPois: any) {
     const groupedMarkers = this.markerService.groupMarkersByTags(currentPois, this.markerService.getOptions);
     console.log(groupedMarkers)
     // groupedMarkers.forEach(category => {
@@ -96,6 +138,10 @@ export class LocationReportViewComponent implements OnInit {
       }
     }
     return tmpReportType;
+  }
+
+  ngOnDestroy(): void {
+    this.poisSubscription?.unsubscribe();
   }
 
   protected readonly Math = Math;

@@ -1,12 +1,36 @@
+.map-leaflet__container {
+  /*min-height: 80vh;*/
+  display:flex;
+  /*max-width: 1400px;*/
+  /*margin: 0 auto;*/
+  margin-right: 30px
+}
+
+.map-leaflet__col {
+  /*height: 100vh;*/
+  /*min-height: 300px;*/
+  /*flex:1;*/
+}
+.map-leaflet__map {
+  position:relative;
+  /*flex: 5;*/
+  /*min-width: 50%;*/
+  width: 60%;
+}
+.map-leaflet__location{
+  width: 40%;
+  /*flex: 1;*/
+}
+
 .map-container {
   position: absolute;
-  top: 80px; /* da je ok glede na navbar*/
-  /*top: 0;*/
+  /*top: 80px; !* da je ok glede na navbar*!*/
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: 30px;
-  height: calc(100% - 140px);  /* da je ok glede na navbar*/
+  /*height: calc(100% - 140px);  !* da je ok glede na navbar*!*/
 }
 
 .map-frame {

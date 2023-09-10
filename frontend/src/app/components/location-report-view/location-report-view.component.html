@@ -1,5 +1,5 @@
 
-<div class="container rounded bg-white p-5 mt-4 mb-4" style="top: 80px;">
+<div class=" rounded bg-white p-5 mt-4 mb-4" style="top: 80px;">
       <h5 class="text-center"> Report type: {{this.reportType}} </h5>
       <h5 class="d-flex align-items-center">Category<div class="flex-grow-1 text-center">{{this.locationReport.reportName ? this.locationReport.reportName : ''}}</div> <span class="">Rating</span></h5>
       <div class="custom-border-bottom mb-4"></div>
@@ -12,18 +12,7 @@
                   <span *ngIf="group[1].groupRating == -999"> - </span>
                   <span *ngIf="group[1].groupRating != -999">{{ group[1].groupRating | number: '1.2-2' }}%</span>
                 </h3>
-<!--                <ul class="pl-5" *ngIf="Array.isArray(group[1].markers)">-->
-<!--                    <li *ngFor="let marker of group[1].markers">-->
-<!--                        {{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m | {{ marker.rating | number: '1.2-2' }}-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--              <app-base-accordion [accTitle]="group[0]" *ngIf="group[1].markers.length > 0">-->
-<!--                  <ul class="pl-5" >-->
-<!--                    <li *ngFor="let marker of group[1].markers">-->
-<!--                        {{ marker.properties.name }} | {{ Math.floor(marker.properties.distance) }}m | {{ marker.rating | number: '1.2-2' }}-->
-<!--                    </li>-->
-<!--                  </ul>-->
-<!--              </app-base-accordion>-->
+
                 <p-accordion [activeIndex]="1">
                     <p-accordionTab header="Show more" *ngIf="group[1].markers.length > 0">
 <!--                      <app-pois-data-table [pois]="group[1].markers">-->
@@ -34,7 +23,13 @@
 
             </ng-container>
       </div>
-    <h2 class="d-flex align-items-center">Overall Rating:<div class="custom-border-bottom mx-3"></div> <span class="">{{ locationReport.overall_rating | number: '1.2-2' }}%</span></h2>
+
+    <h2 class="d-flex align-items-center">
+      Overall Rating:
+      <div class="custom-border-bottom mx-3"></div>
+      <span *ngIf="locationReport.overall_rating == -999"> - </span>
+      <span *ngIf="locationReport.overall_rating != -999">{{ locationReport.overall_rating | number: '1.2-2' }}%</span>
+    </h2>
 
       <div class="d-flex flex-column align-items-center">
   <!--      <button class="btn btn-primary mb-4 " type="button" (click)="onSaveSubmit()">Save location report</button>-->
