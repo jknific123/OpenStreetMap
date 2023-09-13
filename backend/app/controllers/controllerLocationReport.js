@@ -13,6 +13,7 @@ const saveLocationReport = async (req, res) => {
             maxDistance: req.body.maxDistance,
             location: req.body.location,
             categories: req.body.categories,
+            savedPreferences: req.body.savedPreferences,
             number_of_selected_categories: req.body.number_of_selected_categories,
             overall_rating: req.body.overall_rating
         });
@@ -35,6 +36,17 @@ const getLocationReportsForUser = async (req, res) => {
     }
 }
 
+const getLocationReportByReportId = async (req, res) => {
+    try {
+        const reportId = req.params.reportId;
+        const report = await LocationReport.findById(reportId);
+        res.status(200).json(report);
+    } catch (error) {
+        console.log('Error occurred when fetching location report for id: ', error);
+        res.status(500).send({ message: error.message});
+    }
+}
+
 const locationReportDelete = (req, res) => {
     LocationReport.findOneAndRemove({_id: req.params.id}, function(err, locationReport) {
             if (err || !locationReport) {
@@ -50,5 +62,6 @@ const locationReportDelete = (req, res) => {
 module.exports = {
     saveLocationReport,
     getLocationReportsForUser,
-    locationReportDelete
+    locationReportDelete,
+    getLocationReportByReportId
 }
