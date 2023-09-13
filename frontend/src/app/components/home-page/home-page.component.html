@@ -6,18 +6,18 @@
 
     <h5> Please choose the parameters that are important for quality of your life! </h5>
 
-    <label for="distanceDropdown" class="mt-2"> Modify the distances of your search: </label>
+    <label class="mt-2"> Modify the distances of your search: </label>
 
         <!-- Distance Input Fields -->
     <div class="d-flex justify-content-center input-spacing mt-2 mb-2">
         <div>
-            <label for="min" class="mr-2">Min distance:</label>
-            <p-inputNumber [(ngModel)]="minDistance" inputId="min" suffix=" m" [maxFractionDigits]=0 [min]="0" [max]="1999" mode="decimal" [useGrouping]="false" (onBlur)="validateMinMax()"> </p-inputNumber>
+            <label class="mr-2">Min distance:</label>
+            <p-inputNumber [(ngModel)]="minDistance" inputId="min" [maxFractionDigits]=0 [min]="0" [max]="1999" mode="decimal" [useGrouping]="false" (onBlur)="validateMinMax()"> </p-inputNumber> m
         </div>
 
         <div>
-            <label for="max" class="mr-2">Max distance:</label>
-            <p-inputNumber [(ngModel)]="maxDistance" inputId="max" suffix=" m" [min]="0" [max]="2000" mode="decimal" [useGrouping]="false" (onBlur)="validateMinMax()"> </p-inputNumber>
+            <label class="mr-2">Max distance:</label>
+            <p-inputNumber [(ngModel)]="maxDistance" inputId="max" [min]="0" [max]="2000" mode="decimal" [useGrouping]="false" (onBlur)="validateMinMax()"> </p-inputNumber> m
         </div>
     </div>
 
