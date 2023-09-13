@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { LocationReport } from "../../classes/location-report";
 import { LocationReportService } from "../../services/location.report.service";
+import { SessionStorageService} from "../../services/session.storage.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-location-report-table',
@@ -12,14 +14,40 @@ export class LocationReportTableComponent implements OnInit {
 
     @Input() reportsSortableData: any[] = [];
 
+    visible: boolean = false;
+    reportToShow: LocationReport | null = null;
+
     constructor(private locationReportService: LocationReportService,
-                private toastr: ToastrService) {}
+                private sessionStorageService: SessionStorageService,
+                private toastr: ToastrService,
+                private router: Router) {}
 
     ngOnInit() {}
 
-    viewOnMap(report: LocationReport) {
+    showViewOnMapDialog(report: LocationReport) {
+        this.visible = true;
+        this.reportToShow = report;
+    }
+
+    viewOnMap(report: any) {
         // Logic to view the report on the map
-        console.log('View report on map:', report);
+        this.locationReportService.getLocationReportForReportId(report._id).subscribe({
+        next: (locationReportData: LocationReport)  => {
+          this.toastr.success('Location report loaded successfully');
+          console.log(locationReportData)
+          this.sessionStorageService.clearPreferencesAndMapData();
+          this.sessionStorageService.setPreferencesAndMapData(locationReportData.savedPreferences);
+          this.toastr.info('Your preferences were updated to those saved in location report!', 'Info', {
+            timeOut: 3500
+          });
+          this.router.navigate(['/map'])
+        },
+        error: err => {
+          this.toastr.error('Error loading location reports!');
+          console.log('Error loading location reports: ', err);
+        }
+      });
+      this.visible = false; // Close the confirmation dialog
     }
 
     deleteReport(report: LocationReport) {
@@ -56,5 +84,13 @@ export class LocationReportTableComponent implements OnInit {
       }
       else return category;
     }
+
+  onDialogHide() {
+    // This function is called when the dialog is closed (whether confirmed or not)
+    if (!this.visible) {
+      // Clear the reportToShow if the dialog is closed without confirming
+      this.reportToShow = null;
+    }
+  }
 
 }

@@ -1,4 +1,5 @@
 import {GroupedMarkers} from "./grouped-markers";
+import {SavedPreferences} from "./saved-preferences";
 
 export interface LocationReport {
     _id: string;
@@ -16,6 +17,7 @@ export interface LocationReport {
         Transport?: GroupedMarkers;
         Izobrazevanje?: GroupedMarkers;
     };
+    savedPreferences: SavedPreferences;
     number_of_selected_categories: number;
     overall_rating: number;
 }

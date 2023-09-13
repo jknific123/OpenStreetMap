@@ -54,6 +54,18 @@ export class LocationReportViewComponent implements OnInit, OnDestroy {
       location: {
         coordinates: []
       },
+      savedPreferences: {
+        tag_preferences: null,
+        min_distance_preferences: null,
+        max_distance_preferences: null,
+        options_tag_preferences: null,
+        profile_options_tag_preferences: null,
+        location_coordinates: null,
+        current_pois: null,
+        selected_profile: null,
+        checkbox_selected: null,
+        tab_view_active_index: null
+      },
       categories: {
         Zdravje: { name: 'Zdravje', markers: [], bestMarkers: [], groupRating: -999 },
         Okolje: { name: 'Okolje', markers: [], bestMarkers: [], groupRating: -999 },

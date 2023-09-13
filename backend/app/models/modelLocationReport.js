@@ -23,6 +23,20 @@ const schemaGroupedMarkers = new Schema({
     groupRating: Number
 });
 
+// Define the savedPreferences schema
+const schemaSavedPreferences = new Schema({
+      tag_preferences: { type: Schema.Types.Mixed, default: null },
+      min_distance_preferences: { type: Number, default: null },
+      max_distance_preferences: { type: Number, default: null },
+      options_tag_preferences: { type: [Schema.Types.Mixed], default: null },
+      profile_options_tag_preferences: { type: [Schema.Types.Mixed], default: null },
+      location_coordinates: { type: [Number], default: null },
+      current_pois: { type: [Schema.Types.Mixed], default: null },
+      selected_profile: { type: String, default: null },
+      checkbox_selected: { type: Boolean, default: null },
+      tab_view_active_index: { type: Number, default: null }
+});
+
 // Define the main LocationReport schema
 const schemaLocationReport = new Schema({
     reportName: String,
@@ -39,6 +53,7 @@ const schemaLocationReport = new Schema({
         Transport: { type: schemaGroupedMarkers, default: {} },
         Izobrazevanje: { type: schemaGroupedMarkers, default: {} }
     },
+    savedPreferences: schemaSavedPreferences,
     number_of_selected_categories: Number,
     overall_rating: Number,
     created_at: { type: Date, default: Date.now }

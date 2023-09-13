@@ -37,6 +37,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { AccordionModule } from 'primeng/accordion';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogModule } from 'primeng/dialog';
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
@@ -91,7 +92,8 @@ import { PoisDataTableComponent } from './components/pois-data-table/pois-data-t
     DropdownModule,
     ButtonModule,
     AccordionModule,
-    InputNumberModule
+    InputNumberModule,
+    DialogModule
   ],
   providers: [MarkerService,
   httpAuthInterceptorProvider,

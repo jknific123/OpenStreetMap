@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import {User} from "../classes/user";
 import {BehaviorSubject} from "rxjs";
+import {SavedPreferences} from "../classes/saved-preferences";
 
 const AUTH_TOKEN_KEY = 'auth-token';
 const REFRESH_TOKEN_KEY = 'refresh-token';
@@ -42,6 +43,68 @@ export class SessionStorageService {
     // Emit defaults to reset POIs and marker coordinates in subscribers
     this.currentPoisSubject.next([]);
     this.currentMarkerCoordinatesSubject.next(null);
+  }
+
+  public clearPreferencesAndMapData(): void {
+    this.deleteTagPreferences();
+    this.deleteMinDistancePreferences();
+    this.deleteMaxDistancePreferences();
+    this.deleteOptionsTagPreferences();
+    this.deleteProfileOptionsTagPreferences();
+    this.clearMapData();
+    this.deleteSelectedProfile();
+    this.deleteCheckboxSelected();
+    this.deleteTabViewActiveIndex();
+  }
+
+  public setPreferencesAndMapData(savedPreferences: SavedPreferences): void {
+    if (savedPreferences.tag_preferences != null) {
+      this.saveTagPreferences(savedPreferences.tag_preferences)
+    }
+
+    if (savedPreferences.min_distance_preferences != null) {
+      this.saveMinDistancePreferences(savedPreferences.min_distance_preferences)
+    }
+
+    if (savedPreferences.max_distance_preferences != null) {
+      this.saveMaxDistancePreferences(savedPreferences.max_distance_preferences)
+    }
+
+    if (savedPreferences.options_tag_preferences != null) {
+      this.saveOptionsTagPreferences(savedPreferences.options_tag_preferences)
+    }
+
+    if (savedPreferences.profile_options_tag_preferences != null) {
+      this.saveProfileOptionsTagPreferences(savedPreferences.profile_options_tag_preferences)
+    }
+
+    // setting map data
+    if (savedPreferences.location_coordinates != null) {
+      this.saveLocationCoordinates(savedPreferences.location_coordinates[0], savedPreferences.location_coordinates[1])
+    }
+
+    // setting map data
+    if (savedPreferences.current_pois != null) {
+      this.saveCurrentPois(savedPreferences.current_pois)
+    }
+
+    if (savedPreferences.selected_profile != null) {
+      this.saveSelectedProfile(savedPreferences.selected_profile)
+    }
+
+    if (savedPreferences.checkbox_selected != null) {
+      this.saveCheckboxSelected(savedPreferences.checkbox_selected)
+    }
+
+    if (savedPreferences.tab_view_active_index != null) {
+      this.saveTabViewActiveIndex(savedPreferences.tab_view_active_index)
+    }
+
+  }
+
+  public setMapData(locationCoordinates: any, poisFromReport: any) {
+    this.saveLocationCoordinates(locationCoordinates, locationCoordinates);
+    this.saveCurrentPois(poisFromReport)
   }
 
   public saveAuthToken(token: any): void {
@@ -123,9 +186,17 @@ export class SessionStorageService {
     sessionStorage.setItem(MIN_DISTANCE_PREFERENCES, JSON.stringify(minDistance));
   }
 
+  public deleteMinDistancePreferences(): any {
+    sessionStorage.removeItem(MIN_DISTANCE_PREFERENCES);
+  }
+
   public saveMaxDistancePreferences(maxDistance: any): void {
     sessionStorage.removeItem(MAX_DISTANCE_PREFERENCES);
     sessionStorage.setItem(MAX_DISTANCE_PREFERENCES, JSON.stringify(maxDistance));
+  }
+
+  public deleteMaxDistancePreferences(): any {
+    sessionStorage.removeItem(MAX_DISTANCE_PREFERENCES);
   }
 
   public getMinDistancePreferences(): any {
@@ -152,6 +223,10 @@ export class SessionStorageService {
   public saveProfileOptionsTagPreferences(profileOptions: any): void {
     sessionStorage.removeItem(PROFILE_OPTIONS_TAG_PREFERENCES);
     sessionStorage.setItem(PROFILE_OPTIONS_TAG_PREFERENCES, JSON.stringify(profileOptions));
+  }
+
+  public deleteProfileOptionsTagPreferences(): any {
+    sessionStorage.removeItem(PROFILE_OPTIONS_TAG_PREFERENCES);
   }
 
   public deleteOptionsTagPreferences(): any {
@@ -216,7 +291,7 @@ export class SessionStorageService {
     sessionStorage.removeItem(SELECTED_PROFILE);
   }
 
-  public getSelectedProfile(): string | null {
+  public getSelectedProfile(): any {
     const profile = sessionStorage.getItem(SELECTED_PROFILE);
     return profile != null ? JSON.parse(profile) : null;
   }
@@ -238,6 +313,10 @@ export class SessionStorageService {
   public saveTabViewActiveIndex(tabViewActiveIndex: number): void {
     sessionStorage.removeItem(TAB_VIEW_ACTIVE_INDEX);
     sessionStorage.setItem(TAB_VIEW_ACTIVE_INDEX, JSON.stringify(tabViewActiveIndex));
+  }
+
+  public deleteTabViewActiveIndex(): any {
+    sessionStorage.removeItem(TAB_VIEW_ACTIVE_INDEX);
   }
 
   public getTabViewActiveIndex(): number | null {

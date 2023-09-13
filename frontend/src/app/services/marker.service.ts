@@ -8,6 +8,7 @@ import {PoiMarker} from "../classes/poi-marker";
 import {GroupedMarkers} from "../classes/grouped-markers";
 import {LocationReport} from "../classes/location-report";
 import {TagOptions} from "../classes/tag-options";
+import {SavedPreferences} from "../classes/saved-preferences";
 
 type OptionTag = {
   [name: string]: string[] | string;
@@ -373,6 +374,19 @@ export class MarkerService {
       }
     }
 
+    const tmpSavedPreferences: SavedPreferences = {
+      tag_preferences: this.sessionStorageService.getTagPreferences(),
+      min_distance_preferences: this.sessionStorageService.getMinDistancePreferences(),
+      max_distance_preferences: this.sessionStorageService.getMaxDistancePreferences(),
+      options_tag_preferences: this.sessionStorageService.getOptionsTagPreferences(),
+      profile_options_tag_preferences: this.sessionStorageService.getProfileOptionsTagPreferences(),
+      location_coordinates: [locationCoordinates.lat, locationCoordinates.lon],
+      current_pois: this.sessionStorageService.getCurrentPois(),
+      selected_profile: this.sessionStorageService.getSelectedProfile(),
+      checkbox_selected: this.sessionStorageService.getCheckboxSelected(),
+      tab_view_active_index: this.sessionStorageService.getTabViewActiveIndex()
+    }
+
     const overall_rating = parseFloat((overallScore / numSelectedCategories).toFixed(2)); // overall score in percentage
 
     return {
@@ -385,6 +399,7 @@ export class MarkerService {
       location: {
         coordinates: [locationCoordinates.lat, locationCoordinates.lon]
       },
+      savedPreferences: tmpSavedPreferences,
       categories: categories,
       number_of_selected_categories: numSelectedCategories,
       overall_rating: overall_rating
