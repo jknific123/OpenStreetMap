@@ -39,7 +39,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
   private reportButton?: HTMLButtonElement;
   private resetButton?: HTMLButtonElement;
 
-  showModal:boolean = false;
+  visible: boolean = false;
 
   constructor(private markerService: MarkerService,
               private poisService: PoisService,
@@ -114,7 +114,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       else {
         // window.alert("Nimate izbranih parametrov kvalitete življenja!");
         // window.alert("Please pick preferred quality of life parameters!");
-        this.showModal = true;
+        this.visible = true;
       }
     });
   }

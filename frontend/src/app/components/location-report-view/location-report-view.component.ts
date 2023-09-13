@@ -20,6 +20,8 @@ export class LocationReportViewComponent implements OnInit, OnDestroy {
   reportName: string = '';
   reportType: string = '';
 
+  visible: boolean = false;
+
   private poisSubscription?: Subscription;
 
   @ViewChild('reportNameDialog', { static: true }) reportNameDialog!: TemplateRef<any>;
@@ -122,6 +124,7 @@ export class LocationReportViewComponent implements OnInit, OnDestroy {
 
   openDialog(): void {
     this.showModal = true;
+    this.visible = true;
   }
 
   convertToEnglish(category: string): string {

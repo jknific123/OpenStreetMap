@@ -62,12 +62,13 @@
 <!--</div>-->
 
 <!-- Confirmation Dialog -->
-<p-dialog header="View report on map" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" (onHide)="onDialogHide()">
+<p-dialog header="View report on map" [(visible)]="visible" [modal]="true" [style]="{ width: '40vw' }" (onHide)="onDialogHide()">
   <p>
     You will be redirected to map view where the report data will be displayed.
     But beware, your preferences will be updated to the preferences saved in the location report.
   </p>
   <div class="d-flex justify-content-center">
-    <button pButton type="button" label="Confirm" (click)="viewOnMap(this.reportToShow)"></button>
+<!--    <button pButton type="button" label="Confirm" (click)="viewOnMap(this.reportToShow)"></button>-->
+    <p-button label="Confirm" styleClass="p-button-sm" (click)="viewOnMap(this.reportToShow)"></p-button>
   </div>
 </p-dialog>
