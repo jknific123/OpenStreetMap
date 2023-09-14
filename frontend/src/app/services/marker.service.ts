@@ -78,7 +78,7 @@ export class MarkerService {
       name: 'Zdravje',
       tags: ['pharmacy', 'hospital', 'clinic', 'optician', 'pediatric'],
       tagsProfileFamily: ['hospital', 'clinic', 'pediatric'],
-      tagsProfilePensioner: ['pharmacy', 'hospital', 'clinic', 'optician'],
+      tagsProfileSenior: ['pharmacy', 'hospital', 'clinic', 'optician'],
       tagsProfileStudent: []
     },
     {
@@ -86,21 +86,21 @@ export class MarkerService {
       tags: ['shop', 'grocery', 'mall', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'park',
         'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool'],
       tagsProfileFamily: ['shop', 'grocery', 'mall', 'restaurant', 'park', 'playground', 'sports_centre', 'swimming_pool'],
-      tagsProfilePensioner: ['shop', 'grocery', 'post_office', 'library', 'bank', 'park',],
+      tagsProfileSenior: ['shop', 'grocery', 'post_office', 'library', 'bank', 'park',],
       tagsProfileStudent: []
     },
     {
       name: 'Transport',
       tags: ['bus stop', 'bicycle_rental'],
       tagsProfileFamily: ['bus stop'],
-      tagsProfilePensioner: ['bus stop'],
+      tagsProfileSenior: ['bus stop'],
       tagsProfileStudent: ['bus stop', 'bicycle_rental']
     },
     {
       name: 'Izobrazevanje',
       tags: ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre'],
       tagsProfileFamily: ['school', 'kindergarten',],
-      tagsProfilePensioner: ['social_centre', 'community_centre'],
+      tagsProfileSenior: ['social_centre', 'community_centre'],
       tagsProfileStudent: ['university']
     }
   ]
@@ -124,10 +124,10 @@ export class MarkerService {
       selected: false
     },
     {
-      name: 'Pensioner',
-      description: 'The Pensioner profile is tailored for the older population, focusing on amenities that ensure comfort,' +
+      name: 'Senior',
+      description: 'The Senior profile is tailored for the older population, focusing on amenities that ensure comfort,' +
         ' convenience, healthcare, and opportunities for passive recreation.',
-      descriptionENG: 'The Pensioner profile is tailored for the older population. It focuses on  grocery stores, healthcare, opportunities for passive recreation and adult education.',
+      descriptionENG: 'The Senior profile is tailored for the older population. It focuses on  grocery stores, healthcare, opportunities for passive recreation and adult education.',
       tags: {
         'amenity': ['hospital', 'pharmacy', 'social_centre', 'community_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
         'leisure': ['park'],
@@ -235,8 +235,8 @@ export class MarkerService {
               allTypesForCategory = option.tagsProfileFamily;
               return;
           }
-          else if (reportType === 'Pensioner') {
-              allTypesForCategory = option.tagsProfilePensioner;
+          else if (reportType === 'Senior') {
+              allTypesForCategory = option.tagsProfileSenior;
               return;
           }
           else if (reportType === 'Student') {
@@ -280,8 +280,8 @@ export class MarkerService {
       if (selectedProfile === 'Family') {
         tmpReportType = 'Family';
       }
-      else if (selectedProfile === 'Pensioner') {
-        tmpReportType = 'Pensioner';
+      else if (selectedProfile === 'Senior') {
+        tmpReportType = 'Senior';
       }
     }
 

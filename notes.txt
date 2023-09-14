@@ -37,3 +37,5 @@ MongoDB error v Compassu: connect ECONNREFUSED 127.0.0.1:27017
 
 - potrebno startat service
 https://stackoverflow.com/questions/46523321/mongoerror-connect-econnrefused-127-0-0-127017
+
+elderly svg: https://thenounproject.com/icon/elderly-3312960/
