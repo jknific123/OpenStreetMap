@@ -45,7 +45,7 @@ export class MarkerService {
         ' ATM, post office, parks, gardens, sports facilities, playground, fitness center, library, restaurants',
       tags: {
         'shop': ['mall', 'supermarket'],
-        'amenity': ['grocery', 'atm', 'post_office', 'library', 'restaurant', 'bank'],
+        'amenity': ['grocery', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'pub', 'bar'],
         // 'landuse': ['forest'], // 'grass',
         'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool']
       },
@@ -79,15 +79,15 @@ export class MarkerService {
       tags: ['pharmacy', 'hospital', 'clinic', 'optician', 'pediatric'],
       tagsProfileFamily: ['hospital', 'clinic', 'pediatric'],
       tagsProfileSenior: ['pharmacy', 'hospital', 'clinic', 'optician'],
-      tagsProfileStudent: []
+      tagsProfileStudent: ['hospital']
     },
     {
       name: 'Okolje',
       tags: ['shop', 'grocery', 'mall', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'park',
-        'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool'],
+        'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool', 'pub', 'bar'],
       tagsProfileFamily: ['shop', 'grocery', 'mall', 'restaurant', 'park', 'playground', 'sports_centre', 'swimming_pool'],
       tagsProfileSenior: ['shop', 'grocery', 'post_office', 'library', 'bank', 'park',],
-      tagsProfileStudent: []
+      tagsProfileStudent: ['library', 'pub', 'bar', 'restaurant', 'grocery', 'park', 'sports_centre', 'swimming_pool', 'mall', 'shop']
     },
     {
       name: 'Transport',
@@ -101,7 +101,7 @@ export class MarkerService {
       tags: ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre'],
       tagsProfileFamily: ['school', 'kindergarten',],
       tagsProfileSenior: ['social_centre', 'community_centre'],
-      tagsProfileStudent: ['university']
+      tagsProfileStudent: ['university', 'college']
     }
   ]
 
@@ -134,6 +134,19 @@ export class MarkerService {
         'public_transport': ['station'],
         'highway': ['bus_stop'],
         'shop': ['supermarket', 'grocery', 'optician'],
+      },
+      selected: false
+    },
+    {
+      name: 'Student',
+      description: 'Student life is the best life TODO',
+      descriptionENG: 'Student life is the best life TODO',
+      tags: {
+        'amenity': ['library', 'university', 'college', 'pub', 'bar', 'restaurant', 'bus_station', 'grocery',  'hospital', 'bicycle_rental'],
+        'leisure': ['park', 'sports_centre', 'swimming_pool'],
+        'public_transport': ['station'],
+        'highway': ['bus_stop'],
+        'shop': ['mall', 'supermarket'],
       },
       selected: false
     }
@@ -282,6 +295,9 @@ export class MarkerService {
       }
       else if (selectedProfile === 'Senior') {
         tmpReportType = 'Senior';
+      }
+      else if (selectedProfile === 'Student') {
+        tmpReportType = 'Student';
       }
     }
 

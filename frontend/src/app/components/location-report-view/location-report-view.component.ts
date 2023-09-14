@@ -151,6 +151,9 @@ export class LocationReportViewComponent implements OnInit, OnDestroy {
       else if (selectedProfile === 'Senior') {
         tmpReportType = 'Senior';
       }
+      else if (selectedProfile === 'Student') {
+        tmpReportType = 'Student';
+      }
     }
     return tmpReportType;
   }

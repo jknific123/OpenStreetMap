@@ -17,6 +17,7 @@ export class LocationReportTabViewComponent implements OnInit, AfterViewInit {
     reportsCategories!: LocationReport[];
     reportsFamilyProfile!: LocationReport[];
     reportsSeniorProfile!: LocationReport[];
+    reportsStudentProfile!: LocationReport[];
 
     constructor(private locationReportService: LocationReportService,
                 private sessionReportService: SessionStorageService,
@@ -51,6 +52,7 @@ export class LocationReportTabViewComponent implements OnInit, AfterViewInit {
       this.reportsCategories = reportsSortable.filter( report => report.reportType === 'Categories')
       this.reportsFamilyProfile = reportsSortable.filter( report => report.reportType === 'Family')
       this.reportsSeniorProfile = reportsSortable.filter( report => report.reportType === 'Senior')
+      this.reportsStudentProfile = reportsSortable.filter( report => report.reportType === 'Student')
     }
 
     transformToSortableData(reports: LocationReport[]) {

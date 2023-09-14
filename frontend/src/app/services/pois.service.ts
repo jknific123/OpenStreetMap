@@ -47,6 +47,9 @@ export class PoisService {
 
     for (let tag of tags) {
         if (properties[tag]) {
+            if (properties[tag] === 'swimming_pool') {
+                return 'swimming pool';
+            }
             return properties[tag].charAt(0).toUpperCase() + properties[tag].slice(1);
         }
     }
@@ -110,6 +113,10 @@ export class PoisService {
                 return 'bus stop';
             case 'bicycle_rental':
                 return 'bicycle rental';
+            case 'pub':
+                return 'pub';
+            case 'bar':
+                return 'bar';
             default:
                 return properties['amenity'].charAt(0).toUpperCase() + properties['amenity'].slice(1);
         }
