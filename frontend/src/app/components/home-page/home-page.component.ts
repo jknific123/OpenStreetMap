@@ -104,6 +104,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     // kle nisem sure a je ok da so od marker servica options al bi mogli bit tej od komponente
     const tagResult = this.markerService.getSelectedTags(this.selectedProfile != null ? this.profileOptions : this.markerService.options);
     if (Object.keys(tagResult).length == 0) {
+      // deleting profile data
+      console.log('deleting profile data')
+      this.sessionStorageService.deleteSelectedProfile();
+      this.sessionStorageService.deleteTagPreferences();
+      this.sessionStorageService.deleteOptionsTagPreferences();
+
+      // deleting map data
+      this.sessionStorageService.clearMapData();
       console.log("No tags selected, chose profile or categories")
       this.toastr.warning("Please choose a profile or categories!")
       return;
@@ -121,6 +129,11 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // Save the profile options states in sessionStorage
     this.sessionStorageService.saveProfileOptionsTagPreferences(this.profileOptions);
+
+    // Save selected profile data in sessionStorage
+    if (this.selectedProfile != null) {
+      this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
+    }
 
     // Save correct active index value in sessionStorage
     if (this.sessionStorageService.getSelectedProfile()) {
@@ -156,9 +169,9 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       // ko drugic kliknemo na isti profil ga deselectamo, setamo disable categories header na false
       this.selectedProfile = null;
       this.disableCategoriesHeader = false;
-      this.sessionStorageService.deleteSelectedProfile();
-      this.sessionStorageService.deleteTagPreferences();
-      this.sessionStorageService.deleteOptionsTagPreferences();
+      // this.sessionStorageService.deleteSelectedProfile();
+      // this.sessionStorageService.deleteTagPreferences();
+      // this.sessionStorageService.deleteOptionsTagPreferences();
       this.profileOptions.forEach((profileOption: TagOptions) => {
         if (profileOption.name === profile) {
           profileOption.selected = false;
@@ -170,7 +183,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     else {
       this.selectedProfile = profile;
       this.disableCategoriesHeader = true;
-      this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
+      // this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
       this.profileOptions.forEach((profileOption: TagOptions) => {
         if (profileOption.name === this.selectedProfile) {
           profileOption.selected = true;
