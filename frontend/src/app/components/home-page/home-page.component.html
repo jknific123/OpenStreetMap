@@ -6,10 +6,12 @@
 
     <h5> Please choose the parameters that are important for quality of your life! </h5>
 
-    <label class="mt-2"> Modify the distances of your search: </label>
+<!--    <p class="mt-2"> Modify the distances of your search: </p>-->
+    <label class="mt-2"> Minimum distance represents your ideal range, while maximum distance defines your travel limit. </label>
+
 
         <!-- Distance Input Fields -->
-    <div class="d-flex justify-content-center input-spacing mt-2 mb-2">
+    <div class="d-flex justify-content-center input-spacing mt-1 mb-2">
         <div>
             <label class="mr-2">Min distance:</label>
             <p-inputNumber [(ngModel)]="minDistance" inputId="min" [maxFractionDigits]=0 [min]="0" [max]="1999" mode="decimal" [useGrouping]="false" (onBlur)="validateMinMax()"> </p-inputNumber> m

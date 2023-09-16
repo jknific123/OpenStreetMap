@@ -50,6 +50,9 @@ export class PoisService {
             if (properties[tag] === 'swimming_pool') {
                 return 'swimming pool';
             }
+            if (properties[tag] === 'sports_centre') {
+                return 'sports centre';
+            }
             return properties[tag].charAt(0).toUpperCase() + properties[tag].slice(1);
         }
     }
@@ -101,7 +104,7 @@ export class PoisService {
             case 'university':
                 return 'university';
             case 'college':
-                return 'college';
+                return 'university';
             case 'school':
                 return 'school';
             case 'kindergarten':
@@ -114,7 +117,7 @@ export class PoisService {
             case 'bicycle_rental':
                 return 'bicycle rental';
             case 'pub':
-                return 'pub';
+                return 'bar';
             case 'bar':
                 return 'bar';
             default:
@@ -217,7 +220,7 @@ export class PoisService {
             case 'university':
                 return 'university';
             case 'college':
-                return 'college';
+                return 'university';
             case 'school':
                 return 'school';
             case 'kindergarten':
@@ -230,6 +233,10 @@ export class PoisService {
                 return 'bus stop';
             case 'bicycle_rental':
                 return 'bicycle_rental';
+            case 'pub':
+                return 'bar';
+            case 'bar':
+                return 'bar';
             default:
                 return properties['amenity'].charAt(0) + properties['amenity'].slice(1);
         }

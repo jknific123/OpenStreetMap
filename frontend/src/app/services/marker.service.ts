@@ -84,10 +84,10 @@ export class MarkerService {
     {
       name: 'Okolje',
       tags: ['shop', 'grocery', 'mall', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'park',
-        'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool', 'pub', 'bar'],
+        'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool', 'bar'],
       tagsProfileFamily: ['shop', 'grocery', 'mall', 'restaurant', 'park', 'playground', 'sports_centre', 'swimming_pool'],
       tagsProfileSenior: ['shop', 'grocery', 'post_office', 'library', 'bank', 'park',],
-      tagsProfileStudent: ['library', 'pub', 'bar', 'restaurant', 'grocery', 'park', 'sports_centre', 'swimming_pool', 'mall', 'shop']
+      tagsProfileStudent: ['library', 'bar', 'restaurant', 'grocery', 'park', 'sports_centre', 'swimming_pool', 'mall', 'shop']
     },
     {
       name: 'Transport',
@@ -101,7 +101,7 @@ export class MarkerService {
       tags: ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre'],
       tagsProfileFamily: ['school', 'kindergarten',],
       tagsProfileSenior: ['social_centre', 'community_centre'],
-      tagsProfileStudent: ['university', 'college']
+      tagsProfileStudent: ['university']
     }
   ]
 
@@ -324,6 +324,7 @@ export class MarkerService {
                 // Score decreases linearly with distance, from 100 at max_full_score_distance to 0 at selected_distance
                 // score = Math.max(100 - (distance - maxFullScoreDistance) * 100 / (selectedMaxDistance - maxFullScoreDistance), 0);
                 score = distance / (selectedMinDistance - selectedMaxDistance) + selectedMaxDistance / (selectedMaxDistance - selectedMinDistance);
+                score = score * 100;
             }
 
             marker.rating = parseFloat(score.toFixed(2)); // save score for marker in percentage
