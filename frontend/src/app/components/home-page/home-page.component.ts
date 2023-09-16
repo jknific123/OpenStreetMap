@@ -113,7 +113,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       // deleting map data
       this.sessionStorageService.clearMapData();
       console.log("No tags selected, chose profile or categories")
-      this.toastr.warning("Please choose a profile or categories!")
+      this.toastr.warning("You don't have any preferences selected. Please choose a profile or categories!")
       return;
     }
 
