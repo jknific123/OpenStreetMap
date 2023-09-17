@@ -110,6 +110,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       this.sessionStorageService.deleteSelectedProfile();
       this.sessionStorageService.deleteTagPreferences();
       this.sessionStorageService.deleteOptionsTagPreferences();
+      this.sessionStorageService.deleteProfileOptionsTagPreferences();
 
       // deleting map data
       this.sessionStorageService.clearMapData();
