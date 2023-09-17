@@ -106,6 +106,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     if (Object.keys(tagResult).length == 0) {
       // deleting profile data
       console.log('deleting profile data')
+      this.disableCategoriesHeader = false;
       this.sessionStorageService.deleteSelectedProfile();
       this.sessionStorageService.deleteTagPreferences();
       this.sessionStorageService.deleteOptionsTagPreferences();
@@ -132,6 +133,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
 
     // Save selected profile data in sessionStorage
     if (this.selectedProfile != null) {
+      this.disableCategoriesHeader = true;
       this.sessionStorageService.saveSelectedProfile(this.selectedProfile);
     }
 
@@ -168,7 +170,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     if (this.selectedProfile === profile) {
       // ko drugic kliknemo na isti profil ga deselectamo, setamo disable categories header na false
       this.selectedProfile = null;
-      this.disableCategoriesHeader = false;
+      // this.disableCategoriesHeader = false;
       // this.sessionStorageService.deleteSelectedProfile();
       // this.sessionStorageService.deleteTagPreferences();
       // this.sessionStorageService.deleteOptionsTagPreferences();
