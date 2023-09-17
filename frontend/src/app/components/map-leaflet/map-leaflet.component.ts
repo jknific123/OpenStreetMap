@@ -162,6 +162,9 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       error: err => {
         console.log('Error getting POIS: ', err);
+        this.toastr.warning('An error occurred while processing your request. Please try again!', 'Warning', {
+            timeOut: 1300
+        });
       }
     });
   }

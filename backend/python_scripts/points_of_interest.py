@@ -29,6 +29,9 @@ def get_pois(latitude, longitude, distance, prefTags):
         elif geom.geom_type == 'MultiPolygon':
             # When encountering a MultiPolygon, we don't calculate the distance
             return None
+        elif geom.geom_type == 'LineString':
+            # When encountering a LineString, we don't calculate the distance
+            return None
         else:  # it's a Point
             lon, lat = geom.x, geom.y
         try:

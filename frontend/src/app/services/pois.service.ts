@@ -120,6 +120,10 @@ export class PoisService {
                 return 'bar';
             case 'bar':
                 return 'bar';
+            case 'community_centre':
+                return 'community centre'
+            case 'social_centre':
+                return 'community centre'
             default:
                 return properties['amenity'].charAt(0).toUpperCase() + properties['amenity'].slice(1);
         }
@@ -237,6 +241,10 @@ export class PoisService {
                 return 'bar';
             case 'bar':
                 return 'bar';
+            case 'community_centre':
+                return 'community_centre'
+            case 'social_centre':
+                return 'community_centre'
             default:
                 return properties['amenity'].charAt(0) + properties['amenity'].slice(1);
         }

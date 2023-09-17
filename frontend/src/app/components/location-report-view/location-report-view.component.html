@@ -1,5 +1,8 @@
-<div class="rounded bg-white pt-5 pl-5 pr-5 pb-3 mt-4 mb-4">
-      <h5 class="text-center"> Report type: {{this.reportType}} </h5>
+<div class="report__container rounded bg-white pt-4 pl-5 pr-5 pb-2 mt-3 mb-2">
+
+  <div>
+
+    <h5 class="text-center"> Report type: {{this.reportType}} </h5>
       <h5 class="d-flex align-items-center">Category<div class="flex-grow-1 text-center">{{this.locationReport.reportName ? this.locationReport.reportName : ''}}</div> <span class="">Rating</span></h5>
       <div class="custom-border-bottom mb-4"></div>
       <div class="mb-4" *ngFor="let group of groupedMarkerEntries">
@@ -30,12 +33,16 @@
       <span *ngIf="locationReport.overall_rating != -999">{{ locationReport.overall_rating | number: '1.2-2' }}%</span>
     </h3>
 
-      <div class="d-flex flex-column align-items-center">
-  <!--      <button class="btn btn-primary mb-4 " type="button" (click)="onSaveSubmit()">Save location report</button>-->
-<!--        <button class="btn btn-primary mb-2 " type="button" (click)="openDialog()">Save location report</button>-->
-        <p-button label="Save location report" styleClass="p-button-sm" (click)="openDialog()"></p-button>
+  </div>
 
-      </div>
+  <div class="report__container-btn d-flex flex-column align-items-center justify-content-end">
+<!--      <button class="btn btn-primary mb-4 " type="button" (click)="onSaveSubmit()">Save location report</button>-->
+<!--        <button class="btn btn-primary mb-2 " type="button" (click)="openDialog()">Save location report</button>-->
+    <div class="my-3">
+      <p-button label="Save location report" styleClass="p-button-sm" (click)="openDialog()"></p-button>
+    </div>
+
+  </div>
 
 </div>
 

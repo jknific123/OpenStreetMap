@@ -98,9 +98,9 @@ export class MarkerService {
     },
     {
       name: 'Izobrazevanje',
-      tags: ['school', 'kindergarten', 'university', 'college', 'social_centre', 'community_centre'],
+      tags: ['school', 'kindergarten', 'university', 'college', 'community_centre'],
       tagsProfileFamily: ['school', 'kindergarten',],
-      tagsProfileSenior: ['social_centre', 'community_centre'],
+      tagsProfileSenior: ['community_centre'],
       tagsProfileStudent: ['university']
     }
   ]
