@@ -17,12 +17,23 @@ export class LocationReportTableComponent implements OnInit {
     visible: boolean = false;
     reportToShow: LocationReport | null = null;
 
+    rowsPerPage: any = 5;
+
     constructor(private locationReportService: LocationReportService,
                 private sessionStorageService: SessionStorageService,
                 private toastr: ToastrService,
                 private router: Router) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+      const savedRowsPerPage = this.sessionStorageService.getRowsPerPage();
+      if (savedRowsPerPage) {
+        this.rowsPerPage = savedRowsPerPage;
+      }
+    }
+
+    saveRowsPerPage(rows: number) {
+      this.sessionStorageService.saveRowsPerPage(rows);
+    }
 
     showViewOnMapDialog(report: LocationReport) {
         this.visible = true;

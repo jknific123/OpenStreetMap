@@ -2,10 +2,11 @@
       <p-table [value]="reportsSortableData"
                [tableStyle]="{ 'min-width': '50rem' }"
                [paginator]="true"
-               [rows]="5"
+               [rows]="rowsPerPage"
                [showCurrentPageReport]="true"
                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                [rowsPerPageOptions]="[5, 10, 25, 50]"
+               (onPage)="saveRowsPerPage($event.rows)"
       >
         <ng-template pTemplate="header">
             <tr>

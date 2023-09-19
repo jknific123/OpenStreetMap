@@ -17,6 +17,7 @@ const CURRENT_POIS = 'current-points-of-interest';
 const SELECTED_PROFILE ='selected-profile';
 const CHECKBOX_SELECTED = 'checkbox-selected';
 const TAB_VIEW_ACTIVE_INDEX = 'tab-view-active-index';
+const ROWS_PER_PAGE = 'rows-per-page';
 
 @Injectable({
   providedIn: 'root'
@@ -322,6 +323,20 @@ export class SessionStorageService {
   public getTabViewActiveIndex(): number | null {
     const tabViewActiveIndex = sessionStorage.getItem(TAB_VIEW_ACTIVE_INDEX);
     return tabViewActiveIndex != null ? JSON.parse(tabViewActiveIndex) : null;
+  }
+
+  public saveRowsPerPage(rowsPerPage: number): void {
+    sessionStorage.removeItem(ROWS_PER_PAGE);
+    sessionStorage.setItem(ROWS_PER_PAGE, JSON.stringify(rowsPerPage));
+  }
+
+  public getRowsPerPage(): number | null {
+    const rowsPerPage = sessionStorage.getItem(ROWS_PER_PAGE);
+    return rowsPerPage != null ? JSON.parse(rowsPerPage) : null;
+  }
+
+  public deleteRowsPerPage(): any {
+    sessionStorage.removeItem(ROWS_PER_PAGE);
   }
 
   getDecodedAccessToken(token: string): any {

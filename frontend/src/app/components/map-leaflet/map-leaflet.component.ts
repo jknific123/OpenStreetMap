@@ -148,7 +148,7 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
           this.sessionStorageService.saveCurrentPois(data.features)
 
           data.features.forEach((poi: PoiMarker) => {
-            console.log('poi: ', poi.properties.name)
+            console.log('poi: ', poi.properties.name, 'distance: ', poi.properties.distance);
 
             // then we show current poi marker on map and save it in poiMarker array
             this.markerService.showPoiMarker(this.map, poi, this.poiMarkers);
