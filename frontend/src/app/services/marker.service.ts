@@ -195,8 +195,8 @@ export class MarkerService {
 
       let poiMarker: L.Marker;
       const popup = poi.properties?.description != '' && poi.properties?.description != undefined
-        ? `<b>${poi.properties.name}</b><br>${poi.properties?.description}<br><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m`
-        :`<b>${poi.properties.name}</b><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m`;
+        ? `<b>${poi.properties.name}</b><br>${poi.properties?.description}<br><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m<br>${Math.floor(poi.rating)} %`
+        :`<b>${poi.properties.name}</b><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m<br>${Math.floor(poi.rating)} %`;
 
       if (poi?.geometry?.type === 'Point') {
         poiMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
@@ -362,9 +362,19 @@ export class MarkerService {
         // saving the best rated marker for every type
         for (let type in markersByTypeMap) {
           if (markersByTypeMap[type].length > 0) {
-              bestRatedMarkersMap[type] = markersByTypeMap[type].reduce((maxObj, currentObj) => {
-                  return (currentObj.rating > maxObj.rating) ? currentObj : maxObj;
-              });
+            bestRatedMarkersMap[type] = markersByTypeMap[type].reduce((maxObj, currentObj) => {
+              if (currentObj.rating > maxObj.rating) {
+                return currentObj;
+              } else if (currentObj.rating == 100 && maxObj.rating == 100) {
+                // console.log('oba sta sto: ', currentObj.name, ': ', currentObj, maxObj.name, ': ', maxObj)
+                if (currentObj?.properties?.distance < maxObj?.properties?.distance) {
+                  return currentObj;
+                } else {
+                  return maxObj;
+                }
+              }
+              return maxObj;
+            });
           }
         }
         // setting the missing types values to 0
