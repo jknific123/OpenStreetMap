@@ -12,7 +12,7 @@ const schemaPoiMarker = new Schema({
         coordinates: Schema.Types.Mixed
     },
     rating: Number,
-    maxTypeRating: Number
+    bestMarkerForType: Boolean
 });
 
 // Define the GroupedMarkers schema

@@ -58,6 +58,15 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
       shadowSize: [41, 41]
   });
 
+  // greenIcon = L.icon({
+  //   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  //   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  //   iconSize: [25, 41],
+  //   iconAnchor: [12, 41],
+  //   popupAnchor: [1, -34],
+  //   shadowSize: [41, 41]
+  // });
+
   private initMap(): void {
     this.map = L.map('map', {
       center: [46.05108, 14.50513],
@@ -154,6 +163,10 @@ export class MapLeafletComponent implements OnInit, AfterViewInit, OnDestroy {
             this.markerService.showPoiMarker(this.map, poi, this.poiMarkers);
 
           });
+
+          this.sessionStorageService.saveCurrentPois(data.features)
+          // console.log('data features after modification: ', data.features)
+
         } else {
           this.toastr.warning('No points of interest found for your query.', 'Warning', {
             timeOut: 1800

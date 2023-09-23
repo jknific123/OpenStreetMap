@@ -4,5 +4,5 @@ export interface PoiMarker {
   properties: any;
   geometry: any;
   rating: number;
-  maxTypeRating: number;
+  bestMarkerForType: boolean;
 }

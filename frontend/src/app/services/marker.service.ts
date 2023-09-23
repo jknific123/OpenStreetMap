@@ -14,6 +14,15 @@ type OptionTag = {
   [name: string]: string[] | string;
 }
 
+const greenIcon = L.icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 @Injectable({
   providedIn: 'root'
 })
@@ -194,6 +203,13 @@ export class MarkerService {
           .bindPopup(popup)
           .addTo(map);
         markers.push(poiMarker);
+
+        // Check if the marker is one of the best-rated markers
+        console.log(poi.bestMarkerForType)
+        if (poi?.bestMarkerForType) {
+          // Set the green icon for best-rated markers
+          poiMarker.setIcon(greenIcon);
+        }
       }
       else if (poi?.geometry?.type === 'MultiPolygon') {
         // skip for now
@@ -203,6 +219,13 @@ export class MarkerService {
           .bindPopup(popup)
           .addTo(map);
         markers.push(poiMarker);
+
+        // Check if the marker is one of the best-rated markers
+        console.log(poi.bestMarkerForType)
+        if (poi?.bestMarkerForType) {
+          // Set the green icon for best-rated markers
+          poiMarker.setIcon(greenIcon);
+        }
       }
 
     return markers;
@@ -376,6 +399,15 @@ export class MarkerService {
             // group.groupRating = parseFloat((groupScore / group.markers.length).toFixed(2)); // save score for group in percentage
             group.groupRating = parseFloat((groupScore).toFixed(2));
             group.bestMarkers = markersArray;
+
+            // Associate the best-rated marker with the original marker
+            markersArray.forEach(bestMarker => {
+              const originalMarker = group.markers.find(marker => marker.id === bestMarker.id);
+              if (originalMarker) {
+                originalMarker.bestMarkerForType = true;
+              }
+            });
+
         } else {
             group.groupRating = 0;
         }
