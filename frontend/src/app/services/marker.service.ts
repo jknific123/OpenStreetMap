@@ -46,7 +46,7 @@ export class MarkerService {
       tags: {
         'shop': ['mall', 'supermarket'],
         'amenity': ['grocery', 'atm', 'post_office', 'library', 'restaurant', 'bank', 'pub', 'bar'],
-        // 'landuse': ['forest'], // 'grass',
+        'landuse': ['forest', 'meadow'], // 'grass',
         'leisure': ['park', 'garden', 'nature_reserve', 'playground', 'sports_centre', 'fitness_centre', 'swimming_pool']
       },
       selected: false
