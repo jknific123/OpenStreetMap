@@ -138,7 +138,7 @@ export class MarkerService {
         ' convenience, healthcare, and opportunities for passive recreation.',
       descriptionENG: 'The Senior profile is tailored for the older population. It focuses on  grocery stores, healthcare, opportunities for passive recreation and adult education.',
       tags: {
-        'amenity': ['hospital', 'pharmacy', 'social_centre', 'community_centre', 'library', 'clinic', 'bench', 'bank', 'post_office'],
+        'amenity': ['hospital', 'pharmacy', 'social_centre', 'community_centre', 'library', 'clinic', 'bank', 'post_office'],
         'leisure': ['park'],
         'public_transport': ['station'],
         'highway': ['bus_stop'],
@@ -195,8 +195,8 @@ export class MarkerService {
 
       let poiMarker: L.Marker;
       const popup = poi.properties?.description != '' && poi.properties?.description != undefined
-        ? `<b>${poi.properties.name}</b><br>${poi.properties?.description}<br><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m<br>${Math.floor(poi.rating)} %`
-        :`<b>${poi.properties.name}</b><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)}m<br>${Math.floor(poi.rating)} %`;
+        ? `<b>${poi.properties.name}</b><br>${poi.properties?.description}<br><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)} m<br>${Math.floor(poi.rating)} %`
+        :`<b>${poi.properties.name}</b><br>${poi.properties?.poiType}<br>${Math.floor(poi.properties.distance)} m<br>${Math.floor(poi.rating)} %`;
 
       if (poi?.geometry?.type === 'Point') {
         poiMarker = L.marker([poi?.geometry?.coordinates[1], poi?.geometry?.coordinates[0]])
