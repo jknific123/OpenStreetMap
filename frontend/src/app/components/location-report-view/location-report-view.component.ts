@@ -113,7 +113,7 @@ export class LocationReportViewComponent implements OnInit, OnDestroy {
         this.toastr.success('Location report saved successfully');
         // console.log('savedReport: ', savedReport)
         this.showModal = false;
-        this.router.navigate(['/location-report-list'])
+        this.router.navigate(['/previous-locations'])
       },
       error: err => {
         this.toastr.error('Error saving location report!');

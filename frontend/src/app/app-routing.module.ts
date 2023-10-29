@@ -42,7 +42,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'location-report-list',
+    path: 'previous-locations',
     component: LocationReportTabViewComponent,
     canActivate: [authGuard]
   },

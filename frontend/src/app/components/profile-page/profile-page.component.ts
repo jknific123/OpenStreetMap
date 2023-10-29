@@ -31,12 +31,12 @@ export class ProfilePageComponent implements OnInit {
     }, { validator: this.checkPasswords });
   }
 
-  onClickEdit() {
+  onClickChangePassword() {
     this.isEditable = true;
     this.enableInputFields();
   }
 
-  onClickCancleEdit() {
+  onClickCancelEdit() {
     this.isEditable = false;
     this.form.reset();
     this.disableInputFields();
